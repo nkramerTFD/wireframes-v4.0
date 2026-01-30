@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFD Wireframes Index</title>
+    <!-- Adobe Fonts - Neue Haas Grotesk -->
+    <link rel="stylesheet" href="https://use.typekit.net/otc4rpl.css">
+    <style>
+        :root {
+            /* TFD Typography */
+            --font-family-display: 'neue-haas-grotesk-display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-family-text: 'neue-haas-grotesk-text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* Kale (Primary Brand Green) */
+            --kale-0: #E5EFE7;
+            --kale-1: #b5d3ba;
+            --kale-2: #417c67;
+            --kale-3: #173b33;
+            /* Carrot (CTA Orange) */
+            --carrot-2: #f2674b;
+            --carrot-3: #D2563D;
+            /* Charcoal (Text Grays) */
+            --charcoal-0: #39383c;
+            --charcoal-1: #717377;
+            /* Oyster (Light Grays/Backgrounds) */
+            --oyster-1: #dbd6d1;
+            --oyster-2: #efedea;
+            --oyster-3: #f6f5f3;
+            /* Utility */
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-text);
+            line-height: 1.6;
+            color: var(--charcoal-0);
+            background: var(--oyster-3);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-family-display);
+        }
+
+        .page-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .page-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 2rem;
+            align-self: start;
+        }
+
+        .sidebar-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.5rem;
+            color: var(--kale-3);
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-header p {
+            font-size: 0.9rem;
+            color: var(--charcoal-1);
+        }
+
+        .sidebar-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--kale-2);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Accordion toggle for mobile */
+        .sidebar-toggle {
+            display: none;
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .sidebar-toggle .sidebar-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0;
+            padding: 0.5rem 0;
+        }
+
+        .sidebar-toggle .sidebar-title::after {
+            content: "+";
+            font-size: 1.1rem;
+            color: var(--charcoal-1);
+            transition: transform 0.2s;
+        }
+
+        .sidebar-section.open .sidebar-toggle .sidebar-title::after {
+            content: "−";
+        }
+
+        .sidebar-list {
+            list-style: none;
+            font-size: 0.9rem;
+            color: var(--charcoal-1);
+        }
+
+        .sidebar-list li {
+            padding: 0.35rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .sidebar-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--kale-2);
+            font-size: 0.85rem;
+        }
+
+        .sidebar-list--negative li::before {
+            content: "✕";
+            color: var(--carrot-2);
+            font-size: 0.7rem;
+            top: 0.45rem;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                position: static;
+            }
+
+            .sidebar-header {
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+
+            .sidebar-header h1 {
+                font-size: 2rem;
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            /* Hide the standalone title, show the one inside the toggle button */
+            .sidebar-section > .sidebar-title {
+                display: none;
+            }
+
+            .sidebar-toggle .sidebar-title {
+                display: flex !important;
+            }
+
+            .sidebar-list {
+                display: none;
+                padding-top: 0.5rem;
+            }
+
+            .sidebar-section.open .sidebar-list {
+                display: block;
+            }
+        }
+
+        .main-content {
+            min-width: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Hide header on desktop since title is in sidebar */
+        .header {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .header {
+                display: none; /* Title now in sidebar on mobile too */
+            }
+        }
+
+        .batch {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .batch-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--oyster-2);
+        }
+
+        .batch-number {
+            background: var(--kale-3);
+            color: var(--white);
+            font-family: var(--font-family-display);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+        }
+
+        .batch-title {
+            font-size: 1.25rem;
+            color: var(--kale-3);
+        }
+
+        .batch-desc {
+            font-size: 0.9rem;
+            color: var(--charcoal-1);
+            margin-bottom: 1.25rem;
+            font-style: italic;
+        }
+
+        .wireframe-list {
+            list-style: none;
+        }
+
+        .wireframe-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .wireframe-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .wireframe-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            background: var(--oyster-3);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--charcoal-0);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .wireframe-link:hover {
+            background: var(--kale-0);
+            color: var(--kale-3);
+            transform: translateX(4px);
+        }
+
+        .wireframe-link::after {
+            content: "\2192";
+            color: var(--charcoal-1);
+            transition: color 0.2s;
+        }
+
+        .wireframe-link:hover::after {
+            color: var(--kale-2);
+        }
+
+        .footer-note {
+            text-align: center;
+            color: var(--charcoal-1);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>The Farmer's Dog</h1>
+                <p>Wireframe Index</p>
+            </div>
+            <div class="sidebar-card">
+                <div class="sidebar-section" id="whatThisIs">
+                    <button class="sidebar-toggle" onclick="toggleSidebarSection('whatThisIs')">
+                        <h3 class="sidebar-title">What this is</h3>
+                    </button>
+                    <h3 class="sidebar-title">What this is</h3>
+                    <ul class="sidebar-list">
+                        <li>Narrative arcs for individual pages</li>
+                        <li>How pages work as a content ecosystem</li>
+                        <li>Content blocking</li>
+                        <li>Ideas for interactivity</li>
+                        <li>A tool for initial buy-in</li>
+                    </ul>
+                </div>
+                <div class="sidebar-section" id="whatThisIsnt">
+                    <button class="sidebar-toggle" onclick="toggleSidebarSection('whatThisIsnt')">
+                        <h3 class="sidebar-title">What this isn't</h3>
+                    </button>
+                    <h3 class="sidebar-title">What this isn't</h3>
+                    <ul class="sidebar-list sidebar-list--negative">
+                        <li>Final visual design or styling</li>
+                        <li>Layout specifications</li>
+                        <li>Media/asset selection</li>
+                        <li>Production-ready code</li>
+                        <li>Final copy—tone and messaging are directional</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="batch">
+            <div class="batch-header">
+                <span class="batch-number">Batch 0</span>
+            </div>
+            <p class="batch-desc">Validate design system; build SEO/AEO foundation with FAQ</p>
+            <ul class="wireframe-list">
+                <li><a href="our-food-wireframe.html" class="wireframe-link">Our Food</a></li>
+                <li><a href="our-difference-wireframe.html" class="wireframe-link">Our Difference</a></li>
+                <li><a href="faq-wireframe.html" class="wireframe-link">FAQ</a></li>
+                <li><a href="faq-question-page-wireframe.html" class="wireframe-link">FAQ Question Page</a></li>
+            </ul>
+        </div>
+
+        <div class="batch">
+            <div class="batch-header">
+                <span class="batch-number">Batch 1</span>
+            </div>
+            <p class="batch-desc">Create extensible social proof system; test personalization on Get Started</p>
+            <ul class="wireframe-list">
+                <li><a href="get-started-wireframe.html" class="wireframe-link">Get Started</a></li>
+                <li><a href="about-us-wireframe.html" class="wireframe-link">About Us</a></li>
+                <li><a href="reviews-wireframe.html" class="wireframe-link">Reviews</a></li>
+            </ul>
+        </div>
+
+            <p class="footer-note">Click any wireframe to view</p>
+        </main>
+    </div>
+
+    <script>
+        function toggleSidebarSection(id) {
+            const section = document.getElementById(id);
+            section.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - The Farmer's Dog | Wireframe v3</title>
+    <!-- Adobe Fonts - Neue Haas Grotesk -->
+    <link rel="stylesheet" href="https://use.typekit.net/otc4rpl.css">
+    <style>
+        /* TFD Design Tokens - Embedded for standalone viewing */
+        :root {
+            /* TFD Typography */
+            --font-family-display: 'neue-haas-grotesk-display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-family-text: 'neue-haas-grotesk-text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* Kale (Primary Brand Green) */
+            --kale-0: #E5EFE7;
+            --kale-1: #b5d3ba;
+            --kale-2: #417c67;
+            --kale-3: #173b33;
+            /* Carrot (CTA Orange) */
+            --carrot-0: #fff4f1;
+            --carrot-1: #ffd9cc;
+            --carrot-2: #f2674b;
+            --carrot-3: #D2563D;
+            /* Blueberry */
+            --blueberry-0: #e6ecf5;
+            --blueberry-1: #b7c6e6;
+            --blueberry-2: #385a9d;
+            --blueberry-3: #03184e;
+            /* Charcoal (Text Grays) */
+            --charcoal-0: #39383c;
+            --charcoal-1: #717377;
+            --charcoal-2: #969799;
+            --charcoal-3: #c2c3c5;
+            /* Oyster (Light Grays/Backgrounds) */
+            --oyster-0: #c6bfb7;
+            --oyster-1: #dbd6d1;
+            --oyster-2: #efedea;
+            --oyster-3: #f6f5f3;
+            /* Chickpea (Warm Cream/Tan) */
+            --chickpea-0: #d3bfa2;
+            --chickpea-1: #f2e1c8;
+            --chickpea-2: #fff3e1;
+            --chickpea-3: #fffaf3;
+            /* Utility Colors */
+            --white: #ffffff;
+            --gold: #f5a623;
+            --success: #2ecc71;
+            /* Spacing */
+            --spacing-12: 12px;
+            --spacing-24: 24px;
+            --spacing-36: 36px;
+            --spacing-48: 48px;
+            /* Border Radius */
+            --radius-xs: 2px;
+            --radius-sm: 4px;
+            --radius-md: 6px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            /* Font Weights */
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            /* Z-index */
+            --z-dropdown: 100;
+            --z-fixed: 1000;
+            --z-modal-backdrop: 1001;
+            --z-modal: 1002;
+            /* Animation */
+            --animation-standard: 300ms ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-text);
+            line-height: 1.6;
+            color: var(--charcoal-0);
+            background: var(--chickpea-3);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-display);
+        }
+
+        /* Navigation */
+        .nav-tfd {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 12px 24px;
+            z-index: var(--z-fixed);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-tfd__logo {
+            color: var(--kale-3);
+            font-weight: var(--font-weight-bold);
+            font-size: 1.25rem;
+            text-decoration: none;
+        }
+
+        .nav-tfd__logo-full { display: inline; }
+        .nav-tfd__logo-short { display: none; }
+
+        .nav-tfd__links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-tfd__links a {
+            color: var(--charcoal-1);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-medium);
+            transition: color 0.2s;
+        }
+
+        .nav-tfd__links a:hover {
+            color: var(--kale-3);
+        }
+
+        .nav-tfd__links a.active {
+            color: var(--kale-3);
+        }
+
+        .nav-tfd__actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .nav-tfd__login {
+            color: var(--kale-3);
+            text-decoration: none;
+            font-weight: var(--font-weight-medium);
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border: 1px solid var(--oyster-1);
+            border-radius: var(--radius-sm);
+            transition: all 0.2s;
+        }
+
+        .nav-tfd__login:hover {
+            border-color: var(--kale-2);
+            background: var(--kale-0);
+        }
+
+        .nav-tfd__cta {
+            background: var(--carrot-2);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .nav-tfd__cta:hover {
+            background: var(--carrot-3);
+        }
+
+        /* Mobile Menu */
+        .nav-tfd__mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--kale-3);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .nav-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 58px;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 1rem;
+            border-top: 1px solid var(--oyster-2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+
+        .nav-mobile-menu.open {
+            display: block;
+        }
+
+        .nav-mobile-menu a {
+            display: block;
+            color: var(--charcoal-1);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border-radius: var(--radius-sm);
+            transition: background 0.2s;
+        }
+
+        .nav-mobile-menu a:hover {
+            background: var(--oyster-3);
+        }
+
+        .nav-mobile-menu a.active {
+            color: var(--kale-3);
+            background: var(--kale-0);
+        }
+
+        .nav-mobile-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-top: 1px solid var(--oyster-2);
+            margin-top: 0.5rem;
+        }
+
+        .nav-mobile-actions .nav-tfd__login {
+            flex: 1;
+            text-align: center;
+        }
+
+        .nav-mobile-actions .nav-tfd__cta {
+            flex: 1;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .nav-tfd__links {
+                display: none;
+            }
+            .nav-tfd__login {
+                display: none;
+            }
+            .nav-tfd__mobile-toggle {
+                display: block;
+            }
+            .nav-tfd {
+                padding: 12px 16px;
+            }
+            .nav-tfd__logo-full {
+                display: none;
+            }
+            .nav-tfd__logo-short {
+                display: inline;
+            }
+        }
+
+        /* ============================================
+           HERO SECTION - Search First (per PRD 7.1)
+           ============================================ */
+        .hero {
+            padding: 8rem 2rem 3rem;
+            background: var(--chickpea-3);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 0.5rem;
+            color: var(--kale-3);
+        }
+
+        .hero-subhead {
+            font-size: 1.1rem;
+            color: var(--charcoal-1);
+            margin-bottom: 2rem;
+        }
+
+        /* ============================================
+           SEARCH COMPONENT - Submit Only (NO autocomplete per PRD 4.1)
+           ============================================ */
+        .faq-search {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .faq-search__form {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-search__input-wrapper {
+            position: relative;
+            flex: 1;
+        }
+
+        .faq-search__icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--charcoal-1);
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        .faq-search__input {
+            width: 100%;
+            height: 56px;
+            padding: 0 1rem 0 3.25rem;
+            font-size: 1rem;
+            border: 2px solid var(--oyster-1);
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            color: var(--charcoal-0);
+            transition: border-color var(--animation-standard), box-shadow var(--animation-standard);
+        }
+
+        .faq-search__input:focus {
+            outline: none;
+            border-color: var(--kale-2);
+            box-shadow: 0 0 0 4px rgba(65, 124, 103, 0.1);
+        }
+
+        .faq-search__input::placeholder {
+            color: var(--charcoal-2);
+        }
+
+        .faq-search__submit {
+            height: 56px;
+            padding: 0 1.5rem;
+            background: var(--carrot-2);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: var(--font-weight-bold);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background var(--animation-standard);
+            white-space: nowrap;
+        }
+
+        .faq-search__submit:hover {
+            background: var(--carrot-3);
+        }
+
+        /* ============================================
+           OR BROWSE DIVIDER (per PRD 7.1)
+           ============================================ */
+        .browse-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.5rem auto;
+            max-width: 600px;
+        }
+
+        .browse-divider__line {
+            flex: 1;
+            height: 1px;
+            background: var(--oyster-1);
+        }
+
+        .browse-divider__text {
+            font-size: 0.85rem;
+            color: var(--charcoal-2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: var(--font-weight-medium);
+        }
+
+        /* ============================================
+           FEATURED QUESTIONS (per PRD 2.4)
+           ============================================ */
+        .featured-questions {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .featured-question {
+            display: block;
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            background: var(--white);
+            border: 1px solid var(--oyster-1);
+            border-radius: var(--radius-lg);
+            margin-bottom: 0.75rem;
+            text-align: left;
+            cursor: pointer;
+            transition: background var(--animation-standard), border-color var(--animation-standard);
+            text-decoration: none;
+        }
+
+        .featured-question:hover {
+            background: var(--kale-0);
+            border-color: var(--kale-1);
+        }
+
+        .featured-question__text {
+            font-weight: var(--font-weight-semibold);
+            color: var(--kale-3);
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .featured-question__arrow {
+            color: var(--kale-2);
+            font-size: 1.25rem;
+        }
+
+        /* ============================================
+           MAIN CONTENT AREA
+           ============================================ */
+        .faq-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+
+        /* ============================================
+           INLINE ANSWER CARD (per PRD 7.2)
+           ============================================ */
+        .answer-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            display: none;
+        }
+
+        .answer-card--visible {
+            display: block;
+        }
+
+        .answer-card__back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--kale-2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-medium);
+            margin-bottom: 1.25rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .answer-card__back:hover {
+            text-decoration: underline;
+        }
+
+        .answer-card__question {
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--kale-3);
+            margin-bottom: 1.25rem;
+            line-height: 1.3;
+        }
+
+        .answer-card__answer {
+            color: var(--charcoal-1);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .answer-card__answer p {
+            margin-bottom: 1rem;
+        }
+
+        .answer-card__answer ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .answer-card__answer li {
+            margin-bottom: 0.5rem;
+        }
+
+        .answer-card__answer strong {
+            color: var(--charcoal-0);
+        }
+
+        /* Dynamic blocks within answers */
+        .answer-block {
+            background: var(--oyster-3);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .answer-block--stat {
+            border-left: 3px solid var(--success);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .answer-block--review {
+            border-left: 3px solid var(--gold);
+        }
+
+        .answer-block--expert {
+            border-left: 3px solid var(--blueberry-2);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .answer-block__stat-number {
+            font-size: 2rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--success);
+            line-height: 1;
+        }
+
+        .answer-block__stat-text {
+            font-size: 0.9rem;
+            color: var(--charcoal-1);
+        }
+
+        .answer-block__review-text {
+            font-style: italic;
+            color: var(--charcoal-0);
+            margin-bottom: 0.5rem;
+        }
+
+        .answer-block__review-author {
+            font-size: 0.85rem;
+            color: var(--charcoal-1);
+        }
+
+        .answer-block__expert-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--oyster-2);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--charcoal-1);
+        }
+
+        .answer-block__expert-quote {
+            font-style: italic;
+            color: var(--charcoal-0);
+            margin-bottom: 0.35rem;
+        }
+
+        .answer-block__expert-name {
+            font-size: 0.85rem;
+            font-weight: var(--font-weight-semibold);
+            color: var(--charcoal-0);
+        }
+
+        /* CTA within answer */
+        .answer-card__cta {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--oyster-1);
+        }
+
+        .answer-card__cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--carrot-2);
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: var(--font-weight-bold);
+            font-size: 0.95rem;
+            transition: background var(--animation-standard);
+        }
+
+        .answer-card__cta-button:hover {
+            background: var(--carrot-3);
+        }
+
+        /* ============================================
+           "WAS THIS HELPFUL?" (per PRD 5.3)
+           ============================================ */
+        .helpful-prompt {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--oyster-1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .helpful-prompt__text {
+            font-size: 0.95rem;
+            color: var(--charcoal-1);
+        }
+
+        .helpful-prompt__buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .helpful-btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            transition: all var(--animation-standard);
+            border: 1px solid var(--oyster-1);
+            background: var(--white);
+            color: var(--charcoal-0);
+        }
+
+        .helpful-btn:hover {
+            border-color: var(--kale-2);
+            color: var(--kale-2);
+        }
+
+        .helpful-btn--yes:hover {
+            background: var(--kale-0);
+            border-color: var(--kale-2);
+            color: var(--kale-3);
+        }
+
+        .helpful-btn--no:hover {
+            background: var(--carrot-0);
+            border-color: var(--carrot-2);
+            color: var(--carrot-3);
+        }
+
+        /* ============================================
+           CLARIFICATION CARD (per PRD 2.2)
+           ============================================ */
+        .clarification-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            display: none;
+        }
+
+        .clarification-card--visible {
+            display: block;
+        }
+
+        .clarification-card__back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--kale-2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-medium);
+            margin-bottom: 1.25rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .clarification-card__back:hover {
+            text-decoration: underline;
+        }
+
+        .clarification-card__title {
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--kale-3);
+            margin-bottom: 1.25rem;
+        }
+
+        .clarification-card__options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .clarification-option {
+            display: block;
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: var(--oyster-3);
+            border: 1px solid var(--oyster-1);
+            border-radius: var(--radius-md);
+            text-align: left;
+            cursor: pointer;
+            transition: all var(--animation-standard);
+            font-size: 0.95rem;
+            color: var(--charcoal-0);
+        }
+
+        .clarification-option:hover {
+            background: var(--kale-0);
+            border-color: var(--kale-1);
+            color: var(--kale-3);
+        }
+
+        /* ============================================
+           CHAT ESCALATION PANEL (per PRD 5.1, 7.3)
+           ============================================ */
+        .chat-panel {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            display: none;
+        }
+
+        .chat-panel--visible {
+            display: block;
+        }
+
+        .chat-panel__back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--kale-2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-medium);
+            margin-bottom: 1.25rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .chat-panel__back:hover {
+            text-decoration: underline;
+        }
+
+        .chat-panel__title {
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--kale-3);
+            margin-bottom: 0.5rem;
+        }
+
+        .chat-panel__subtitle {
+            font-size: 0.95rem;
+            color: var(--charcoal-1);
+            margin-bottom: 1.5rem;
+        }
+
+        .chat-panel__message-preview {
+            background: var(--oyster-3);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--kale-2);
+        }
+
+        .chat-panel__message-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--charcoal-2);
+            margin-bottom: 0.35rem;
+        }
+
+        .chat-panel__message-text {
+            color: var(--charcoal-0);
+            font-style: italic;
+        }
+
+        .chat-panel__options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .chat-panel__btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--animation-standard);
+            text-decoration: none;
+        }
+
+        .chat-panel__btn--primary {
+            background: var(--carrot-2);
+            color: var(--white);
+            border: none;
+        }
+
+        .chat-panel__btn--primary:hover {
+            background: var(--carrot-3);
+        }
+
+        .chat-panel__btn--secondary {
+            background: var(--white);
+            color: var(--charcoal-0);
+            border: 1px solid var(--oyster-1);
+        }
+
+        .chat-panel__btn--secondary:hover {
+            border-color: var(--kale-2);
+            color: var(--kale-2);
+        }
+
+        /* Email capture within chat panel */
+        .chat-panel__email {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--oyster-1);
+        }
+
+        .chat-panel__email-label {
+            font-size: 0.9rem;
+            color: var(--charcoal-1);
+            margin-bottom: 0.75rem;
+        }
+
+        .chat-panel__email-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-panel__email-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--oyster-1);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+        }
+
+        .chat-panel__email-input:focus {
+            outline: none;
+            border-color: var(--kale-2);
+        }
+
+        .chat-panel__email-submit {
+            padding: 0.75rem 1.25rem;
+            background: var(--kale-2);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+        }
+
+        .chat-panel__email-submit:hover {
+            background: var(--kale-3);
+        }
+
+        .chat-panel__reassurance {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--charcoal-2);
+            text-align: center;
+        }
+
+        /* ============================================
+           GLADLY-STYLE FLOATING CHAT WIDGET (per PRD 5.1, 7.3)
+           ============================================ */
+        .chat-widget-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: var(--z-modal-backdrop);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--animation-standard), visibility var(--animation-standard);
+        }
+
+        .chat-widget-overlay--open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .chat-widget {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 380px;
+            max-width: calc(100vw - 48px);
+            max-height: calc(100vh - 120px);
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: var(--z-modal);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .chat-widget--open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Chat Widget Header */
+        .chat-widget__header {
+            background: var(--kale-3);
+            color: var(--white);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-widget__header-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chat-widget__avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--kale-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .chat-widget__title {
+            font-weight: var(--font-weight-bold);
+            font-size: 1rem;
+        }
+
+        .chat-widget__status {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .chat-widget__status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+        }
+
+        .chat-widget__close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .chat-widget__close:hover {
+            opacity: 1;
+        }
+
+        /* Chat Widget Messages */
+        .chat-widget__messages {
+            flex: 1;
+            padding: 1.25rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 200px;
+            background: var(--oyster-3);
+        }
+
+        .chat-message {
+            max-width: 85%;
+            padding: 0.875rem 1rem;
+            border-radius: var(--radius-lg);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .chat-message--user {
+            background: var(--kale-3);
+            color: var(--white);
+            align-self: flex-end;
+            border-bottom-right-radius: var(--radius-xs);
+        }
+
+        .chat-message--system {
+            background: var(--white);
+            color: var(--charcoal-1);
+            align-self: flex-start;
+            border-bottom-left-radius: var(--radius-xs);
+            font-size: 0.85rem;
+        }
+
+        .chat-message--agent {
+            background: var(--white);
+            color: var(--charcoal-0);
+            align-self: flex-start;
+            border-bottom-left-radius: var(--radius-xs);
+        }
+
+        /* Email capture in chat */
+        .chat-widget__email-capture {
+            padding: 1rem 1.25rem;
+            background: var(--chickpea-3);
+            border-top: 1px solid var(--oyster-1);
+        }
+
+        .chat-widget__email-label {
+            font-size: 0.8rem;
+            color: var(--charcoal-1);
+            margin-bottom: 0.5rem;
+        }
+
+        .chat-widget__email-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-widget__email-input {
+            flex: 1;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid var(--oyster-1);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            background: var(--white);
+        }
+
+        .chat-widget__email-input:focus {
+            outline: none;
+            border-color: var(--kale-2);
+        }
+
+        .chat-widget__email-btn {
+            padding: 0.625rem 1rem;
+            background: var(--kale-2);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .chat-widget__email-btn:hover {
+            background: var(--kale-3);
+        }
+
+        /* Chat Widget Input */
+        .chat-widget__input-area {
+            padding: 1rem 1.25rem;
+            border-top: 1px solid var(--oyster-1);
+            background: var(--white);
+        }
+
+        .chat-widget__input-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-widget__input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--oyster-1);
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+        }
+
+        .chat-widget__input:focus {
+            outline: none;
+            border-color: var(--kale-2);
+        }
+
+        .chat-widget__input::placeholder {
+            color: var(--charcoal-2);
+        }
+
+        .chat-widget__send {
+            width: 44px;
+            height: 44px;
+            background: var(--kale-2);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: background 0.2s;
+        }
+
+        .chat-widget__send:hover {
+            background: var(--kale-3);
+        }
+
+        /* No Answer State - Inline card that triggers chat */
+        .no-answer-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            display: none;
+        }
+
+        .no-answer-card--visible {
+            display: block;
+        }
+
+        .no-answer-card__title {
+            font-size: 1.35rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--kale-3);
+            margin-bottom: 0.5rem;
+        }
+
+        .no-answer-card__subtitle {
+            font-size: 1rem;
+            color: var(--charcoal-1);
+            margin-bottom: 0.5rem;
+        }
+
+        .no-answer-card__connecting {
+            font-size: 0.9rem;
+            color: var(--charcoal-2);
+            font-style: italic;
+        }
+
+        @media (max-width: 480px) {
+            .chat-widget {
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                max-width: 100%;
+                max-height: 85vh;
+                border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            }
+        }
+
+        /* Sensitive Chat Panel - Priority Support styling */
+        .sensitive-chat-header {
+            margin-bottom: 1rem;
+        }
+
+        .sensitive-chat-badge {
+            display: inline-block;
+            background: var(--carrot-0);
+            color: var(--carrot-3);
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: var(--font-weight-bold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Urgent clarification option styling */
+        .clarification-option--urgent {
+            background: var(--carrot-0);
+            border-color: var(--carrot-1);
+        }
+
+        .clarification-option--urgent:hover {
+            background: var(--carrot-1);
+            border-color: var(--carrot-2);
+            color: var(--carrot-3);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--kale-3);
+            color: rgba(255,255,255,0.7);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 900px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .footer-newsletter {
+            max-width: 400px;
+        }
+
+        .footer-newsletter__title {
+            font-family: var(--font-family-display);
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-newsletter__subtitle {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .footer-newsletter__form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .footer-newsletter__input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--radius-sm);
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .footer-newsletter__input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-newsletter__input:focus {
+            outline: none;
+            border-color: var(--carrot-2);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .footer-newsletter__btn {
+            background: var(--carrot-2);
+            color: var(--white);
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .footer-newsletter__btn:hover {
+            background: var(--carrot-3);
+        }
+
+        @media (max-width: 480px) {
+            .footer-newsletter__form {
+                flex-direction: column;
+            }
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-links__group h4 {
+            font-family: var(--font-family-display);
+            font-size: 0.8rem;
+            font-weight: var(--font-weight-semibold);
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links__group ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links__group li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links__group a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links__group a:hover {
+            color: var(--white);
+        }
+
+        .footer-middle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .footer-social__link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .footer-social__link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-logo {
+            font-family: var(--font-family-display);
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-legal a:hover {
+            color: rgba(255,255,255,0.85);
+        }
+
+        @media (max-width: 600px) {
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-legal {
+                justify-content: center;
+            }
+        }
+
+        /* State: Hide featured questions when answer is shown */
+        .hero--has-answer .featured-questions,
+        .hero--has-answer .browse-divider {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-tfd">
+        <a href="index.html" class="nav-tfd__logo"><span class="nav-tfd__logo-full">The Farmer's Dog</span><span class="nav-tfd__logo-short">TFD</span></a>
+        <div class="nav-tfd__links">
+            <a href="our-food-wireframe.html">Our Food</a>
+            <a href="our-difference-wireframe.html">Our Difference</a>
+            <a href="reviews-wireframe.html">Reviews</a>
+            <a href="faq-wireframe.html" class="active">FAQ</a>
+            <a href="about-us-wireframe.html">About Us</a>
+            <a href="#">Vet Professionals</a>
+        </div>
+        <div class="nav-tfd__actions">
+            <a href="#" class="nav-tfd__login">Log In</a>
+            <a href="get-started-wireframe.html" class="nav-tfd__cta">Get Started — 50% Off</a>
+        </div>
+        <button class="nav-tfd__mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="nav-mobile-menu" id="mobileMenu">
+        <a href="our-food-wireframe.html">Our Food</a>
+        <a href="our-difference-wireframe.html">Our Difference</a>
+        <a href="reviews-wireframe.html">Reviews</a>
+        <a href="faq-wireframe.html" class="active">FAQ</a>
+        <a href="about-us-wireframe.html">About Us</a>
+        <a href="#">Vet Professionals</a>
+        <div class="nav-mobile-actions">
+            <a href="#" class="nav-tfd__login">Log In</a>
+            <a href="get-started-wireframe.html" class="nav-tfd__cta">Get Started — 50% Off</a>
+        </div>
+    </div>
+
+    <!-- ============================================
+         HERO - Search First (per PRD 7.1)
+         ============================================ -->
+    <section class="hero" id="heroSection">
+        <h1>How can we help?</h1>
+        <p class="hero-subhead">Type your question below and press Enter</p>
+
+        <!-- Search Component - Submit Only (NO autocomplete per PRD 4.1) -->
+        <div class="faq-search">
+            <form class="faq-search__form" id="faqSearchForm" onsubmit="handleSearch(event)">
+                <div class="faq-search__input-wrapper">
+                    <span class="faq-search__icon">&#128269;</span>
+                    <input
+                        type="text"
+                        class="faq-search__input"
+                        id="faqSearchInput"
+                        placeholder="What can we help you with?"
+                        autocomplete="off"
+                    >
+                </div>
+                <button type="submit" class="faq-search__submit">Search</button>
+            </form>
+        </div>
+
+        <!-- OR BROWSE divider (per PRD 7.1) -->
+        <div class="browse-divider">
+            <div class="browse-divider__line"></div>
+            <span class="browse-divider__text">or browse</span>
+            <div class="browse-divider__line"></div>
+        </div>
+
+        <!-- Featured Questions (per PRD 2.4) - Topics we WANT users asking about -->
+        <div class="featured-questions">
+            <button class="featured-question" onclick="showAnswer('fresh-food')">
+                <span class="featured-question__text">
+                    Why should I feed fresh?
+                    <span class="featured-question__arrow">→</span>
+                </span>
+            </button>
+            <button class="featured-question" onclick="showAnswer('recipes')">
+                <span class="featured-question__text">
+                    What are the recipes and ingredients?
+                    <span class="featured-question__arrow">→</span>
+                </span>
+            </button>
+            <button class="featured-question" onclick="showAnswer('shipping')">
+                <span class="featured-question__text">
+                    How do shipments work?
+                    <span class="featured-question__arrow">→</span>
+                </span>
+            </button>
+            <button class="featured-question" onclick="showAnswer('life-stages')">
+                <span class="featured-question__text">
+                    Do you have food for puppies, adults, and seniors?
+                    <span class="featured-question__arrow">→</span>
+                </span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ============================================
+         MAIN CONTENT - Answer Cards, Clarifications, Chat Panel
+         ============================================ -->
+    <main class="faq-content">
+
+        <!-- ============================================
+             INLINE ANSWER CARD - "Why should I feed fresh?" (per PRD 7.2)
+             ============================================ -->
+        <div class="answer-card" id="answer-fresh-food">
+            <button class="answer-card__back" onclick="backToSearch()">← Back to search</button>
+            <h2 class="answer-card__question">Why should I feed fresh?</h2>
+            <div class="answer-card__answer">
+                <p>Fresh food is minimally processed, which means more nutrients remain intact and bioavailable for your dog to absorb. Kibble is cooked at extremely high temperatures (often over 400°F), which destroys many nutrients that then have to be added back synthetically.</p>
+
+                <div class="answer-block answer-block--expert">
+                    <div class="answer-block__expert-photo">[Photo]</div>
+                    <div>
+                        <p class="answer-block__expert-quote">"The difference between processed and fresh food isn't marketing. It's bioavailability. Dogs absorb more nutrients from real food."</p>
+                        <p class="answer-block__expert-name">Dr. Joseph Wakshlag, DVM, Ph.D.</p>
+                    </div>
+                </div>
+
+                <p>A peer-reviewed study conducted with Cornell University found that dogs fed fresh food showed improved markers of long-term health within just one month of switching.</p>
+
+                <div class="answer-block answer-block--stat">
+                    <div class="answer-block__stat-number">93%</div>
+                    <div class="answer-block__stat-text">of customers see visible health improvements within weeks</div>
+                </div>
+            </div>
+
+            <div class="answer-card__cta">
+                <a href="get-started-wireframe.html" class="answer-card__cta-button">See your dog's plan → 50% Off</a>
+            </div>
+
+            <!-- "Was this helpful?" (per PRD 5.3) -->
+            <div class="helpful-prompt">
+                <span class="helpful-prompt__text">Was this helpful?</span>
+                <div class="helpful-prompt__buttons">
+                    <button class="helpful-btn helpful-btn--yes" onclick="handleHelpful(true, 'fresh-food')">Yes</button>
+                    <button class="helpful-btn helpful-btn--no" onclick="handleHelpful(false, 'fresh-food')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             INLINE ANSWER CARD - "What are the recipes and ingredients?"
+             ============================================ -->
+        <div class="answer-card" id="answer-recipes">
+            <button class="answer-card__back" onclick="backToSearch()">← Back to search</button>
+            <h2 class="answer-card__question">What are the recipes and ingredients?</h2>
+            <div class="answer-card__answer">
+                <p>We offer four complete and balanced recipes, each made with human-grade ingredients:</p>
+                <ul>
+                    <li><strong>Beef:</strong> USDA beef, sweet potato, lentils, carrots, spinach</li>
+                    <li><strong>Chicken:</strong> USDA chicken, parsnips, spinach, carrots, green beans</li>
+                    <li><strong>Turkey:</strong> USDA turkey, chickpeas, carrots, broccoli, parsley</li>
+                    <li><strong>Pork:</strong> USDA pork, sweet potato, green beans, cauliflower, spinach</li>
+                </ul>
+
+                <p>Every recipe is formulated by board-certified veterinary nutritionists to meet AAFCO standards for all life stages.</p>
+
+                <div class="answer-block answer-block--review">
+                    <p class="answer-block__review-text">"I love that I can actually see and recognize every ingredient. No mystery powders or chemicals."</p>
+                    <p class="answer-block__review-author">— Sarah M., Cooper's mom</p>
+                </div>
+            </div>
+
+            <div class="answer-card__cta">
+                <a href="get-started-wireframe.html" class="answer-card__cta-button">Build your dog's plan → 50% Off</a>
+            </div>
+
+            <div class="helpful-prompt">
+                <span class="helpful-prompt__text">Was this helpful?</span>
+                <div class="helpful-prompt__buttons">
+                    <button class="helpful-btn helpful-btn--yes" onclick="handleHelpful(true, 'recipes')">Yes</button>
+                    <button class="helpful-btn helpful-btn--no" onclick="handleHelpful(false, 'recipes')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             INLINE ANSWER CARD - "How do shipments work?"
+             ============================================ -->
+        <div class="answer-card" id="answer-shipping">
+            <button class="answer-card__back" onclick="backToSearch()">← Back to search</button>
+            <h2 class="answer-card__question">How do shipments work?</h2>
+            <div class="answer-card__answer">
+                <p>We ship your dog's personalized meals directly to your door on a schedule tailored to their eating plan—typically every 2-4 weeks.</p>
+
+                <ul>
+                    <li><strong>Free shipping</strong> on every order, always</li>
+                    <li><strong>Eco-friendly packaging</strong> with dry ice to keep food frozen</li>
+                    <li><strong>Flexible scheduling</strong> — adjust, skip, or pause anytime</li>
+                    <li><strong>Tracking</strong> provided for every shipment</li>
+                </ul>
+
+                <div class="answer-block answer-block--stat">
+                    <div class="answer-block__stat-number">Free</div>
+                    <div class="answer-block__stat-text">shipping on every order, always</div>
+                </div>
+
+                <p>We ship nationwide to all 48 contiguous states. Most orders arrive within 1-5 business days depending on your location.</p>
+            </div>
+
+            <div class="answer-card__cta">
+                <a href="get-started-wireframe.html" class="answer-card__cta-button">Get started → 50% Off</a>
+            </div>
+
+            <div class="helpful-prompt">
+                <span class="helpful-prompt__text">Was this helpful?</span>
+                <div class="helpful-prompt__buttons">
+                    <button class="helpful-btn helpful-btn--yes" onclick="handleHelpful(true, 'shipping')">Yes</button>
+                    <button class="helpful-btn helpful-btn--no" onclick="handleHelpful(false, 'shipping')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             INLINE ANSWER CARD - "Life stages"
+             ============================================ -->
+        <div class="answer-card" id="answer-life-stages">
+            <button class="answer-card__back" onclick="backToSearch()">← Back to search</button>
+            <h2 class="answer-card__question">Do you have food for puppies, adults, and seniors?</h2>
+            <div class="answer-card__answer">
+                <p>Yes! All of our recipes are formulated to meet AAFCO nutritional standards for <strong>all life stages</strong>, including:</p>
+
+                <ul>
+                    <li><strong>Puppies:</strong> Complete nutrition for growth and development</li>
+                    <li><strong>Adult dogs:</strong> Balanced meals for maintenance and vitality</li>
+                    <li><strong>Seniors:</strong> Easy-to-digest nutrition with joint-supporting benefits</li>
+                </ul>
+
+                <p>When you create your plan, we ask about your dog's age and life stage to calculate the perfect portion size. As your dog grows or ages, you can update their profile and we'll adjust automatically.</p>
+
+                <div class="answer-block answer-block--review">
+                    <p class="answer-block__review-text">"Started my puppy on TFD at 12 weeks. Now he's 3 and still loves every meal. Never had to switch foods!"</p>
+                    <p class="answer-block__review-author">— Marcus T., Benny's dad</p>
+                </div>
+            </div>
+
+            <div class="answer-card__cta">
+                <a href="get-started-wireframe.html" class="answer-card__cta-button">Build your dog's plan → 50% Off</a>
+            </div>
+
+            <div class="helpful-prompt">
+                <span class="helpful-prompt__text">Was this helpful?</span>
+                <div class="helpful-prompt__buttons">
+                    <button class="helpful-btn helpful-btn--yes" onclick="handleHelpful(true, 'life-stages')">Yes</button>
+                    <button class="helpful-btn helpful-btn--no" onclick="handleHelpful(false, 'life-stages')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             INLINE ANSWER CARD - "Cost / Price" (Searchable but not featured per PRD 3.3)
+             ============================================ -->
+        <div class="answer-card" id="answer-cost">
+            <button class="answer-card__back" onclick="backToSearch()">← Back to search</button>
+            <h2 class="answer-card__question">What does The Farmer's Dog cost?</h2>
+            <div class="answer-card__answer">
+                <p>The cost depends on your dog's size, age, and activity level. Every plan is personalized, so pricing varies—but most customers pay between <strong>$2-12 per day</strong>.</p>
+
+                <div class="answer-block answer-block--stat">
+                    <div class="answer-block__stat-number">50%</div>
+                    <div class="answer-block__stat-text">off your first box when you try The Farmer's Dog</div>
+                </div>
+
+                <p>Many customers find that when they factor in vet bills, treats, and supplements they no longer need, fresh food is comparable to what they were spending before—with better results.</p>
+
+                <p>The best way to see your exact price is to complete the quick quiz. It takes about 2 minutes.</p>
+            </div>
+
+            <div class="answer-card__cta">
+                <a href="get-started-wireframe.html" class="answer-card__cta-button">Get your dog's exact price → 50% Off</a>
+            </div>
+
+            <div class="helpful-prompt">
+                <span class="helpful-prompt__text">Was this helpful?</span>
+                <div class="helpful-prompt__buttons">
+                    <button class="helpful-btn helpful-btn--yes" onclick="handleHelpful(true, 'cost')">Yes</button>
+                    <button class="helpful-btn helpful-btn--no" onclick="handleHelpful(false, 'cost')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             CLARIFICATION CARD - Ambiguous "shipping" query (per PRD 2.2, 4.3)
+             ============================================ -->
+        <div class="clarification-card" id="clarification-shipping">
+            <button class="clarification-card__back" onclick="backToSearch()">← Back to search</button>
+            <h3 class="clarification-card__title">Are you asking about...</h3>
+            <div class="clarification-card__options">
+                <button class="clarification-option" onclick="showAnswer('shipping')">Delivery times and schedule</button>
+                <button class="clarification-option" onclick="showAnswer('shipping-cost')">Shipping costs</button>
+                <button class="clarification-option" onclick="showAnswer('shipping-address')">Changing your delivery address</button>
+            </div>
+        </div>
+
+        <!-- ============================================
+             CLARIFICATION CARD - Ambiguous "cost/price" query
+             ============================================ -->
+        <div class="clarification-card" id="clarification-cost">
+            <button class="clarification-card__back" onclick="backToSearch()">← Back to search</button>
+            <h3 class="clarification-card__title">Are you asking about...</h3>
+            <div class="clarification-card__options">
+                <button class="clarification-option" onclick="showAnswer('cost')">Plan pricing</button>
+                <button class="clarification-option" onclick="showAnswer('billing')">Billing and payment</button>
+                <button class="clarification-option" onclick="showAnswer('discounts')">Discounts and promotions</button>
+            </div>
+        </div>
+
+        <!-- ============================================
+             SENSITIVE TOPIC CLARIFICATION - Pancreatitis (per PRD 3.6)
+             Gated response - must confirm intent before responding
+             ============================================ -->
+        <div class="clarification-card" id="clarification-pancreatitis">
+            <button class="clarification-card__back" onclick="backToSearch()">← Back to search</button>
+            <h3 class="clarification-card__title">Are you asking about...</h3>
+            <div class="clarification-card__options">
+                <button class="clarification-option" onclick="showAnswer('panc-general')">General information about pancreatitis in dogs</button>
+                <button class="clarification-option" onclick="showAnswer('panc-suitability')">Whether The Farmer's Dog food is suitable for dogs with pancreatitis</button>
+                <button class="clarification-option clarification-option--urgent" onclick="showSensitiveChatPanel('pancreatitis-concern')">A concern about my dog's health after eating your food</button>
+            </div>
+        </div>
+
+        <!-- ============================================
+             SENSITIVE ANSWER - Pancreatitis General Info
+             ============================================ -->
+        <div class="answer-card" id="answer-panc-general">
+            <button class="answer-card__back" onclick="backToSearch()">← Back to search</button>
+            <h2 class="answer-card__question">Understanding pancreatitis in dogs</h2>
+            <div class="answer-card__answer">
+                <p>Pancreatitis is inflammation of the pancreas, which can range from mild to severe. It's often triggered by high-fat foods, but can have other causes including genetics, certain medications, or underlying conditions.</p>
+
+                <p><strong>Common signs include:</strong></p>
+                <ul>
+                    <li>Vomiting or loss of appetite</li>
+                    <li>Abdominal pain (hunched posture)</li>
+                    <li>Lethargy or weakness</li>
+                    <li>Diarrhea</li>
+                    <li>Fever</li>
+                </ul>
+
+                <div class="answer-block answer-block--expert">
+                    <div class="answer-block__expert-photo">[Photo]</div>
+                    <div>
+                        <p class="answer-block__expert-quote">"If you suspect pancreatitis, contact your veterinarian immediately. Early intervention is key to successful treatment."</p>
+                        <p class="answer-block__expert-name">Dr. Sarah Chen, DVM</p>
+                    </div>
+                </div>
+
+                <p>If your dog has been diagnosed with or is prone to pancreatitis, consult your veterinarian about dietary management. They can help determine the best approach for your dog's specific situation.</p>
+            </div>
+
+            <div class="helpful-prompt">
+                <span class="helpful-prompt__text">Was this helpful?</span>
+                <div class="helpful-prompt__buttons">
+                    <button class="helpful-btn helpful-btn--yes" onclick="handleHelpful(true, 'panc-general')">Yes</button>
+                    <button class="helpful-btn helpful-btn--no" onclick="handleHelpful(false, 'panc-general')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             SENSITIVE ANSWER - Pancreatitis Suitability (routes to vet + chat)
+             ============================================ -->
+        <div class="answer-card" id="answer-panc-suitability">
+            <button class="answer-card__back" onclick="backToSearch()">← Back to search</button>
+            <h2 class="answer-card__question">Is The Farmer's Dog suitable for dogs with pancreatitis?</h2>
+            <div class="answer-card__answer">
+                <p>Dogs with pancreatitis or a history of pancreatic issues have unique dietary needs that should be determined by a veterinarian who knows your dog's specific health history.</p>
+
+                <p>Our recipes vary in fat content, and what works for one dog may not work for another. We strongly recommend:</p>
+
+                <ol>
+                    <li><strong>Consult your veterinarian first</strong> — They can review our nutritional information and advise whether any of our recipes are appropriate</li>
+                    <li><strong>Share our recipe details</strong> — We're happy to provide full nutritional profiles to share with your vet</li>
+                    <li><strong>Consider a gradual approach</strong> — If approved by your vet, any diet transition should be slow and monitored</li>
+                </ol>
+
+                <div class="answer-block answer-block--expert">
+                    <div class="answer-block__expert-photo">[Photo]</div>
+                    <div>
+                        <p class="answer-block__expert-quote">"Every case of pancreatitis is different. I always recommend working with your vet to determine the right diet for your specific dog."</p>
+                        <p class="answer-block__expert-name">Dr. Joseph Wakshlag, DVM, Ph.D.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="answer-card__cta">
+                <p style="margin-bottom: 1rem; color: var(--charcoal-1); font-size: 0.95rem;">Want to discuss your dog's specific situation?</p>
+                <button class="answer-card__cta-button" onclick="showSensitiveChatPanel('panc-diet-help')" style="background: var(--kale-2);">💬 Chat with our team</button>
+            </div>
+
+            <div class="helpful-prompt">
+                <span class="helpful-prompt__text">Was this helpful?</span>
+                <div class="helpful-prompt__buttons">
+                    <button class="helpful-btn helpful-btn--yes" onclick="handleHelpful(true, 'panc-suitability')">Yes</button>
+                    <button class="helpful-btn helpful-btn--no" onclick="handleHelpful(false, 'panc-suitability')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             SENSITIVE CHAT PANEL - Immediate escalation for health concerns
+             Per PRD 3.6: "Concern about your dog's health" → Immediate chat escalation
+             ============================================ -->
+        <div class="chat-panel" id="sensitiveChatPanel">
+            <button class="chat-panel__back" onclick="backToSearch()">← Back to search</button>
+
+            <div class="sensitive-chat-header">
+                <span class="sensitive-chat-badge">Priority Support</span>
+            </div>
+
+            <h3 class="chat-panel__title">We're here to help.</h3>
+            <p class="chat-panel__subtitle" id="sensitiveChatSubtitle">We take health concerns seriously. Let's connect you with our Customer Experience team right away.</p>
+
+            <div class="chat-panel__message-preview">
+                <p class="chat-panel__message-label">Your concern</p>
+                <p class="chat-panel__message-text" id="sensitiveChatQueryPreview">"Health concern about my dog"</p>
+            </div>
+
+            <div class="chat-panel__options">
+                <button class="chat-panel__btn chat-panel__btn--primary">💬 Chat with us now — We're here</button>
+                <a href="tel:6467807957" class="chat-panel__btn chat-panel__btn--secondary">📞 Call us: 646.780.7957</a>
+            </div>
+
+            <div class="chat-panel__email">
+                <p class="chat-panel__email-label">Or leave your details and we'll reach out to you:</p>
+                <form class="chat-panel__email-form">
+                    <input type="email" class="chat-panel__email-input" placeholder="your@email.com">
+                    <button type="submit" class="chat-panel__email-submit">Contact me</button>
+                </form>
+            </div>
+
+            <p class="chat-panel__reassurance">Our team is available 24/7 to help with any concerns.</p>
+        </div>
+
+        <!-- ============================================
+             HIDDEN ANSWER - "Grass fed / Sourcing" (per PRD 3.4, 4.2)
+             ============================================ -->
+        <div class="answer-card" id="answer-sourcing">
+            <button class="answer-card__back" onclick="backToSearch()">← Back to search</button>
+            <h2 class="answer-card__question">Is your meat organic or grass-fed?</h2>
+            <div class="answer-card__answer">
+                <p>We can't guarantee specific parameters like organic or grass-fed certification for every ingredient in every meal—supply chains today make that difficult to promise consistently.</p>
+
+                <p>What we <strong>can and do guarantee</strong> is that all our meats and vegetables are <strong>human-grade</strong>, which in our view is the most important measure of ingredient quality. This means our ingredients meet the same safety and quality standards as food you'd find in a grocery store.</p>
+
+                <p>If you have specific dietary requirements for your dog, we'd love to hear about them. Let us know below and we'll reach out when we have a recipe that suits your needs.</p>
+            </div>
+
+            <!-- Special action: Email capture for recipe notification (per PRD 4.2) -->
+            <div class="chat-panel__email">
+                <p class="chat-panel__email-label">Get notified when we have recipes that match your requirements:</p>
+                <form class="chat-panel__email-form">
+                    <input type="email" class="chat-panel__email-input" placeholder="Your email">
+                    <button type="submit" class="chat-panel__email-submit">Notify me</button>
+                </form>
+            </div>
+
+            <div class="helpful-prompt">
+                <span class="helpful-prompt__text">Was this helpful?</span>
+                <div class="helpful-prompt__buttons">
+                    <button class="helpful-btn helpful-btn--yes" onclick="handleHelpful(true, 'sourcing')">Yes</button>
+                    <button class="helpful-btn helpful-btn--no" onclick="handleHelpful(false, 'sourcing')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             NO ANSWER CARD - Shows inline when no match (per PRD 2.3)
+             Chat widget opens automatically
+             ============================================ -->
+        <div class="no-answer-card" id="noAnswerCard">
+            <h3 class="no-answer-card__title">We don't have that answer ready for you.</h3>
+            <p class="no-answer-card__subtitle">Let me connect you with an advisor...</p>
+        </div>
+
+    </main>
+
+    <!-- ============================================
+         GLADLY-STYLE FLOATING CHAT WIDGET (per PRD 5.1, 7.3)
+         Opens automatically when no match found
+         User's query appears as ALREADY SENT message
+         ============================================ -->
+    <div class="chat-widget-overlay" id="chatWidgetOverlay" onclick="closeChatWidget()"></div>
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-widget__header">
+            <div class="chat-widget__header-info">
+                <div class="chat-widget__avatar">💬</div>
+                <div>
+                    <div class="chat-widget__title">The Farmer's Dog</div>
+                    <div class="chat-widget__status">
+                        <span class="chat-widget__status-dot"></span>
+                        Support is online
+                    </div>
+                </div>
+            </div>
+            <button class="chat-widget__close" onclick="closeChatWidget()">×</button>
+        </div>
+
+        <div class="chat-widget__messages" id="chatMessages">
+            <!-- User's query appears as already-sent message (per PRD 2.3) -->
+            <div class="chat-message chat-message--user" id="userQueryMessage">
+                fish
+            </div>
+
+            <!-- System message -->
+            <div class="chat-message chat-message--system">
+                Your message has been sent. An agent will respond shortly.
+            </div>
+
+            <!-- Agent response -->
+            <div class="chat-message chat-message--agent">
+                Hi there! Thanks for reaching out. I'm looking into your question now and will have an answer for you in just a moment.
+            </div>
+        </div>
+
+        <!-- Email capture (per PRD 5.2) -->
+        <div class="chat-widget__email-capture">
+            <p class="chat-widget__email-label">Leave your email in case we take a moment to respond:</p>
+            <form class="chat-widget__email-form" onsubmit="return false;">
+                <input type="email" class="chat-widget__email-input" placeholder="your@email.com">
+                <button type="submit" class="chat-widget__email-btn">Save</button>
+            </form>
+        </div>
+
+        <div class="chat-widget__input-area">
+            <form class="chat-widget__input-form" onsubmit="return false;">
+                <input type="text" class="chat-widget__input" placeholder="Type a message...">
+                <button type="submit" class="chat-widget__send">➤</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-newsletter">
+                    <h3 class="footer-newsletter__title">Join the pack</h3>
+                    <p class="footer-newsletter__subtitle">Get nutrition tips, exclusive offers, and stories from real dog parents delivered to your inbox.</p>
+                    <form class="footer-newsletter__form">
+                        <input type="email" class="footer-newsletter__input" placeholder="Enter your email">
+                        <button type="submit" class="footer-newsletter__btn">Subscribe</button>
+                    </form>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-links__group">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="#">DIY</a></li>
+                            <li><a href="#">Digest</a></li>
+                            <li><a href="#">Breeds</a></li>
+                            <li><a href="#">WSAVA</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Affiliates</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links__group">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="mailto:help@thefarmersdog.com">help@thefarmersdog.com</a></li>
+                            <li><a href="tel:6467807957">Call/Text: 646.780.7957</a></li>
+                            <li><a href="faq-wireframe.html">Help Center</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links__group">
+                        <h4>Business</h4>
+                        <ul>
+                            <li><a href="#">Media Inquiries</a></li>
+                            <li><a href="#">Partnership Inquiries</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-middle">
+                <div class="footer-social">
+                    <a href="#" class="footer-social__link" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" class="footer-social__link" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                    </a>
+                    <a href="#" class="footer-social__link" aria-label="TikTok">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                    </a>
+                </div>
+                <div class="footer-logo">The Farmer's Dog</div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2025 The Farmer's Dog, Inc. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Accessibility</a>
+                    <a href="#">Do Not Sell My Personal Information</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+
+        // FAQ Database - Maps queries to answers (simulates backend matching)
+        const faqDatabase = {
+            // Featured questions (high confidence matches)
+            'fresh': 'fresh-food',
+            'why fresh': 'fresh-food',
+            'why should i feed fresh': 'fresh-food',
+            'fresh food': 'fresh-food',
+            'kibble': 'fresh-food',
+            'difference': 'fresh-food',
+
+            'recipe': 'recipes',
+            'recipes': 'recipes',
+            'ingredients': 'recipes',
+            'what ingredients': 'recipes',
+            'what are the recipes': 'recipes',
+
+            'ship': 'clarification-shipping', // Ambiguous - show clarification
+            'shipping': 'clarification-shipping',
+            'delivery': 'clarification-shipping',
+            'shipments': 'shipping',
+            'how do shipments work': 'shipping',
+
+            'puppy': 'life-stages',
+            'puppies': 'life-stages',
+            'senior': 'life-stages',
+            'seniors': 'life-stages',
+            'adult': 'life-stages',
+            'life stage': 'life-stages',
+            'age': 'life-stages',
+
+            // Searchable but not featured (per PRD 3.3)
+            'cost': 'clarification-cost', // Ambiguous
+            'price': 'clarification-cost',
+            'pricing': 'clarification-cost',
+            'how much': 'cost',
+            'what does it cost': 'cost',
+            'expensive': 'cost',
+
+            // Hidden answers (per PRD 3.4)
+            'grass fed': 'sourcing',
+            'grass-fed': 'sourcing',
+            'organic': 'sourcing',
+            'sourcing': 'sourcing',
+            'where do you source': 'sourcing',
+            'humanely raised': 'sourcing',
+            'free range': 'sourcing',
+            'pasture raised': 'sourcing',
+            'hormone free': 'sourcing',
+            'antibiotic free': 'sourcing',
+
+            // Sensitive topics - Gated responses (per PRD 3.6)
+            // These require clarification to confirm intent before responding
+            'pancreatitis': 'clarification-pancreatitis',
+            'panc': 'clarification-pancreatitis',
+            'pancreas': 'clarification-pancreatitis',
+            'pancreatic': 'clarification-pancreatitis',
+            'made my dog sick': 'clarification-pancreatitis',
+            'dog got sick': 'clarification-pancreatitis',
+        };
+
+        // Current state
+        let currentQuery = '';
+
+        // Handle search form submission (per PRD 4.1 - submit only, no autocomplete)
+        function handleSearch(event) {
+            event.preventDefault();
+            const input = document.getElementById('faqSearchInput');
+            const query = input.value.trim().toLowerCase();
+            currentQuery = input.value.trim();
+
+            if (query.length < 3) {
+                alert('Please enter at least 3 characters');
+                return;
+            }
+
+            // Hide all cards first
+            hideAllCards();
+
+            // Find matching answer
+            let matchId = null;
+            for (const [keyword, answerId] of Object.entries(faqDatabase)) {
+                if (query.includes(keyword)) {
+                    matchId = answerId;
+                    break;
+                }
+            }
+
+            if (matchId) {
+                // Check if it's a clarification or direct answer
+                if (matchId.startsWith('clarification-')) {
+                    showClarification(matchId);
+                } else {
+                    showAnswer(matchId);
+                }
+            } else {
+                // No match - escalate to chat (per PRD 2.3)
+                showChatWidget(currentQuery);
+            }
+
+            // Add visual state to hero
+            document.getElementById('heroSection').classList.add('hero--has-answer');
+        }
+
+        // Show specific answer card
+        function showAnswer(answerId) {
+            hideAllCards();
+            const card = document.getElementById('answer-' + answerId);
+            if (card) {
+                card.classList.add('answer-card--visible');
+                document.getElementById('heroSection').classList.add('hero--has-answer');
+                // Scroll to answer
+                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Show clarification card (per PRD 2.2)
+        function showClarification(clarificationId) {
+            hideAllCards();
+            const card = document.getElementById(clarificationId);
+            if (card) {
+                card.classList.add('clarification-card--visible');
+                document.getElementById('heroSection').classList.add('hero--has-answer');
+                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Show chat widget for escalation (per PRD 2.3, 5.1)
+        // The search bar query becomes the chat message - already sent
+        function showChatWidget(query) {
+            // Show the "no answer" card inline
+            const noAnswerCard = document.getElementById('noAnswerCard');
+            noAnswerCard.classList.add('no-answer-card--visible');
+            document.getElementById('heroSection').classList.add('hero--has-answer');
+            noAnswerCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Update the user message in the chat widget with their query
+            document.getElementById('userQueryMessage').textContent = query;
+
+            // Open the chat widget after a brief delay (simulating "Connecting you...")
+            setTimeout(() => {
+                document.getElementById('chatWidgetOverlay').classList.add('chat-widget-overlay--open');
+                document.getElementById('chatWidget').classList.add('chat-widget--open');
+            }, 500);
+
+            // Log analytics
+            console.log('Analytics: faq_chat_opened', { query, reason: 'no_match' });
+        }
+
+        // Close chat widget
+        function closeChatWidget() {
+            document.getElementById('chatWidgetOverlay').classList.remove('chat-widget-overlay--open');
+            document.getElementById('chatWidget').classList.remove('chat-widget--open');
+        }
+
+        // Hide all answer/clarification/chat cards
+        function hideAllCards() {
+            document.querySelectorAll('.answer-card').forEach(card => {
+                card.classList.remove('answer-card--visible');
+            });
+            document.querySelectorAll('.clarification-card').forEach(card => {
+                card.classList.remove('clarification-card--visible');
+            });
+            document.getElementById('noAnswerCard').classList.remove('no-answer-card--visible');
+            document.getElementById('sensitiveChatPanel').classList.remove('chat-panel--visible');
+            closeChatWidget();
+        }
+
+        // Show sensitive chat panel for health concerns (per PRD 3.6)
+        function showSensitiveChatPanel(context) {
+            hideAllCards();
+
+            // Customize the user message based on context
+            let userMessage = currentQuery || 'I have a health-related question';
+            if (context === 'pancreatitis-concern') {
+                userMessage = 'I have a concern about my dog\'s health after eating your food';
+            } else if (context === 'panc-diet-help') {
+                userMessage = 'I\'d like to discuss whether your food is right for my dog with pancreatitis';
+            }
+
+            // Update the chat widget message
+            document.getElementById('userQueryMessage').textContent = userMessage;
+
+            // Show the sensitive chat panel inline
+            const panel = document.getElementById('sensitiveChatPanel');
+            const queryPreview = document.getElementById('sensitiveChatQueryPreview');
+            const subtitle = document.getElementById('sensitiveChatSubtitle');
+
+            queryPreview.textContent = '"' + userMessage + '"';
+
+            if (context === 'pancreatitis-concern') {
+                subtitle.textContent = 'We take health concerns very seriously. Our team is standing by to help you right away.';
+            } else if (context === 'panc-diet-help') {
+                subtitle.textContent = 'Our team can review your dog\'s specific situation and provide personalized guidance.';
+            }
+
+            panel.classList.add('chat-panel--visible');
+            document.getElementById('heroSection').classList.add('hero--has-answer');
+            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Also open the chat widget
+            setTimeout(() => {
+                document.getElementById('chatWidgetOverlay').classList.add('chat-widget-overlay--open');
+                document.getElementById('chatWidget').classList.add('chat-widget--open');
+            }, 300);
+
+            // Log analytics event for sensitive topic escalation
+            console.log('Analytics: faq_sensitive_escalation', { context, query: currentQuery });
+        }
+
+        // Back to search (per PRD 5.4)
+        function backToSearch() {
+            hideAllCards();
+            document.getElementById('heroSection').classList.remove('hero--has-answer');
+            document.getElementById('faqSearchInput').value = '';
+            document.getElementById('faqSearchInput').focus();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Handle "Was this helpful?" response (per PRD 5.3)
+        function handleHelpful(wasHelpful, answerId) {
+            if (wasHelpful) {
+                // Log helpful_yes event
+                console.log('Analytics: faq_helpful_yes', { answerId, query: currentQuery });
+                // Show success state or CTA
+                alert('Thanks for your feedback!');
+            } else {
+                // Log helpful_no event and escalate to chat (per PRD 5.3)
+                console.log('Analytics: faq_helpful_no', { answerId, query: currentQuery });
+                // Escalate to chat widget with original query
+                const query = currentQuery || 'I need help with: ' + answerId;
+                document.getElementById('userQueryMessage').textContent = query;
+                document.getElementById('chatWidgetOverlay').classList.add('chat-widget-overlay--open');
+                document.getElementById('chatWidget').classList.add('chat-widget--open');
+            }
+        }
+
+        // Close chat widget with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeChatWidget();
+            }
+        });
+    </script>
+</body>
+</html>

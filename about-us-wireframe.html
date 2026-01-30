@@ -1,0 +1,2488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - The Farmer's Dog | Wireframe v2</title>
+    <!-- Adobe Fonts - Neue Haas Grotesk -->
+    <link rel="stylesheet" href="https://use.typekit.net/otc4rpl.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* TFD Typography */
+            --font-family-display: 'neue-haas-grotesk-display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-family-text: 'neue-haas-grotesk-text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+            /* TFD Design Tokens */
+            /* Kale (Primary Brand Green) */
+            --kale-0: #E5EFE7;
+            --kale-1: #b5d3ba;
+            --kale-2: #417c67;
+            --kale-3: #173b33;
+
+            /* Carrot (CTA Orange) */
+            --carrot-0: #fff4f1;
+            --carrot-1: #ffd9cc;
+            --carrot-2: #f2674b;
+            --carrot-3: #D2563D;
+
+            /* Blueberry (Secondary Blue) */
+            --blueberry-0: #e6ecf5;
+            --blueberry-1: #b7c6e6;
+            --blueberry-2: #385a9d;
+            --blueberry-3: #03184e;
+
+            /* Charcoal (Text Grays) */
+            --charcoal-0: #39383c;
+            --charcoal-1: #717377;
+            --charcoal-2: #969799;
+            --charcoal-3: #c2c3c5;
+
+            /* Oyster (Light Grays/Backgrounds) */
+            --oyster-0: #c6bfb7;
+            --oyster-1: #dbd6d1;
+            --oyster-2: #efedea;
+            --oyster-3: #f6f5f3;
+
+            /* Chickpea (Warm Cream/Tan) */
+            --chickpea-0: #d3bfa2;
+            --chickpea-1: #f2e1c8;
+            --chickpea-2: #fff3e1;
+            --chickpea-3: #fffaf3;
+
+            /* Mapped Variables */
+            --primary-dark: var(--kale-3);
+            --primary-blue: var(--carrot-2);
+            --primary-light-blue: var(--kale-1);
+            --accent-blue: var(--kale-2);
+            --bg-light: var(--oyster-3);
+            --bg-gray: var(--oyster-2);
+            --bg-dark-gray: var(--oyster-1);
+            --text-primary: var(--charcoal-0);
+            --text-secondary: var(--charcoal-1);
+            --border-color: var(--oyster-1);
+            --white: #ffffff;
+            --gold: #f5a623;
+        }
+
+        body {
+            font-family: var(--font-family-text);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-display);
+        }
+
+        /* Sticky Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-logo {
+            color: var(--kale-3);
+            font-weight: bold;
+            font-size: 1.25rem;
+            text-decoration: none;
+        }
+
+        .nav-logo-full {
+            display: inline;
+        }
+
+        .nav-logo-short {
+            display: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--charcoal-1);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--kale-3);
+        }
+
+        .nav-links a.active {
+            color: var(--kale-3);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .nav-login {
+            color: var(--kale-3);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--oyster-1);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .nav-login:hover {
+            border-color: var(--kale-3);
+            background: var(--oyster-3);
+        }
+
+        .nav-cta {
+            background: var(--carrot-2);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--carrot-3);
+        }
+
+        /* Mobile Menu */
+        .nav-mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--kale-3);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .nav-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 58px;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 1rem;
+            border-top: 1px solid var(--oyster-2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+
+        .nav-mobile-menu.open {
+            display: block;
+        }
+
+        .nav-mobile-menu a {
+            display: block;
+            color: var(--charcoal-1);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .nav-mobile-menu a:hover {
+            background: var(--oyster-3);
+        }
+
+        .nav-mobile-menu a.active {
+            color: var(--kale-3);
+            background: var(--oyster-3);
+        }
+
+        .nav-mobile-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-top: 1px solid var(--oyster-2);
+            margin-top: 0.5rem;
+        }
+
+        .nav-mobile-actions .nav-login {
+            flex: 1;
+            text-align: center;
+        }
+
+        .nav-mobile-actions .nav-cta {
+            flex: 1;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+            .nav-login {
+                display: none;
+            }
+            .nav-mobile-toggle {
+                display: block;
+            }
+            .nav {
+                padding: 0.75rem 1rem;
+            }
+            .nav-logo-full {
+                display: none;
+            }
+            .nav-logo-short {
+                display: inline;
+            }
+        }
+
+        /* Section Base Styles */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: clamp(2.25rem, 5vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .subhead {
+            font-size: clamp(1.05rem, 2vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 550px;
+        }
+
+        .subhead-centered {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--carrot-3);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--primary-blue);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid var(--primary-blue);
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Placeholder Styles */
+        .placeholder {
+            background: var(--bg-gray);
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            min-height: 200px;
+        }
+
+        .placeholder-image {
+            aspect-ratio: 16/9;
+            width: 100%;
+        }
+
+        .placeholder-square {
+            aspect-ratio: 1;
+            width: 100%;
+        }
+
+        .placeholder-portrait {
+            aspect-ratio: 3/4;
+            width: 100%;
+        }
+
+        /* ================================
+           HERO OPTION TOGGLE UI
+           ================================ */
+        .hero-toggle {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            width: 280px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .hero-toggle.collapsed .hero-toggle__body {
+            display: none;
+        }
+
+        .hero-toggle__header {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            background: var(--white);
+            transition: background 0.2s;
+        }
+
+        .hero-toggle__header:hover {
+            background: var(--oyster-3);
+        }
+
+        .hero-toggle__header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-toggle__header-left::before {
+            content: '⚙️';
+        }
+
+        .hero-toggle__chevron {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-toggle.collapsed .hero-toggle__chevron {
+            transform: rotate(180deg);
+        }
+
+        .hero-toggle__body {
+            padding: 0 1rem 1rem;
+        }
+
+        .hero-toggle__options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .hero-toggle__option {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--white);
+        }
+
+        .hero-toggle__option:hover {
+            border-color: var(--kale-1);
+            background: var(--oyster-3);
+        }
+
+        .hero-toggle__option.active {
+            border-color: var(--kale-2);
+            background: var(--kale-0);
+        }
+
+        .hero-toggle__radio {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 2px;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .hero-toggle__option.active .hero-toggle__radio {
+            border-color: var(--kale-2);
+        }
+
+        .hero-toggle__option.active .hero-toggle__radio::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 8px;
+            height: 8px;
+            background: var(--kale-2);
+            border-radius: 50%;
+        }
+
+        .hero-toggle__content {
+            flex: 1;
+        }
+
+        .hero-toggle__label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-toggle__desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .hero-toggle {
+                position: fixed;
+                top: unset;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                border-radius: 12px 12px 0 0;
+                box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+            }
+
+            .hero-toggle__body {
+                max-height: 50vh;
+                overflow-y: auto;
+            }
+        }
+
+        /* ================================
+           SECTION 1: HERO - Multi-Option
+           Content Pillar: All Pillars (Mission-driven)
+           ================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 58px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hero content panels - only one visible at a time */
+        .hero-panel {
+            display: none;
+            width: 100%;
+            min-height: calc(100vh - 58px);
+        }
+
+        .hero-panel.active {
+            display: block;
+        }
+
+        /* ================================
+           OPTION A: The Dog Who Started It All
+           ================================ */
+        .hero-option-a {
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .hero-option-a .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--chickpea-3) 0%, var(--oyster-3) 100%);
+        }
+
+        .hero-option-a .hero-bg-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: var(--oyster-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero-option-a .hero-bg-image {
+                width: 100%;
+                height: 50%;
+                top: auto;
+                bottom: 0;
+            }
+        }
+
+        .hero-option-a .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            min-height: calc(100vh - 58px);
+            padding: 4rem 2rem;
+        }
+
+        .hero-option-a .hero-text {
+            max-width: 500px;
+        }
+
+        .hero-option-a h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-option-a .hero-subhead {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .hero-option-a .hero-cta {
+            display: inline-block;
+            color: var(--kale-2);
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            border-bottom: 2px solid var(--kale-2);
+            padding-bottom: 0.25rem;
+            transition: all 0.2s;
+        }
+
+        .hero-option-a .hero-cta:hover {
+            color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        /* ================================
+           OPTION B: Long Live Dogs (Anthemic)
+           ================================ */
+        .hero-option-b {
+            background: var(--primary-dark);
+            position: relative;
+        }
+
+        .hero-option-b .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--kale-3) 0%, #1a4a3f 50%, var(--kale-3) 100%);
+            overflow: hidden;
+        }
+
+        .hero-option-b .hero-video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.3);
+        }
+
+        /* Animated gradient overlay for cinematic feel */
+        .hero-option-b .hero-video-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, var(--kale-3) 100%);
+            opacity: 0.7;
+        }
+
+        .hero-option-b .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 58px);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-option-b h1 {
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1;
+            text-transform: lowercase;
+            letter-spacing: -2px;
+        }
+
+        .hero-option-b .hero-subhead {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: rgba(255,255,255,0.85);
+            line-height: 1.5;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .hero-option-b .btn-primary {
+            font-size: 1.1rem;
+            padding: 1.25rem 2.5rem;
+        }
+
+        /* ================================
+           OPTION D: We're Dog People First
+           ================================ */
+        .hero-option-d {
+            background: var(--white);
+            position: relative;
+        }
+
+        .hero-option-d .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - 58px);
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .hero-option-d .hero-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hero-option-d .hero-text {
+            padding: 4rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero-option-d .hero-text {
+                padding: 3rem 1.5rem;
+                order: 2;
+            }
+        }
+
+        .hero-option-d h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+        }
+
+        .hero-option-d .hero-subhead {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .hero-option-d .hero-cta {
+            display: inline-block;
+            color: var(--kale-2);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border-bottom: 2px solid var(--kale-2);
+            padding-bottom: 0.25rem;
+            transition: all 0.2s;
+        }
+
+        .hero-option-d .hero-cta:hover {
+            color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        .hero-option-d .hero-collage {
+            height: 100%;
+            min-height: 500px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 1rem;
+            padding: 2rem;
+            background: var(--oyster-3);
+        }
+
+        @media (max-width: 900px) {
+            .hero-option-d .hero-collage {
+                min-height: 350px;
+                order: 1;
+            }
+        }
+
+        .hero-option-d .collage-photo {
+            background: var(--oyster-2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .hero-option-d .collage-photo:nth-child(1) {
+            grid-row: span 2;
+        }
+
+        /* Legacy styles for Option C (letter) - keeping for reference */
+        .hero-letter-layout {
+            position: relative;
+            max-width: 650px;
+        }
+
+        .letter-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 4px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .letter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gold);
+        }
+
+        /* Scrapbook-style photos */
+        .scrapbook-photo {
+            position: absolute;
+            background: var(--white);
+            padding: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            z-index: 1;
+        }
+
+        .scrapbook-photo .placeholder {
+            min-height: unset;
+            font-size: 0.65rem;
+        }
+
+        .scrapbook-photo-1 {
+            width: 200px;
+            top: -20px;
+            left: -180px;
+            transform: rotate(-6deg);
+        }
+
+        .scrapbook-photo-1 .placeholder {
+            width: 184px;
+            height: 140px;
+        }
+
+        .scrapbook-photo-2 {
+            width: 180px;
+            top: 60%;
+            left: -160px;
+            transform: rotate(4deg);
+        }
+
+        .scrapbook-photo-2 .placeholder {
+            width: 164px;
+            height: 164px;
+        }
+
+        .scrapbook-photo-3 {
+            width: 220px;
+            top: -30px;
+            right: -200px;
+            transform: rotate(5deg);
+        }
+
+        .scrapbook-photo-3 .placeholder {
+            width: 204px;
+            height: 150px;
+        }
+
+        .scrapbook-photo-4 {
+            width: 190px;
+            bottom: -20px;
+            right: -170px;
+            transform: rotate(-4deg);
+        }
+
+        .scrapbook-photo-4 .placeholder {
+            width: 174px;
+            height: 130px;
+        }
+
+        .photo-caption {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        @media (max-width: 1200px) {
+            .scrapbook-photo-1 {
+                left: -120px;
+                width: 160px;
+            }
+            .scrapbook-photo-1 .placeholder {
+                width: 144px;
+                height: 110px;
+            }
+            .scrapbook-photo-2 {
+                left: -100px;
+                width: 140px;
+            }
+            .scrapbook-photo-2 .placeholder {
+                width: 124px;
+                height: 124px;
+            }
+            .scrapbook-photo-3 {
+                right: -140px;
+                width: 180px;
+            }
+            .scrapbook-photo-3 .placeholder {
+                width: 164px;
+                height: 120px;
+            }
+            .scrapbook-photo-4 {
+                right: -120px;
+                width: 160px;
+            }
+            .scrapbook-photo-4 .placeholder {
+                width: 144px;
+                height: 110px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .scrapbook-photo {
+                position: relative;
+                top: unset;
+                left: unset;
+                right: unset;
+                bottom: unset;
+                transform: none;
+                width: auto;
+                display: inline-block;
+            }
+            .scrapbook-photos-mobile {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+            .scrapbook-photo-1 {
+                transform: rotate(-3deg);
+            }
+            .scrapbook-photo-2 {
+                transform: rotate(2deg);
+            }
+            .scrapbook-photo-3 {
+                transform: rotate(3deg);
+            }
+            .scrapbook-photo-4 {
+                transform: rotate(-2deg);
+            }
+            .scrapbook-photo .placeholder {
+                width: 100% !important;
+                height: 120px !important;
+            }
+            .scrapbook-photos-desktop {
+                display: none;
+            }
+        }
+
+        @media (min-width: 901px) {
+            .scrapbook-photos-mobile {
+                display: none;
+            }
+        }
+
+        .letter-greeting {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .letter-mission {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .letter-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .letter-body p {
+            margin-bottom: 1rem;
+        }
+
+        .letter-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .letter-signatures {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 500px) {
+            .letter-signatures {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        .signature {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .signature-name {
+            font-family: 'Georgia', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--primary-dark);
+        }
+
+        .signature-title {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .signature-dog {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* ================================
+           SECTION 2: WHY WE BUILT THIS
+           Content Pillar: Every Dog, Every Stage
+           ================================ */
+        .origin-story {
+            background: var(--white);
+        }
+
+        .origin-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .origin-intro .subhead-centered {
+            margin-top: 1rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item {
+                grid-template-columns: 1fr;
+                padding-left: 50px;
+                gap: 1.5rem;
+            }
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--kale-2);
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 3px var(--kale-2);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item::before {
+                left: 20px;
+            }
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            order: 2;
+        }
+
+        .timeline-item:nth-child(even) .timeline-visual {
+            order: 1;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item:nth-child(even) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-visual {
+                order: unset;
+            }
+        }
+
+        .timeline-content {
+            padding-top: 0;
+        }
+
+        .timeline-year {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .timeline-visual .placeholder {
+            min-height: 200px;
+        }
+
+        /* Mission Culmination */
+        .mission-culmination {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mission-culmination h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .mission-culmination > p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mission-video {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .mission-video .placeholder {
+            aspect-ratio: 16/9;
+            min-height: unset;
+        }
+
+        /* ================================
+           SECTION 3: THE SCIENCE BEHIND IT
+           Content Pillar: Expert Advocacy
+           ================================ */
+        .science-section {
+            background: var(--bg-light);
+        }
+
+        .science-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .science-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        .expert-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .expert-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+        }
+
+        .expert-photo .placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: unset;
+            border-radius: 50%;
+        }
+
+        .expert-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .expert-title {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .expert-quote {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .credentials-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .credential-item {
+            text-align: center;
+        }
+
+        .credential-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            line-height: 1;
+        }
+
+        .credential-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Research Callout */
+        .research-callout {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--kale-2);
+        }
+
+        .research-callout-content {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .research-callout-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+        .research-icon {
+            flex-shrink: 0;
+        }
+
+        .research-text h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary-dark);
+        }
+
+        .research-text p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+
+        .research-publication {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .research-link {
+            display: inline-block;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .research-link:hover {
+            color: var(--primary-dark);
+        }
+
+        .section-cta {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        /* ================================
+           SECTION 4: HOW WE MADE IT WORK
+           Content Pillar: Made to Fit Your Life
+           ================================ */
+        .solution-section {
+            background: var(--white);
+        }
+
+        .solution-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .solution-intro .subhead {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .solution-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .solution-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .solution-steps {
+                grid-template-columns: 1fr;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--kale-2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin: 0 auto 1rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .solution-followup {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 2rem auto 0;
+            font-style: italic;
+        }
+
+        /* ================================
+           SECTION 5: WHO'S WITH US
+           Content Pillar: Ask the Pack
+           ================================ */
+        .community-section {
+            background: var(--bg-light);
+        }
+
+        /* Reviews Carousel */
+        .reviews-carousel-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .reviews-carousel {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 1rem 0;
+        }
+
+        .reviews-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .review-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            min-width: 340px;
+            max-width: 340px;
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 500px) {
+            .review-card {
+                min-width: 300px;
+                max-width: 300px;
+            }
+        }
+
+        .review-outcome-tag {
+            display: inline-block;
+            background: var(--kale-0);
+            color: var(--kale-2);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .review-stars {
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: -1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .review-author-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .review-author-photo .placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: unset;
+            border-radius: 50%;
+            font-size: 0.6rem;
+        }
+
+        .review-author-info {
+            flex: 1;
+        }
+
+        .review-author-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .review-author-dog {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border-color);
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .carousel-dot.active {
+            background: var(--kale-2);
+        }
+
+        .reviews-cta {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .reviews-link {
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .reviews-link:hover {
+            color: var(--primary-dark);
+        }
+
+        .press-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .press-logo {
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .press-logo .placeholder {
+            height: 32px;
+            width: 100px;
+            min-height: unset;
+            font-size: 0.7rem;
+        }
+
+        /* ================================
+           SECTION 6: JOIN THE MOVEMENT
+           Content Pillar: All Pillars
+           ================================ */
+        .final-cta {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: clamp(3rem, 8vw, 5rem);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .final-cta .subhead-centered {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+        }
+
+        .final-cta .btn-primary {
+            font-size: 1.1rem;
+            padding: 1.25rem 2.5rem;
+        }
+
+        .cta-subhead {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 2rem;
+        }
+
+        .cta-button-group {
+            margin-bottom: 2rem;
+        }
+
+        .cta-benefits {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .cta-benefit {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-benefit .checkmark {
+            color: var(--kale-1);
+        }
+
+        /* ================================
+           FOOTER
+           ================================ */
+        /* Footer */
+        .footer {
+            background: var(--kale-3);
+            color: rgba(255,255,255,0.7);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 900px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .footer-newsletter {
+            max-width: 400px;
+        }
+
+        .footer-newsletter__title {
+            font-family: var(--font-family-display);
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-newsletter__subtitle {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .footer-newsletter__form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .footer-newsletter__input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .footer-newsletter__input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-newsletter__input:focus {
+            outline: none;
+            border-color: var(--carrot-2);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .footer-newsletter__btn {
+            background: var(--carrot-2);
+            color: var(--white);
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .footer-newsletter__btn:hover {
+            background: var(--carrot-3);
+        }
+
+        @media (max-width: 480px) {
+            .footer-newsletter__form {
+                flex-direction: column;
+            }
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-links__group h4 {
+            font-family: var(--font-family-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links__group ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links__group li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links__group a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links__group a:hover {
+            color: var(--white);
+        }
+
+        .footer-middle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .footer-social__link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .footer-social__link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-logo {
+            font-family: var(--font-family-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-legal a:hover {
+            color: rgba(255,255,255,0.85);
+        }
+
+        @media (max-width: 600px) {
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-legal {
+                justify-content: center;
+            }
+        }
+
+        /* Annotation Styles */
+        .wireframe-note {
+            background: #fff3cd;
+            border-left: 4px solid var(--gold);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+            color: #856404;
+        }
+
+        .wireframe-note strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo"><span class="nav-logo-full">The Farmer's Dog</span><span class="nav-logo-short">TFD</span></a>
+        <div class="nav-links">
+            <a href="our-food-wireframe.html">Our Food</a>
+            <a href="our-difference-wireframe.html">Our Difference</a>
+            <a href="reviews-wireframe.html">Reviews</a>
+            <a href="faq-wireframe.html">FAQ</a>
+            <a href="about-us-wireframe.html" class="active">About Us</a>
+            <a href="#">Vet Professionals</a>
+        </div>
+        <div class="nav-actions">
+            <a href="#" class="nav-login">Log In</a>
+            <a href="get-started-wireframe.html" class="nav-cta">Get Started — 50% Off</a>
+        </div>
+        <button class="nav-mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="nav-mobile-menu" id="mobileMenu">
+        <a href="our-food-wireframe.html">Our Food</a>
+        <a href="our-difference-wireframe.html">Our Difference</a>
+        <a href="reviews-wireframe.html">Reviews</a>
+        <a href="faq-wireframe.html">FAQ</a>
+        <a href="about-us-wireframe.html" class="active">About Us</a>
+        <a href="#">Vet Professionals</a>
+        <div class="nav-mobile-actions">
+            <a href="#" class="nav-login">Log In</a>
+            <a href="get-started-wireframe.html" class="nav-cta">Get Started — 50% Off</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+    </script>
+
+    <!-- ================================
+         HERO OPTION TOGGLE UI
+         For stakeholder review
+         ================================ -->
+    <div class="hero-toggle">
+        <div class="hero-toggle__header" onclick="toggleHeroPanel()">
+            <span class="hero-toggle__header-left">Hero Option Selector</span>
+            <span class="hero-toggle__chevron">▼</span>
+        </div>
+        <div class="hero-toggle__body">
+            <div class="hero-toggle__options">
+                <div class="hero-toggle__option active" data-option="b">
+                    <div class="hero-toggle__radio"></div>
+                    <div class="hero-toggle__content">
+                        <div class="hero-toggle__label">Long Live Dogs</div>
+                        <div class="hero-toggle__desc">Emotional + Anthemic. Cinematic video hero with bold statement.</div>
+                    </div>
+                </div>
+                <div class="hero-toggle__option" data-option="a">
+                    <div class="hero-toggle__radio"></div>
+                    <div class="hero-toggle__content">
+                        <div class="hero-toggle__label">The Dog Who Started It All</div>
+                        <div class="hero-toggle__desc">Most emotional. Origin story focused on Jada.</div>
+                    </div>
+                </div>
+                <div class="hero-toggle__option" data-option="d">
+                    <div class="hero-toggle__radio"></div>
+                    <div class="hero-toggle__content">
+                        <div class="hero-toggle__label">We're Dog People First</div>
+                        <div class="hero-toggle__desc">Balanced. Team collage showing authentic connection.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================
+         SECTION 1: HERO - Multi-Option
+         Content Pillar: All Pillars (Mission-driven)
+         ================================ -->
+    <section class="hero">
+        <!-- OPTION B: Long Live Dogs (Anthemic) - DEFAULT -->
+        <div class="hero-panel hero-option-b active" id="hero-option-b">
+            <div class="hero-video-bg"></div>
+            <div class="hero-content">
+                <h1>Long live dogs.</h1>
+                <p class="hero-subhead">They give us everything. We started this company to give them more years of it.</p>
+            </div>
+        </div>
+
+        <!-- OPTION A: The Dog Who Started It All -->
+        <div class="hero-panel hero-option-a" id="hero-option-a">
+            <div class="hero-bg">
+                <div class="hero-bg-image">[Full-bleed photo of Jada with gentle Ken Burns zoom]</div>
+            </div>
+            <div class="hero-content">
+                <div class="container">
+                    <div class="hero-text">
+                        <h1>It started with one dog.</h1>
+                        <p class="hero-subhead">When our founder's dog Jada got sick, he couldn't find food good enough. So he made it himself. That decision changed everything.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTION D: We're Dog People First -->
+        <div class="hero-panel hero-option-d" id="hero-option-d">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>We're dog people who happen to make dog food.</h1>
+                    <p class="hero-subhead">We're a team of dog lovers, owners, and obsessives. Every decision we make starts with one question: would we feed this to our own dogs?</p>
+                </div>
+                <div class="hero-collage">
+                    <div class="collage-photo">[Team member with their dog - tall vertical photo]</div>
+                    <div class="collage-photo">[Team member with their dog]</div>
+                    <div class="collage-photo">[Team member with their dog]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Hero toggle panel collapse functionality
+        function toggleHeroPanel() {
+            document.querySelector('.hero-toggle').classList.toggle('collapsed');
+        }
+
+        // Hero option toggle functionality
+        document.querySelectorAll('.hero-toggle__option').forEach(option => {
+            option.addEventListener('click', function() {
+                const selectedOption = this.dataset.option;
+
+                // Update toggle UI
+                document.querySelectorAll('.hero-toggle__option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                // Update hero panels
+                document.querySelectorAll('.hero-panel').forEach(panel => {
+                    panel.classList.remove('active');
+                });
+                document.getElementById('hero-option-' + selectedOption).classList.add('active');
+            });
+        });
+    </script>
+
+    <!-- ================================
+         SECTION 2: WHY WE BUILT THIS
+         Content Pillar: Every Dog, Every Stage
+         ================================ -->
+    <section class="origin-story" id="origin-story">
+        <div class="container">
+            <div class="origin-intro">
+                <h2>Before the mission, there was Jada</h2>
+                <p class="subhead-centered">Every big idea starts somewhere small. Ours started with one sick dog and a question that changed everything.</p>
+            </div>
+
+            <div class="timeline">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>The Wake-Up Call</h3>
+                        <p>Brett's dog Jada was constantly sick despite eating "premium" dog food. Vets were stumped. Out of desperation, he tried something radical: cooking her real food.</p>
+                    </div>
+                    <div class="timeline-visual">
+                        <div class="placeholder">[Photo: Jada before/after or vet visit imagery]</div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>The Discovery</h3>
+                        <p>Within weeks, Jada transformed. Her energy returned. Her coat shined. Her digestive issues vanished. The difference was undeniable.</p>
+                    </div>
+                    <div class="timeline-visual">
+                        <div class="placeholder">[Photo: Healthy, energetic Jada]</div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>The Mission</h3>
+                        <p>Not just dogs with health problems. Not just certain breeds or ages. Brett and Jonathan set out to build a company that could bring real food to every dog.</p>
+                    </div>
+                    <div class="timeline-visual">
+                        <div class="placeholder">[Photo: Brett and Jonathan early days, or diverse dogs enjoying TFD]</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Culmination -->
+            <div class="mission-culmination">
+                <h3>Over one billion meals served.</h3>
+                <p>To puppies, seniors, and every dog in between—not just dogs with health issues, but healthy dogs whose owners want to keep them that way.</p>
+                <div class="mission-video">
+                    <div class="placeholder placeholder-image">[Video: The Farmer's Dog story / brand film]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+         SECTION 3: THE SCIENCE BEHIND IT
+         Content Pillar: Expert Advocacy
+         ================================ -->
+    <section class="science-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Backed by experts who believe in better</h2>
+                <p class="subhead-centered">We're committed to advancing the science of canine nutrition through rigorous research, board-certified expertise, and the highest safety standards in the industry.</p>
+            </div>
+
+            <div class="science-grid">
+                <div class="expert-card">
+                    <div class="expert-photo">
+                        <div class="placeholder">[Headshot]</div>
+                    </div>
+                    <div class="expert-name">Dr. Joseph Wakshlag</div>
+                    <div class="expert-title">DVM, Ph.D., DACVIM (Nutrition)</div>
+                    <p class="expert-quote">"The difference between processed and fresh food isn't marketing. It's bioavailability. Dogs absorb more nutrients from real food."</p>
+                </div>
+
+                <div class="expert-card">
+                    <div class="expert-photo">
+                        <div class="placeholder">[Headshot]</div>
+                    </div>
+                    <div class="expert-name">Dr. Rae Sires</div>
+                    <div class="expert-title">DVM, DACVIM (Nutrition)</div>
+                    <p class="expert-quote">"We're not just making food. We're advancing the science of canine nutrition with every formulation."</p>
+                </div>
+
+                <div class="expert-card">
+                    <div class="expert-photo">
+                        <div class="placeholder">[Headshot]</div>
+                    </div>
+                    <div class="expert-name">Dr. Ryan Yamka</div>
+                    <div class="expert-title">Ph.D., Board-Certified Companion Animal Nutritionist</div>
+                    <p class="expert-quote">"Human-grade isn't a marketing term here. It's a legal standard we hold ourselves to in every facility."</p>
+                </div>
+            </div>
+
+            <div class="credentials-bar">
+                <div class="credential-item">
+                    <div class="credential-number">4</div>
+                    <div class="credential-label">Board-certified nutritionists on staff</div>
+                </div>
+                <div class="credential-item">
+                    <div class="credential-number">3 of ~100</div>
+                    <div class="credential-label">US veterinary nutritionists work here</div>
+                </div>
+                <div class="credential-item">
+                    <div class="credential-number">AAFCO</div>
+                    <div class="credential-label">Complete & balanced certified</div>
+                </div>
+                <div class="credential-item">
+                    <div class="credential-number">100%</div>
+                    <div class="credential-label">Human-grade facilities</div>
+                </div>
+            </div>
+
+            <div class="section-cta">
+                <a href="our-difference-wireframe.html" class="btn-secondary">Explore our difference</a>
+            </div>
+
+            <!-- Cornell Study Callout -->
+            <div class="research-callout">
+                <div class="research-callout-content">
+                    <div class="research-icon">
+                        <div class="placeholder" style="width: 80px; height: 80px; min-height: unset; border-radius: 8px;">[Cornell Logo]</div>
+                    </div>
+                    <div class="research-text">
+                        <h3>Research-backed nutrition for a longer, healthier life</h3>
+                        <p>A yearlong study with Cornell University found that dogs eating fresh food showed lower levels of compounds linked to aging and disease, and higher levels of protective antioxidants. The takeaway: what you feed your dog can help them live better, longer. Changes were visible in just one month.</p>
+                        <p class="research-publication">Published in <em>Metabolites</em>, a peer-reviewed scientific journal</p>
+                    </div>
+                </div>
+                <a href="#" class="research-link">Read the full study →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+         SECTION 4: HOW WE MADE IT WORK
+         Content Pillar: Made to Fit Your Life
+         ================================ -->
+    <section class="solution-section">
+        <div class="container">
+            <div class="solution-intro">
+                <h2>We solved the hard part so you don't have to</h2>
+                <p class="subhead">Brett spent hours every week cooking for Jada. We wanted every dog to have access to the same quality food, without asking their owners to become full-time chefs.</p>
+            </div>
+
+            <div class="solution-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>You tell us about your dog</h3>
+                    <p>Age, weight, activity level, health goals. We capture it all in a quick quiz.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>We formulate their plan</h3>
+                    <p>Our nutritionists calculate the perfect portions and recipes for your dog's needs.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>We cook and deliver</h3>
+                    <p>Fresh meals made in human-grade kitchens, shipped to your door on your schedule.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>You just serve</h3>
+                    <p>Pre-portioned packs. No prep, no math, no mess. Just happy dogs.</p>
+                </div>
+            </div>
+
+            <p class="solution-followup">And as your dog's needs change, your account puts you in control—swap recipes, adjust portions, or reschedule deliveries anytime.</p>
+
+            <div class="section-cta">
+                <a href="get-started-wireframe.html" class="btn-primary">Get 50% Off Your First Box</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+         SECTION 5: WHO'S WITH US
+         Content Pillar: Ask the Pack
+         ================================ -->
+    <section class="community-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Join the pack</h2>
+                <p class="subhead-centered">Millions of pet parents have made the switch. Here's why they're never going back.</p>
+            </div>
+
+            <div class="reviews-carousel-container">
+                <div class="reviews-carousel">
+                    <div class="review-card">
+                        <span class="review-outcome-tag">Picky Eater</span>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Luna was the pickiest eater. We tried everything. TFD is the only food she's ever finished without coaxing. Every. Single. Meal."</p>
+                        <div class="review-author">
+                            <div class="review-author-photo">
+                                <div class="placeholder">[Photo]</div>
+                            </div>
+                            <div class="review-author-info">
+                                <div class="review-author-name">James T.</div>
+                                <div class="review-author-dog">Luna, 2 yr old Beagle</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <span class="review-outcome-tag">More Energy</span>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Max had been slowing down for years. We thought it was just age. Three months on TFD and he's acting like a puppy again."</p>
+                        <div class="review-author">
+                            <div class="review-author-photo">
+                                <div class="placeholder">[Photo]</div>
+                            </div>
+                            <div class="review-author-info">
+                                <div class="review-author-name">Sarah M.</div>
+                                <div class="review-author-dog">Max, 8 yr old Lab</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <span class="review-outcome-tag">Weight Loss</span>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Our vet said Biscuit needed to lose 10 lbs. With TFD's portioned meals, he hit his goal weight in 4 months. No more guessing."</p>
+                        <div class="review-author">
+                            <div class="review-author-photo">
+                                <div class="placeholder">[Photo]</div>
+                            </div>
+                            <div class="review-author-info">
+                                <div class="review-author-name">Michelle K.</div>
+                                <div class="review-author-dog">Biscuit, 5 yr old Corgi</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <span class="review-outcome-tag">Better Digestion</span>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Constant stomach issues for 2 years. We tried prescription diets, nothing worked. Two weeks on TFD and the problems just stopped."</p>
+                        <div class="review-author">
+                            <div class="review-author-photo">
+                                <div class="placeholder">[Photo]</div>
+                            </div>
+                            <div class="review-author-info">
+                                <div class="review-author-name">David R.</div>
+                                <div class="review-author-dog">Cooper, 4 yr old Golden</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <span class="review-outcome-tag">Shinier Coat</span>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"People stop us on walks to ask what we feed her. Her coat went from dull and patchy to soft and shiny in about a month."</p>
+                        <div class="review-author">
+                            <div class="review-author-photo">
+                                <div class="placeholder">[Photo]</div>
+                            </div>
+                            <div class="review-author-info">
+                                <div class="review-author-name">Amanda S.</div>
+                                <div class="review-author-dog">Rosie, 3 yr old Aussie</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <span class="review-outcome-tag">Vet Recommended</span>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"I recommend fresh food to my patients. My own dogs eat TFD. The quality and science behind it is exactly what I'd want for any dog."</p>
+                        <div class="review-author">
+                            <div class="review-author-photo">
+                                <div class="placeholder">[Photo]</div>
+                            </div>
+                            <div class="review-author-info">
+                                <div class="review-author-name">Dr. Rebecca L.</div>
+                                <div class="review-author-dog">Veterinarian & TFD customer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-nav">
+                    <button class="carousel-dot active"></button>
+                    <button class="carousel-dot"></button>
+                    <button class="carousel-dot"></button>
+                    <button class="carousel-dot"></button>
+                    <button class="carousel-dot"></button>
+                    <button class="carousel-dot"></button>
+                </div>
+            </div>
+
+            <div class="reviews-cta">
+                <a href="#" class="reviews-link">Read more reviews →</a>
+            </div>
+
+            <div class="press-logos">
+                <div class="press-logo"><div class="placeholder">[NYT Logo]</div></div>
+                <div class="press-logo"><div class="placeholder">[Forbes Logo]</div></div>
+                <div class="press-logo"><div class="placeholder">[WSJ Logo]</div></div>
+                <div class="press-logo"><div class="placeholder">[GMA Logo]</div></div>
+                <div class="press-logo"><div class="placeholder">[Today Logo]</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+         SECTION 6: JOIN THE MOVEMENT
+         Content Pillar: All Pillars
+         ================================ -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Long live dogs.</h2>
+            <p class="cta-subhead">Join millions of pet parents who decided their dogs deserve better. Your dog is worth it.</p>
+            <div class="cta-button-group">
+                <a href="get-started-wireframe.html" class="btn-primary">Get 50% Off Your First Box</a>
+            </div>
+            <div class="cta-benefits">
+                <div class="cta-benefit">
+                    <span class="checkmark">&#10003;</span> Personalized for your dog
+                </div>
+                <div class="cta-benefit">
+                    <span class="checkmark">&#10003;</span> Free shipping, always
+                </div>
+                <div class="cta-benefit">
+                    <span class="checkmark">&#10003;</span> Cancel anytime
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-newsletter">
+                    <h3 class="footer-newsletter__title">Join the pack</h3>
+                    <p class="footer-newsletter__subtitle">Get nutrition tips, exclusive offers, and stories from real dog parents delivered to your inbox.</p>
+                    <form class="footer-newsletter__form">
+                        <input type="email" class="footer-newsletter__input" placeholder="Enter your email">
+                        <button type="submit" class="footer-newsletter__btn">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-links__group">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="#">DIY</a></li>
+                            <li><a href="#">Digest</a></li>
+                            <li><a href="#">Breeds</a></li>
+                            <li><a href="#">WSAVA</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Affiliates</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links__group">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="mailto:help@thefarmersdog.com">help@thefarmersdog.com</a></li>
+                            <li><a href="tel:6467807957">Call/Text: 646.780.7957</a></li>
+                            <li><a href="faq-wireframe.html">Help Center</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links__group">
+                        <h4>Business</h4>
+                        <ul>
+                            <li><a href="#">Media Inquiries</a></li>
+                            <li><a href="#">Partnership Inquiries</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-middle">
+                <div class="footer-social">
+                    <a href="#" class="footer-social__link" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" class="footer-social__link" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                    </a>
+                    <a href="#" class="footer-social__link" aria-label="TikTok">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                    </a>
+                </div>
+                <div class="footer-logo">The Farmer's Dog</div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2025 The Farmer's Dog, Inc. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Accessibility</a>
+                    <a href="#">Do Not Sell My Personal Information</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,4457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Difference - The Farmer's Dog | Wireframe</title>
+    <!-- Adobe Fonts - Neue Haas Grotesk -->
+    <link rel="stylesheet" href="https://use.typekit.net/otc4rpl.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* TFD Typography */
+            --font-family-display: 'neue-haas-grotesk-display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-family-text: 'neue-haas-grotesk-text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+            /* TFD Design Tokens */
+            /* Kale (Primary Brand Green) */
+            --kale-0: #E5EFE7;
+            --kale-1: #b5d3ba;
+            --kale-2: #417c67;
+            --kale-3: #173b33;
+            /* Carrot (CTA Orange) */
+            --carrot-0: #fff4f1;
+            --carrot-1: #ffd9cc;
+            --carrot-2: #f2674b;
+            --carrot-3: #D2563D;
+            /* Blueberry (Secondary Blue) */
+            --blueberry-0: #e6ecf5;
+            --blueberry-1: #b7c6e6;
+            --blueberry-2: #385a9d;
+            --blueberry-3: #03184e;
+            /* Charcoal (Text Grays) */
+            --charcoal-0: #39383c;
+            --charcoal-1: #717377;
+            --charcoal-2: #969799;
+            --charcoal-3: #c2c3c5;
+            /* Oyster (Light Grays/Backgrounds) */
+            --oyster-0: #c6bfb7;
+            --oyster-1: #dbd6d1;
+            --oyster-2: #efedea;
+            --oyster-3: #f6f5f3;
+            /* Chickpea (Warm Cream/Tan) */
+            --chickpea-0: #d3bfa2;
+            --chickpea-1: #f2e1c8;
+            --chickpea-2: #fff3e1;
+            --chickpea-3: #fffaf3;
+            /* Mapped Variables */
+            --primary-dark: var(--kale-3);
+            --primary-blue: var(--carrot-2);
+            --primary-light-blue: var(--kale-1);
+            --accent-blue: var(--kale-2);
+            --bg-light: var(--oyster-3);
+            --bg-gray: var(--oyster-2);
+            --bg-dark-gray: var(--oyster-1);
+            --text-primary: var(--charcoal-0);
+            --text-secondary: var(--charcoal-1);
+            --border-color: var(--oyster-1);
+            --white: #ffffff;
+            --success-green: #28a745;
+            --error-red: #dc3545;
+        }
+
+        body {
+            font-family: var(--font-family-text);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-display);
+        }
+
+        /* Sticky Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-logo {
+            color: var(--kale-3);
+            font-weight: bold;
+            font-size: 1.25rem;
+            text-decoration: none;
+        }
+
+        .nav-logo-full { display: inline; }
+        .nav-logo-short { display: none; }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--charcoal-1);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--kale-3); }
+        .nav-links a.active { color: var(--kale-3); }
+
+        .nav-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .nav-login {
+            color: var(--kale-3);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--oyster-1);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .nav-login:hover {
+            border-color: var(--kale-3);
+            background: var(--oyster-3);
+        }
+
+        .nav-cta {
+            background: var(--carrot-2);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover { background: var(--carrot-3); }
+
+        /* Mobile Menu */
+        .nav-mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--kale-3);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .nav-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 58px;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 1rem;
+            border-top: 1px solid var(--oyster-2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+
+        .nav-mobile-menu.open { display: block; }
+
+        .nav-mobile-menu a {
+            display: block;
+            color: var(--charcoal-1);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .nav-mobile-menu a:hover { background: var(--oyster-3); }
+        .nav-mobile-menu a.active { color: var(--kale-3); background: var(--oyster-3); }
+
+        .nav-mobile-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-top: 1px solid var(--oyster-2);
+            margin-top: 0.5rem;
+        }
+
+        .nav-mobile-actions .nav-login { flex: 1; text-align: center; }
+        .nav-mobile-actions .nav-cta { flex: 1; text-align: center; }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .nav-login { display: none; }
+            .nav-mobile-toggle { display: block; }
+            .nav { padding: 0.75rem 1rem; }
+            .nav-logo-full { display: none; }
+            .nav-logo-short { display: inline; }
+        }
+
+        /* Section Base Styles */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .subhead {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        .subhead-centered {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--carrot-3);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* Section 1: Hero */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--bg-gray) 0%, var(--bg-dark-gray) 100%);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding-bottom: 2rem;
+        }
+
+        .hero-background::after {
+            content: '[Video/Photo: The unboxing moment—dog watching intently as owner opens TFD box, anticipation visible in body language. Box partially open with packs visible, dry ice fog. Warm, real-home setting. Focus on the dog\'s excited expression. Can be video (looping) or photo.]';
+            padding: 1rem 2rem;
+            text-align: center;
+            max-width: 500px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            padding: 0;
+            margin-left: 5%;
+        }
+
+        .hero-content h1 {
+            color: var(--primary-dark);
+            text-shadow: 0 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .hero-content .subhead {
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .scroll-hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .scroll-hint span {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                margin: 1rem;
+                padding: 1.5rem;
+                background: rgba(255, 255, 255, 0.9);
+                border-radius: 12px;
+            }
+        }
+
+        /* Section 2: Why Process Matters */
+        .process-matters {
+            background: var(--white);
+        }
+
+        .process-comparison {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 900px) {
+            .process-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .process-card {
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .process-card.kibble {
+            background: #fef3f3;
+            border: 2px solid #f5d5d5;
+        }
+
+        .process-card.fresh {
+            background: #f0faf5;
+            border: 2px solid #c8e6d5;
+        }
+
+        .process-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .process-card.kibble h3 {
+            color: var(--error-red);
+        }
+
+        .process-card.fresh h3 {
+            color: var(--success-green);
+        }
+
+        .process-list {
+            list-style: none;
+        }
+
+        .process-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .process-list li:last-child {
+            border-bottom: none;
+        }
+
+        .process-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.85rem;
+        }
+
+        .kibble .process-icon {
+            background: #ffcdd2;
+            color: var(--error-red);
+        }
+
+        .fresh .process-icon {
+            background: #c8e6c9;
+            color: var(--success-green);
+        }
+
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            padding-top: 80px;
+        }
+
+        @media (max-width: 900px) {
+            .vs-divider {
+                padding: 1rem 0;
+            }
+        }
+
+        /* Food or Fiction Quiz */
+        .quiz-section {
+            background: var(--bg-light);
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .quiz-header {
+            margin-bottom: 2rem;
+        }
+
+        .quiz-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-header p {
+            color: var(--text-secondary);
+        }
+
+        .quiz-container {
+            max-width: 480px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .quiz-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .quiz-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .quiz-card-front,
+        .quiz-card-back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2.5rem;
+        }
+
+        .quiz-card-back {
+            transform: rotateY(180deg);
+        }
+
+        .quiz-statement {
+            font-size: 1.25rem;
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+        }
+
+        .quiz-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .quiz-btn {
+            padding: 12px 32px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 2px solid;
+            transition: all 0.2s;
+        }
+
+        .quiz-btn.true {
+            background: var(--white);
+            border-color: var(--success-green);
+            color: var(--success-green);
+        }
+
+        .quiz-btn.true:hover {
+            background: var(--success-green);
+            color: var(--white);
+        }
+
+        .quiz-btn.false {
+            background: var(--white);
+            border-color: var(--error-red);
+            color: var(--error-red);
+        }
+
+        .quiz-btn.false:hover {
+            background: var(--error-red);
+            color: var(--white);
+        }
+
+        .quiz-answer {
+            text-align: left;
+        }
+
+        .quiz-answer-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-answer-badge.correct {
+            background: #d4edda;
+            color: var(--success-green);
+        }
+
+        .quiz-answer-badge.incorrect {
+            background: #f8d7da;
+            color: var(--error-red);
+        }
+
+        .quiz-explanation {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-next {
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .quiz-progress {
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .quiz-progress-bar {
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            height: 100%;
+            background: var(--primary-blue);
+            transition: width 0.3s;
+        }
+
+        /* Quiz Completion State */
+        .quiz-complete {
+            display: none;
+            text-align: center;
+            padding: 2.5rem;
+        }
+
+        .quiz-complete.visible {
+            display: block;
+        }
+
+        .quiz-complete-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-complete h4 {
+            font-size: 1.35rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary-dark);
+        }
+
+        .quiz-complete p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .quiz-complete .btn-primary {
+            margin-bottom: 1rem;
+        }
+
+        .quiz-restart {
+            background: none;
+            border: none;
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .quiz-share {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .quiz-share-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .quiz-share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .quiz-share-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .quiz-share-btn:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+
+        .quiz-share-btn.instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+        }
+
+        .quiz-share-btn.tiktok {
+            background: #000000;
+            color: white;
+        }
+
+        .quiz-share-btn.facebook {
+            background: #1877f2;
+            color: white;
+        }
+
+        .quiz-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--kale-2);
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-score-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Value callout inline (in ingredients section) */
+        .value-callout-inline {
+            background: var(--chickpea-2);
+            border-left: 4px solid var(--chickpea-0);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .value-callout-inline p {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .value-callout-inline strong {
+            color: var(--primary-dark);
+        }
+
+        .value-cta-link {
+            display: inline-block;
+            margin-top: 0.75rem;
+            color: var(--kale-2);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .value-cta-link:hover {
+            text-decoration: underline;
+        }
+
+        /* (Keeping alternatives styles for potential future use) */
+        .alternatives-section {
+            background: var(--charcoal-0);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alternatives-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .alternatives-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .alternatives-section .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .alternatives-section .section-header h2 {
+            color: var(--white);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+        }
+
+        .alternatives-section .section-header .subhead-centered {
+            color: rgba(255,255,255,0.75);
+        }
+
+        .alternatives-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 1000px) {
+            .alternatives-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        .alternative-card {
+            background: rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 1.75rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .alternative-card__label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.75rem;
+        }
+
+        .alternative-card h3 {
+            font-size: 1.25rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alternative-card__drawbacks {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .alternative-card__drawbacks li {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.5;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .alternative-card__drawbacks li:last-child {
+            border-bottom: none;
+        }
+
+        .alternative-card__drawbacks li::before {
+            content: '✕';
+            color: var(--carrot-2);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* Solution Card - stands out */
+        .solution-card {
+            background: var(--kale-2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .solution-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        .solution-card__content h3 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .solution-card__content p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .solution-card__benefits {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .solution-card__benefits {
+                grid-template-columns: 1fr;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+        }
+
+        .solution-card__benefit {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--white);
+        }
+
+        .solution-card__benefit::before {
+            content: '✓';
+            color: var(--kale-1);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Legacy styles - keep for backwards compat */
+        .industry-problem {
+            background: var(--charcoal-0);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .problem-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .problem-card__icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card__stat {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--carrot-2);
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .problem-card h3 {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .problem-card p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+        }
+
+        .problem-quote {
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--carrot-2);
+            padding: 2rem;
+            border-radius: 0 12px 12px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .problem-quote blockquote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .problem-quote cite {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            font-style: normal;
+        }
+
+        /* Section 3: What Goes Into Our Food */
+        .ingredients-light {
+            background: var(--bg-light);
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .ingredients-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ingredients-content h2 {
+            margin-bottom: 1rem;
+        }
+
+        .ingredients-content > p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .ingredients-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .ingredient-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .ingredient-tag {
+            background: var(--white);
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .ingredient-tag.no {
+            color: var(--error-red);
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .cross-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .cross-link:hover {
+            text-decoration: underline;
+        }
+
+        .ingredients-visual {
+            background: linear-gradient(135deg, var(--bg-gray) 0%, var(--bg-dark-gray) 100%);
+            border-radius: 12px;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Section 4: How We Cook */
+        .how-we-cook {
+            background: var(--white);
+        }
+
+        .cook-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .cook-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cook-visual {
+            background: linear-gradient(135deg, var(--bg-gray) 0%, var(--bg-dark-gray) 100%);
+            border-radius: 12px;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .cook-text h2 {
+            margin-bottom: 0.75rem;
+        }
+
+        .cook-intro {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .cook-points {
+            list-style: none;
+        }
+
+        .cook-points li {
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--bg-gray);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .cook-points li:last-child {
+            border-bottom: none;
+        }
+
+        .cook-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-dark);
+            border-radius: 8px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .cook-point-text h4 {
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+
+        .cook-point-text p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Section 5: How We Keep It Safe */
+        .safety {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .safety .section-header h2 {
+            color: var(--white);
+        }
+
+        .safety .section-header .subhead-centered {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .safety-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .safety-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .safety-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .safety-card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .safety-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--white);
+        }
+
+        .safety-card p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .safety-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .safety-cta .btn-primary {
+            background: var(--white);
+            color: var(--primary-dark);
+        }
+
+        .safety-cta .btn-primary:hover {
+            background: var(--bg-light);
+        }
+
+        /* Section 6: Who's Behind the Recipes */
+        .formulation {
+            background: var(--white);
+        }
+
+        .formulation-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .formulation-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .formulation-text h2 {
+            margin-bottom: 1rem;
+        }
+
+        .formulation-text > p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .home-cooking-callout {
+            background: var(--chickpea-2);
+            border-left: 4px solid var(--chickpea-0);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 2rem;
+        }
+
+        .home-cooking-callout p {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .home-cooking-callout strong {
+            color: var(--primary-dark);
+        }
+
+        .research-callout-block {
+            background: var(--kale-0);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .research-callout-content {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .research-callout-content strong {
+            color: var(--kale-3);
+        }
+
+        .research-callout-link {
+            color: var(--kale-2);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .research-callout-link:hover {
+            text-decoration: underline;
+        }
+
+        .credentials-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .credential-badge {
+            background: var(--bg-light);
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .credential-badge span {
+            color: var(--primary-blue);
+        }
+
+        .formulation-visual {
+            background: var(--primary-dark);
+            border-radius: 12px;
+            padding: 2.5rem;
+            color: var(--white);
+        }
+
+        .expert-quote {
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .expert-attribution {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .expert-avatar {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .expert-info {
+            font-size: 0.9rem;
+        }
+
+        .expert-info strong {
+            display: block;
+        }
+
+        .expert-info span {
+            opacity: 0.8;
+        }
+
+        /* Section 7: How It Gets to You */
+        .delivery {
+            background: var(--bg-light);
+        }
+
+        .delivery-timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .delivery-timeline::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: 72px;
+            right: 72px;
+            height: 4px;
+            background: var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .delivery-timeline {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .delivery-timeline::before {
+                display: none;
+            }
+        }
+
+        .delivery-step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .delivery-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--white);
+            border: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .delivery-step h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .delivery-step p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            max-width: 160px;
+            margin: 0 auto;
+        }
+
+        /* Account Control Module */
+        .account-control-module {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .account-control-module {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .account-control-visual .placeholder {
+            border-radius: 12px;
+            min-height: 280px;
+        }
+
+        .account-control-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary-dark);
+        }
+
+        .account-control-content > p {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+        }
+
+        .account-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .account-features li {
+            padding: 0.6rem 0;
+            padding-left: 1.75rem;
+            position: relative;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .account-features li:last-child {
+            border-bottom: none;
+        }
+
+        .account-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--kale-2);
+            font-weight: 600;
+        }
+
+        /* Section 8: The Difference You'll See - Carousel */
+        .difference {
+            background: var(--bg-light);
+            overflow: hidden;
+        }
+
+        .results-carousel-wrapper {
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .results-carousel {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 1rem 0;
+        }
+
+        .results-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .result-card {
+            flex: 0 0 280px;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .result-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--bg-gray) 0%, var(--bg-dark-gray) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            position: relative;
+        }
+
+        .result-info {
+            padding: 1.25rem;
+        }
+
+        .result-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .result-details {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .result-outcome {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-attribution {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            cursor: pointer;
+            font-size: 1.25rem;
+            z-index: 10;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .carousel-btn:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .carousel-btn.prev {
+            left: -10px;
+        }
+
+        .carousel-btn.next {
+            right: -10px;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-btn {
+                display: none;
+            }
+        }
+
+        .difference-link {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* Section 9: Ready to Try It */
+        .cta-section {
+            background: var(--primary-dark);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            background: var(--carrot-3);
+        }
+
+        .cta-subhead {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 2rem;
+        }
+
+        .cta-button-group {
+            margin-bottom: 2rem;
+        }
+
+        .cta-benefits {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .cta-benefit {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-benefit .checkmark {
+            color: var(--kale-1);
+        }
+
+        /* Section 10: FAQ - PRD-Aligned Module */
+        .faq-section {
+            background: var(--chickpea-3);
+            padding: 4rem 2rem;
+        }
+
+        .faq-section .container {
+            max-width: 700px;
+        }
+
+        /* FAQ Search - Submit Only (per PRD) */
+        .faq-search-module {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .faq-search-module__form {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-search-module__input-wrapper {
+            position: relative;
+            flex: 1;
+        }
+
+        .faq-search-module__icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--charcoal-1);
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        .faq-search-module__input {
+            width: 100%;
+            height: 56px;
+            padding: 0 1rem 0 3.25rem;
+            font-size: 1rem;
+            border: 2px solid var(--oyster-1);
+            border-radius: 4px;
+            background: var(--white);
+            color: var(--charcoal-0);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .faq-search-module__input:focus {
+            outline: none;
+            border-color: var(--kale-2);
+            box-shadow: 0 0 0 4px rgba(65, 124, 103, 0.1);
+        }
+
+        .faq-search-module__submit {
+            height: 56px;
+            padding: 0 1.5rem;
+            background: var(--carrot-2);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .faq-search-module__submit:hover {
+            background: var(--carrot-3);
+        }
+
+        /* OR BROWSE Divider */
+        .faq-browse-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+
+        .faq-browse-divider__line {
+            flex: 1;
+            height: 1px;
+            background: var(--oyster-1);
+        }
+
+        .faq-browse-divider__text {
+            font-size: 0.85rem;
+            color: var(--charcoal-2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* Featured Questions */
+        .faq-featured-questions {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .faq-featured-question {
+            display: block;
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            background: var(--white);
+            border: 1px solid var(--oyster-1);
+            border-radius: 20px;
+            margin-bottom: 0.75rem;
+            text-align: left;
+            cursor: pointer;
+            transition: background 0.3s, border-color 0.3s;
+            text-decoration: none;
+        }
+
+        .faq-featured-question:hover {
+            background: var(--kale-0);
+            border-color: var(--kale-1);
+        }
+
+        .faq-featured-question__text {
+            font-weight: 600;
+            color: var(--kale-3);
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-featured-question__arrow {
+            color: var(--kale-2);
+            font-size: 1.25rem;
+        }
+
+        /* Inline Answer Card */
+        .faq-answer-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem 2.5rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .faq-answer-card--visible {
+            display: block;
+        }
+
+        .faq-answer-card__back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--kale-2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .faq-answer-card__back:hover {
+            text-decoration: underline;
+        }
+
+        .faq-answer-card__question {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--kale-3);
+            margin-bottom: 1.25rem;
+            line-height: 1.3;
+        }
+
+        .faq-answer-card__content {
+            color: var(--charcoal-1);
+            line-height: 1.8;
+        }
+
+        .faq-answer-card__content p {
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer-card__content ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .faq-answer-card__content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-answer-card__cta {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--oyster-1);
+        }
+
+        .faq-answer-card__cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--carrot-2);
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background 0.3s;
+        }
+
+        .faq-answer-card__cta-btn:hover {
+            background: var(--carrot-3);
+        }
+
+        /* Dynamic Answer Card Header */
+        .faq-answer-card__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer-card__category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--kale-2);
+            font-weight: 600;
+        }
+
+        .faq-answer-card__close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--charcoal-1);
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .faq-answer-card__close:hover {
+            color: var(--charcoal-0);
+        }
+
+        .faq-answer-card__text {
+            color: var(--charcoal-1);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer-card__message {
+            color: var(--charcoal-1);
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer-card__chat-prompt {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--oyster-1);
+        }
+
+        .faq-answer-card__chat-prompt p {
+            margin-bottom: 0.75rem;
+            color: var(--charcoal-1);
+        }
+
+        .faq-answer-card__chat-btn {
+            background: var(--kale-2);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .faq-answer-card__chat-btn:hover {
+            background: var(--kale-3);
+        }
+
+        /* Clarification Options */
+        .faq-clarification__options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .faq-clarification__option {
+            background: var(--oyster-3);
+            border: 1px solid var(--oyster-1);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-size: 0.95rem;
+            color: var(--charcoal-0);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .faq-clarification__option:hover {
+            background: var(--kale-0);
+            border-color: var(--kale-1);
+            color: var(--kale-3);
+        }
+
+        /* Helpful label variant */
+        .faq-helpful__label {
+            font-size: 0.95rem;
+            color: var(--charcoal-1);
+        }
+
+        .faq-helpful__btn--yes,
+        .faq-helpful__btn--no {
+            padding: 0.5rem 1.25rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--oyster-1);
+            background: var(--white);
+            color: var(--charcoal-0);
+        }
+
+        .faq-helpful__btn--yes:hover,
+        .faq-helpful__btn--no:hover {
+            border-color: var(--kale-2);
+            color: var(--kale-2);
+        }
+
+        .faq-helpful__thanks {
+            color: var(--kale-2);
+            font-weight: 500;
+        }
+
+        .faq-helpful__chat-btn {
+            background: var(--kale-2);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+
+        .faq-helpful__chat-btn:hover {
+            background: var(--kale-3);
+        }
+
+        /* Was this helpful */
+        .faq-helpful {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--oyster-1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .faq-helpful__text {
+            font-size: 0.95rem;
+            color: var(--charcoal-1);
+        }
+
+        .faq-helpful__buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .faq-helpful__btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--oyster-1);
+            background: var(--white);
+            color: var(--charcoal-0);
+        }
+
+        .faq-helpful__btn:hover {
+            border-color: var(--kale-2);
+            color: var(--kale-2);
+        }
+
+        /* No Answer Card */
+        .faq-no-answer {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: none;
+        }
+
+        .faq-no-answer--visible {
+            display: block;
+        }
+
+        .faq-no-answer__title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--kale-3);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-no-answer__subtitle {
+            color: var(--charcoal-1);
+        }
+
+        /* Chat Widget for FAQ */
+        .faq-chat-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .faq-chat-overlay--open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .faq-chat-widget {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 380px;
+            max-width: calc(100vw - 48px);
+            max-height: calc(100vh - 120px);
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .faq-chat-widget--open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .faq-chat-widget__header {
+            background: var(--kale-3);
+            color: var(--white);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .faq-chat-widget__header-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .faq-chat-widget__avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--kale-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .faq-chat-widget__title {
+            font-weight: 700;
+        }
+
+        .faq-chat-widget__status {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .faq-chat-widget__status-dot {
+            width: 8px;
+            height: 8px;
+            background: #2ecc71;
+            border-radius: 50%;
+        }
+
+        .faq-chat-widget__close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .faq-chat-widget__close:hover {
+            opacity: 1;
+        }
+
+        .faq-chat-widget__messages {
+            flex: 1;
+            padding: 1.25rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 200px;
+            background: var(--oyster-3);
+        }
+
+        .faq-chat-message {
+            max-width: 85%;
+            padding: 0.875rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .faq-chat-message--user {
+            background: var(--kale-3);
+            color: var(--white);
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .faq-chat-message--system {
+            background: var(--white);
+            color: var(--charcoal-1);
+            align-self: flex-start;
+            font-size: 0.85rem;
+        }
+
+        .faq-chat-message--agent {
+            background: var(--white);
+            color: var(--charcoal-0);
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .faq-chat-widget__email {
+            padding: 1rem 1.25rem;
+            background: var(--chickpea-3);
+            border-top: 1px solid var(--oyster-1);
+        }
+
+        .faq-chat-widget__email-label {
+            font-size: 0.8rem;
+            color: var(--charcoal-1);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-chat-widget__email-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .faq-chat-widget__email-input {
+            flex: 1;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid var(--oyster-1);
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .faq-chat-widget__email-btn {
+            padding: 0.625rem 1rem;
+            background: var(--kale-2);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .faq-chat-widget__input-area {
+            padding: 1rem 1.25rem;
+            border-top: 1px solid var(--oyster-1);
+        }
+
+        .faq-chat-widget__input-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .faq-chat-widget__input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--oyster-1);
+            border-radius: 50px;
+        }
+
+        .faq-chat-widget__send {
+            width: 44px;
+            height: 44px;
+            background: var(--kale-2);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .faq-chat-widget {
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                max-width: 100%;
+                border-radius: 20px 20px 0 0;
+            }
+        }
+
+        /* Hide featured questions when answer shown */
+        .faq-section--has-answer .faq-featured-questions,
+        .faq-section--has-answer .faq-browse-divider {
+            display: none;
+        }
+
+        /* ============================================
+           FAQ SEARCH COMPONENT
+           ============================================ */
+
+        /* Search Container */
+        .faq-search {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .faq-search__label {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Search Input Wrapper */
+        .faq-search__input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-search__icon {
+            position: absolute;
+            left: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .faq-search__input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 3.25rem;
+            font-size: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            background: var(--white);
+            color: var(--text-primary);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .faq-search__input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+        }
+
+        .faq-search__input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .faq-search__clear {
+            position: absolute;
+            right: 1rem;
+            background: var(--bg-gray);
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: background 0.15s;
+        }
+
+        .faq-search__clear:hover {
+            background: var(--bg-dark-gray);
+        }
+
+        .faq-search--has-value .faq-search__clear {
+            display: flex;
+        }
+
+        /* Search Results Dropdown */
+        .faq-search__results {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+            z-index: 100;
+            display: none;
+        }
+
+        .faq-search--open .faq-search__results {
+            display: block;
+        }
+
+        .faq-search__results-header {
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .faq-search__results-list {
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        .faq-search__result-item {
+            display: block;
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: none;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+            border-bottom: 1px solid var(--bg-gray);
+            transition: background 0.15s;
+        }
+
+        .faq-search__result-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-search__result-item:hover,
+        .faq-search__result-item--focused {
+            background: var(--bg-light);
+        }
+
+        .faq-search__result-question {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-search__result-question mark {
+            background: rgba(67, 97, 238, 0.15);
+            color: var(--primary-blue);
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .faq-search__result-category {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-search__result-tag {
+            background: var(--bg-gray);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .faq-search__no-results {
+            padding: 2rem 1.25rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .faq-search__no-results-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.5;
+        }
+
+        .faq-search__no-results-text {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-search__no-results-hint {
+            font-size: 0.85rem;
+        }
+
+        /* Keyboard navigation hint */
+        .faq-search__keyboard-hint {
+            padding: 0.6rem 1.25rem;
+            background: var(--bg-light);
+            border-top: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .faq-search__keyboard-hint kbd {
+            background: var(--white);
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            border: 1px solid var(--border-color);
+            font-family: inherit;
+            font-size: 0.7rem;
+        }
+
+        @media (max-width: 600px) {
+            .faq-search__keyboard-hint {
+                display: none;
+            }
+        }
+
+        /* FAQ Answer Sheet/Drawer */
+        .faq-sheet-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .faq-sheet-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .faq-sheet {
+            position: fixed;
+            background: white;
+            z-index: 9999;
+            overflow-y: auto;
+            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+
+        @media (min-width: 769px) {
+            .faq-sheet {
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 480px;
+                max-width: 90vw;
+                transform: translateX(100%);
+                box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+            }
+            .faq-sheet.visible {
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .faq-sheet {
+                left: 0;
+                right: 0;
+                bottom: 0;
+                max-height: 90vh;
+                border-radius: 20px 20px 0 0;
+                transform: translateY(100%);
+                box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+            }
+            .faq-sheet.visible {
+                transform: translateY(0);
+            }
+        }
+
+        .faq-sheet-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .faq-sheet-header {
+                padding-top: 0.75rem;
+            }
+            .faq-sheet-header::before {
+                content: '';
+                display: block;
+                width: 40px;
+                height: 4px;
+                background: var(--border-color);
+                border-radius: 2px;
+                margin: 0 auto 1rem;
+            }
+        }
+
+        .faq-sheet-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: var(--bg-light);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        @media (max-width: 768px) {
+            .faq-sheet-close {
+                top: 0.75rem;
+            }
+        }
+
+        .faq-sheet-close:hover {
+            background: var(--bg-gray);
+        }
+
+        .faq-sheet-question {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            padding-right: 2.5rem;
+            line-height: 1.4;
+        }
+
+        .faq-sheet-content {
+            padding: 0;
+        }
+
+        .faq-block {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .faq-block:last-child {
+            border-bottom: none;
+        }
+
+        .faq-block-answer {
+            background: linear-gradient(135deg, #f8fffe 0%, #f0f9f4 100%);
+        }
+
+        .faq-block-answer p {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .faq-block-answer .answer-highlight {
+            background: rgba(40, 167, 69, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+
+        .faq-block-stories {
+            background: var(--bg-light);
+        }
+
+        .faq-block-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .stories-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            margin: 0 -1.5rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            scrollbar-width: none;
+        }
+
+        .stories-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .story-card {
+            flex: 0 0 140px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .story-thumbnail {
+            height: 100px;
+            background: linear-gradient(135deg, var(--bg-gray) 0%, var(--bg-dark-gray) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .story-thumbnail .play-icon {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        .story-info {
+            padding: 0.75rem;
+        }
+
+        .story-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 2px;
+        }
+
+        .story-detail {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .faq-block-product {
+            background: white;
+        }
+
+        .product-card {
+            display: flex;
+            gap: 1rem;
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--bg-gray) 0%, var(--bg-dark-gray) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .product-link {
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .product-link:hover {
+            text-decoration: underline;
+        }
+
+        .faq-block-nutrition {
+            background: white;
+        }
+
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .nutrition-item {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .nutrition-icon {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+        }
+
+        .nutrition-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 2px;
+        }
+
+        .nutrition-value {
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 0.95rem;
+        }
+
+        .faq-block-pricing {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+        }
+
+        .pricing-examples {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .pricing-example {
+            flex: 0 0 calc(50% - 6px);
+            min-width: 140px;
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .pricing-dog {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .pricing-amount {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .pricing-period {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .faq-block-expert {
+            background: white;
+        }
+
+        .expert-quote {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .expert-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-gray);
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+        }
+
+        .expert-content {
+            flex: 1;
+        }
+
+        .expert-text {
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .expert-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+        }
+
+        .expert-title {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .faq-block-cta {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+        }
+
+        .faq-block-cta h4 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-block-cta p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-bottom: 1rem;
+        }
+
+        .faq-block-cta .btn-primary {
+            background: white;
+            color: var(--primary-dark);
+        }
+
+        .faq-block-cta .cta-reassurance {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 0.75rem;
+        }
+
+        /* Footer */
+        /* Footer */
+        .footer {
+            background: var(--kale-3);
+            color: rgba(255,255,255,0.7);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 900px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .footer-newsletter {
+            max-width: 400px;
+        }
+
+        .footer-newsletter__title {
+            font-family: var(--font-family-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-newsletter__subtitle {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .footer-newsletter__form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .footer-newsletter__input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .footer-newsletter__input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-newsletter__input:focus {
+            outline: none;
+            border-color: var(--carrot-2);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .footer-newsletter__btn {
+            background: var(--carrot-2);
+            color: var(--white);
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .footer-newsletter__btn:hover {
+            background: var(--carrot-3);
+        }
+
+        @media (max-width: 480px) {
+            .footer-newsletter__form {
+                flex-direction: column;
+            }
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-links__group h4 {
+            font-family: var(--font-family-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links__group ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links__group li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links__group a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links__group a:hover {
+            color: var(--white);
+        }
+
+        .footer-middle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .footer-social__link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .footer-social__link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-logo {
+            font-family: var(--font-family-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-legal a:hover {
+            color: rgba(255,255,255,0.85);
+        }
+
+        @media (max-width: 600px) {
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-legal {
+                justify-content: center;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo"><span class="nav-logo-full">The Farmer's Dog</span><span class="nav-logo-short">TFD</span></a>
+        <div class="nav-links">
+            <a href="our-food-wireframe.html">Our Food</a>
+            <a href="our-difference-wireframe.html" class="active">Our Difference</a>
+            <a href="reviews-wireframe.html">Reviews</a>
+            <a href="faq-wireframe.html">FAQ</a>
+            <a href="about-us-wireframe.html">About Us</a>
+            <a href="#">Vet Professionals</a>
+        </div>
+        <div class="nav-actions">
+            <a href="#" class="nav-login">Log In</a>
+            <a href="get-started-wireframe.html" class="nav-cta">Get Started — 50% Off</a>
+        </div>
+        <button class="nav-mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="nav-mobile-menu" id="mobileMenu">
+        <a href="our-food-wireframe.html">Our Food</a>
+        <a href="our-difference-wireframe.html" class="active">Our Difference</a>
+        <a href="reviews-wireframe.html">Reviews</a>
+        <a href="faq-wireframe.html">FAQ</a>
+        <a href="about-us-wireframe.html">About Us</a>
+        <a href="#">Vet Professionals</a>
+        <div class="nav-mobile-actions">
+            <a href="#" class="nav-login">Log In</a>
+            <a href="get-started-wireframe.html" class="nav-cta">Get Started — 50% Off</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+    </script>
+
+    <!-- Section 1: Hero -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Made with the care they deserve</h1>
+                <p class="subhead">Real kitchens, not factories. Real ingredients, not rendered mystery meat. The kind of food you'd make yourself—if you had the time. See how we do it differently.</p>
+                <a href="get-started-wireframe.html" class="btn-primary">Get Started — 50% Off</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Why Process Matters -->
+    <section class="process-matters">
+        <div class="container">
+            <div class="section-header">
+                <h2>Kibble wasn't designed for health. It was designed for shelf life.</h2>
+                <p class="subhead-centered">The pet food industry optimized for convenience and profit margins—not nutrition. Here's what that means for what ends up in the bowl.</p>
+            </div>
+
+            <div class="process-comparison">
+                <div class="process-card kibble">
+                    <h3>Ultra-processed kibble</h3>
+                    <ul class="process-list">
+                        <li>
+                            <span class="process-icon">🔥</span>
+                            <div><strong>400°F+ extrusion</strong><br>Extreme heat destroys nutrients</div>
+                        </li>
+                        <li>
+                            <span class="process-icon">⚠️</span>
+                            <div><strong>Rendered ingredients</strong><br>Meat meals and by-products</div>
+                        </li>
+                        <li>
+                            <span class="process-icon">🧪</span>
+                            <div><strong>Synthetic vitamins</strong><br>Sprayed on after cooking</div>
+                        </li>
+                        <li>
+                            <span class="process-icon">📦</span>
+                            <div><strong>18-month shelf life</strong><br>Requires heavy preservatives</div>
+                        </li>
+                        <li>
+                            <span class="process-icon">⚡</span>
+                            <div><strong>Creates AGEs</strong><br>Compounds linked to inflammation</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vs-divider">VS</div>
+
+                <div class="process-card fresh">
+                    <h3>Gently cooked fresh</h3>
+                    <ul class="process-list">
+                        <li>
+                            <span class="process-icon">🌡️</span>
+                            <div><strong>Lower temperatures</strong><br>Nutrients stay intact</div>
+                        </li>
+                        <li>
+                            <span class="process-icon">🥩</span>
+                            <div><strong>Whole ingredients</strong><br>Real meat, real vegetables</div>
+                        </li>
+                        <li>
+                            <span class="process-icon">🥗</span>
+                            <div><strong>Natural nutrition</strong><br>Nutrients from real food</div>
+                        </li>
+                        <li>
+                            <span class="process-icon">❄️</span>
+                            <div><strong>Frozen fresh</strong><br>No artificial preservatives</div>
+                        </li>
+                        <li>
+                            <span class="process-icon">💚</span>
+                            <div><strong>Minimal AGEs</strong><br>Supports healthier aging</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Food or Fiction Quiz Sub-section -->
+            <div class="quiz-section">
+                <div class="quiz-header">
+                    <h3>Test your dog food knowledge</h3>
+                    <p>Swipe or tap to see if these statements are fact or fiction</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-card" id="quizCard">
+                        <div class="quiz-card-front">
+                            <p class="quiz-statement" id="quizStatement">"Kibble is cooked at temperatures over 400°F"</p>
+                            <div class="quiz-buttons">
+                                <button class="quiz-btn true" onclick="answerQuiz(true)">True</button>
+                                <button class="quiz-btn false" onclick="answerQuiz(false)">False</button>
+                            </div>
+                        </div>
+                        <div class="quiz-card-back">
+                            <div class="quiz-answer">
+                                <span class="quiz-answer-badge" id="answerBadge">Correct!</span>
+                                <p class="quiz-explanation" id="quizExplanation">Extrusion processing uses extreme heat that degrades nutrients and creates AGEs (Advanced Glycation End Products)—compounds linked to inflammation and aging.</p>
+                                <button class="quiz-next" onclick="nextQuestion()">Next →</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Completion State -->
+                    <div class="quiz-complete" id="quizComplete">
+                        <div class="quiz-complete-icon">🎉</div>
+                        <div class="quiz-score" id="quizScore">5/8</div>
+                        <div class="quiz-score-label">questions correct</div>
+                        <h4>Now you know what most pet parents don't</h4>
+                        <p>Ready to see the difference real food makes?</p>
+                        <a href="get-started-wireframe.html" class="btn-primary">Get Started — 50% Off</a>
+                        <br>
+                        <button class="quiz-restart" onclick="restartQuiz()">Take the quiz again</button>
+
+                        <div class="quiz-share">
+                            <p class="quiz-share-label">Share your score</p>
+                            <div class="quiz-share-buttons">
+                                <button class="quiz-share-btn instagram" onclick="shareQuiz('instagram')" title="Share on Instagram">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                </button>
+                                <button class="quiz-share-btn tiktok" onclick="shareQuiz('tiktok')" title="Share on TikTok">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                                </button>
+                                <button class="quiz-share-btn facebook" onclick="shareQuiz('facebook')" title="Share on Facebook">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-progress">
+                    <span id="quizProgress">1 of 8</span>
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="progressFill" style="width: 12.5%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: What Goes Into Our Food -->
+    <section class="ingredients-light">
+        <div class="container">
+            <div class="ingredients-grid">
+                <div class="ingredients-content">
+                    <h2>Real ingredients you can see</h2>
+                    <p>We started The Farmer's Dog because we couldn't find food we trusted for our own dogs. Not "premium" kibble with clever marketing—real food, made with real care. What you see here is what's in the bowl. No mystery powders, no vague "natural flavors," no surprises.</p>
+
+                    <!-- Value callout integrated -->
+                    <div class="value-callout-inline">
+                        <p><strong>Yes, real food costs more.</strong> That's because it's real meat, real vegetables, and real kitchens—not rendered scraps and factory fillers. For most dogs, it works out to $3–6/day. And many customers find they spend less on vet bills once the "mystery allergies" disappear.</p>
+                    </div>
+
+                    <a href="our-food-wireframe.html" class="cross-link">
+                        Explore our food →
+                    </a>
+                </div>
+                <div class="ingredients-visual">
+                    [Photo: Recognizable whole ingredients laid out]
+                    <div class="ingredient-tags">
+                        <span class="ingredient-tag">🥩 Whole meat first</span>
+                        <span class="ingredient-tag">🥕 Fresh vegetables</span>
+                        <span class="ingredient-tag">🌾 Simple grains</span>
+                        <span class="ingredient-tag no">No by-products</span>
+                        <span class="ingredient-tag no">No rendered meals</span>
+                        <span class="ingredient-tag no">No artificial preservatives</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: How We Cook -->
+    <section class="how-we-cook">
+        <div class="container">
+            <div class="cook-content">
+                <div class="cook-visual">
+                    [Video/Photo: Inside the facility—clean, professional kitchen]
+                </div>
+                <div class="cook-text">
+                    <h2>A kitchen, not a factory</h2>
+                    <p class="cook-intro">We don't outsource to co-packers or contract manufacturers. We own and operate our own kitchens—because when you control the process, you control the quality.</p>
+                    <ul class="cook-points">
+                        <li>
+                            <div class="cook-icon">🏭</div>
+                            <div class="cook-point-text">
+                                <h4>USDA-inspected facility</h4>
+                                <p>Not a pet food plant—a human food facility with the same standards as your own kitchen's ingredients</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cook-icon">🌡️</div>
+                            <div class="cook-point-text">
+                                <h4>Gently cooked</h4>
+                                <p>Lower temperatures preserve nutrients and avoid the AGE formation that happens in ultra-processed food</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cook-icon">👨‍🍳</div>
+                            <div class="cook-point-text">
+                                <h4>Trained professionals</h4>
+                                <p>Food safety experts—not just pet food workers—handle every batch</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cook-icon">✓</div>
+                            <div class="cook-point-text">
+                                <h4>Human-grade is a legal standard, not a buzzword</h4>
+                                <p>Every ingredient and process must be edible by humans—a requirement most pet food never comes close to meeting</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: How We Keep It Safe -->
+    <section class="safety">
+        <div class="container">
+            <div class="section-header">
+                <h2>Safety you can actually trust</h2>
+                <p class="subhead-centered">Over one billion meals served. Zero recalls. While kibble brands deal with contamination issues—salmonella, aflatoxins, even euthanasia drugs—we've built a system that prevents problems before they start.</p>
+            </div>
+
+            <div class="safety-grid">
+                <div class="safety-card">
+                    <div class="safety-card-icon">🔬</div>
+                    <h3>Rigorous testing</h3>
+                    <p>Every batch is tested for pathogens before it ships. We don't wait for problems—we prevent them.</p>
+                </div>
+                <div class="safety-card">
+                    <div class="safety-card-icon">📋</div>
+                    <h3>Full traceability</h3>
+                    <p>Every ingredient in every batch can be traced back to its source. You can trust exactly what's in every pack your dog eats.</p>
+                </div>
+                <div class="safety-card">
+                    <div class="safety-card-icon">✅</div>
+                    <h3>Multiple checkpoints</h3>
+                    <p>Quality verification at every stage—from incoming ingredients to finished packs leaving the facility.</p>
+                </div>
+                <div class="safety-card">
+                    <div class="safety-card-icon">❄️</div>
+                    <h3>Cold chain integrity</h3>
+                    <p>From our facility to your freezer, the food stays at safe temperatures throughout the journey.</p>
+                </div>
+                <div class="safety-card">
+                    <div class="safety-card-icon">📞</div>
+                    <h3>Transparent communication</h3>
+                    <p>If you ever have a concern, real humans are here 24/7 to help—not scripts, not bots.</p>
+                </div>
+            </div>
+
+            <div class="safety-cta">
+                <a href="get-started-wireframe.html" class="btn-primary">Get Started — 50% Off</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Who's Behind the Recipes -->
+    <section class="formulation">
+        <div class="container">
+            <div class="formulation-content">
+                <div class="formulation-text">
+                    <h2>Formulated by the best in the field</h2>
+                    <p>Every recipe is created by board-certified veterinary nutritionists—the same experts your vet consults for complex dietary needs. They don't just meet standards; they set them.</p>
+
+                    <!-- Home cooking callout -->
+                    <div class="home-cooking-callout">
+                        <p><strong>Thinking about cooking for your dog yourself?</strong> We get it—it comes from a good place. But getting the nutrition right is harder than it looks. Most homemade recipes are missing critical nutrients, and calcium-to-phosphorus ratios alone can take months to balance. Our nutritionists do that work for you—so you get the benefits of real food without the risk.</p>
+                    </div>
+
+                    <div class="credentials-list">
+                        <div class="credential-badge">
+                            <span>✓</span> AAFCO Complete & Balanced
+                        </div>
+                        <div class="credential-badge">
+                            <span>✓</span> WSAVA Guidelines
+                        </div>
+                        <div class="credential-badge">
+                            <span>✓</span> Board-Certified Nutritionists
+                        </div>
+                        <div class="credential-badge">
+                            <span>✓</span> USDA Inspected
+                        </div>
+                    </div>
+                </div>
+                <div class="formulation-visual">
+                    <p class="expert-quote">"When pet parents ask what I recommend, this is at the top of my list. The formulation meets every standard I look for, and the results speak for themselves."</p>
+                    <div class="expert-attribution">
+                        <div class="expert-avatar">[Photo]</div>
+                        <div class="expert-info">
+                            <strong>Dr. Sarah Chen, DVM</strong>
+                            <span>Board-Certified Veterinary Nutritionist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: How It Gets to You -->
+    <section class="delivery">
+        <div class="container">
+            <div class="section-header">
+                <h2>From our kitchen to yours</h2>
+                <p class="subhead-centered">Fresh food that arrives frozen, stays frozen, and is ready when you are.</p>
+            </div>
+
+            <div class="delivery-timeline">
+                <div class="delivery-step">
+                    <div class="delivery-icon">📦</div>
+                    <h4>Portioned & packed</h4>
+                    <p>Pre-measured for your dog, sealed for freshness</p>
+                </div>
+                <div class="delivery-step">
+                    <div class="delivery-icon">❄️</div>
+                    <h4>Flash frozen</h4>
+                    <p>Locks in nutrition without preservatives</p>
+                </div>
+                <div class="delivery-step">
+                    <div class="delivery-icon">🚚</div>
+                    <h4>Insulated shipping</h4>
+                    <p>Stays cold with dry ice throughout transit</p>
+                </div>
+                <div class="delivery-step">
+                    <div class="delivery-icon">🏠</div>
+                    <h4>At your door</h4>
+                    <p>Arrives frozen, ready to store or thaw</p>
+                </div>
+            </div>
+
+            <!-- Account Control Module -->
+            <div class="account-control-module">
+                <div class="account-control-visual">
+                    <div class="placeholder">[Photo: Phone on table next to TFD food pack, showing account dashboard]</div>
+                </div>
+                <div class="account-control-content">
+                    <h3>Your account, your control</h3>
+                    <p>Life changes. Your plan adapts. From your dashboard, you can:</p>
+                    <ul class="account-features">
+                        <li>Skip or reschedule any delivery</li>
+                        <li>Swap recipes if your dog wants variety</li>
+                        <li>Adjust portions as weight or activity changes</li>
+                        <li>Update your address—vacation, move, wherever</li>
+                        <li>Pause or cancel anytime, no questions asked</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: The Difference You'll See -->
+    <section class="difference">
+        <div class="container">
+            <div class="section-header">
+                <h2>What happens when dogs stop eating kibble</h2>
+                <p class="subhead-centered">The issues owners blamed on "breed," "age," or "sensitive stomachs" often disappear within weeks of switching to real food.</p>
+            </div>
+
+            <div class="results-carousel-wrapper">
+                <button class="carousel-btn prev" onclick="scrollResultsCarousel(-1)">&larr;</button>
+                <div class="results-carousel" id="resultsCarousel">
+                    <div class="result-card">
+                        <div class="result-image">[Photo: Golden Retriever puppy]</div>
+                        <div class="result-info">
+                            <div class="result-name">Biscuit</div>
+                            <div class="result-details">Golden Retriever, 8 months</div>
+                            <div class="result-outcome">"She used to walk away from her bowl. Now she sprints to the kitchen when she hears the fridge open."</div>
+                            <div class="result-attribution">— Sarah, Biscuit's mom</div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-image">[Photo: Senior Labrador]</div>
+                        <div class="result-info">
+                            <div class="result-name">Duke</div>
+                            <div class="result-details">Labrador, 11 years</div>
+                            <div class="result-outcome">"He's 11 but he just hiked 6 miles with us. Our vet couldn't believe his bloodwork."</div>
+                            <div class="result-attribution">— Mark, Duke's dad</div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-image">[Photo: French Bulldog]</div>
+                        <div class="result-info">
+                            <div class="result-name">Olive</div>
+                            <div class="result-details">French Bulldog, 4 years</div>
+                            <div class="result-outcome">"Three years of constant ear infections and scratching. Gone within 6 weeks of switching."</div>
+                            <div class="result-attribution">— Jamie, Olive's mom</div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-image">[Photo: Border Collie]</div>
+                        <div class="result-info">
+                            <div class="result-name">Scout</div>
+                            <div class="result-details">Border Collie, 2 years</div>
+                            <div class="result-outcome">"We tried 5 different kibbles. Loose stools every time. Two weeks on fresh and it was like a different dog."</div>
+                            <div class="result-attribution">— Alex, Scout's dad</div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-image">[Photo: Chihuahua senior]</div>
+                        <div class="result-info">
+                            <div class="result-name">Pepper</div>
+                            <div class="result-details">Chihuahua, 13 years</div>
+                            <div class="result-outcome">"She was down to eating a few bites a day. Now she finishes every meal and asks for more."</div>
+                            <div class="result-attribution">— Rosa, Pepper's mom</div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-image">[Photo: Mixed breed adult]</div>
+                        <div class="result-info">
+                            <div class="result-name">Luna</div>
+                            <div class="result-details">Mixed Breed, 5 years</div>
+                            <div class="result-outcome">"Lost 8 lbs in 4 months—but she's more playful than ever. The vet said 'keep doing what you're doing.'"</div>
+                            <div class="result-attribution">— Chen, Luna's dad</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" onclick="scrollResultsCarousel(1)">&rarr;</button>
+            </div>
+
+            <div class="difference-link">
+                <a href="#" class="cross-link">Read more reviews →</a>
+            </div>
+
+            <!-- Research callout - after testimonials for show-then-tell flow -->
+            <div class="research-callout-block">
+                <div class="research-callout-content">
+                    <strong>The science backs it up.</strong> A yearlong study with Cornell University found dogs eating fresh food showed markers of healthier aging—lower compounds linked to disease, higher protective antioxidants. Changes were visible in just one month.
+                </div>
+                <a href="our-food-wireframe.html#science" class="research-callout-link">See the full study →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: Ready to Try It -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to see the difference?</h2>
+            <p class="cta-subhead">Start with a plan made for your dog—and food made the way it should be.</p>
+            <div class="cta-button-group">
+                <a href="get-started-wireframe.html" class="btn-primary">Get 50% Off Your First Box</a>
+            </div>
+            <div class="cta-benefits">
+                <div class="cta-benefit">
+                    <span class="checkmark">&#10003;</span> Personalized for your dog
+                </div>
+                <div class="cta-benefit">
+                    <span class="checkmark">&#10003;</span> Free shipping, always
+                </div>
+                <div class="cta-benefit">
+                    <span class="checkmark">&#10003;</span> Cancel anytime
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 10: FAQ - PRD-Aligned Module -->
+    <section class="faq-section" id="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Still have questions?</h2>
+                <p class="subhead-centered">Type your question below or browse common questions about our process.</p>
+            </div>
+
+            <!-- Search - Submit Only (per PRD) -->
+            <div class="faq-search-module">
+                <form class="faq-search-module__form" id="faqSearchForm" onsubmit="handleFaqSearch(event)">
+                    <div class="faq-search-module__input-wrapper">
+                        <span class="faq-search-module__icon">🔍</span>
+                        <input
+                            type="text"
+                            class="faq-search-module__input"
+                            id="faqSearchInput"
+                            placeholder="What can we help you with?"
+                            autocomplete="off"
+                        >
+                    </div>
+                    <button type="submit" class="faq-search-module__submit">Search</button>
+                </form>
+            </div>
+
+            <!-- OR BROWSE Divider -->
+            <div class="faq-browse-divider">
+                <div class="faq-browse-divider__line"></div>
+                <span class="faq-browse-divider__text">or browse</span>
+                <div class="faq-browse-divider__line"></div>
+            </div>
+
+            <!-- Featured Questions (Process-focused for this page) -->
+            <div class="faq-featured-questions">
+                <button class="faq-featured-question" onclick="showFaqAnswer('safety')">
+                    <span class="faq-featured-question__text">
+                        Is fresh food actually safe? What about bacteria?
+                        <span class="faq-featured-question__arrow">→</span>
+                    </span>
+                </button>
+                <button class="faq-featured-question" onclick="showFaqAnswer('quality')">
+                    <span class="faq-featured-question__text">
+                        How do you ensure quality and consistency?
+                        <span class="faq-featured-question__arrow">→</span>
+                    </span>
+                </button>
+                <button class="faq-featured-question" onclick="showFaqAnswer('ingredients')">
+                    <span class="faq-featured-question__text">
+                        How do I know the ingredients are what you say they are?
+                        <span class="faq-featured-question__arrow">→</span>
+                    </span>
+                </button>
+                <button class="faq-featured-question" onclick="showFaqAnswer('trust')">
+                    <span class="faq-featured-question__text">
+                        Why should I trust a subscription company?
+                        <span class="faq-featured-question__arrow">→</span>
+                    </span>
+                </button>
+            </div>
+
+            <!-- Dynamic Answer Card (for search results) -->
+            <div class="faq-answer-card" id="faqAnswerCard" style="display: none;"></div>
+
+            <!-- Inline Answer Cards -->
+            <div class="faq-answer-card" id="faq-answer-safety">
+                <button class="faq-answer-card__back" onclick="backToFaqSearch()">← Back to search</button>
+                <h3 class="faq-answer-card__question">Is fresh food actually safe? What about bacteria?</h3>
+                <div class="faq-answer-card__content">
+                    <p>Fresh food made properly is <strong>extremely safe</strong>—and in many ways safer than kibble.</p>
+                    <ul>
+                        <li><strong>Gently cooked</strong> to eliminate pathogens</li>
+                        <li><strong>USDA-inspected</strong> human food facilities</li>
+                        <li><strong>Tested</strong> before every shipment</li>
+                        <li><strong>Cold chain</strong> from our kitchen to your freezer</li>
+                    </ul>
+                    <p>Unlike kibble, which has been involved in numerous recalls due to contamination, our process keeps food at safe temperatures throughout its journey to you.</p>
+                </div>
+                <div class="faq-answer-card__cta">
+                    <a href="get-started-wireframe.html" class="faq-answer-card__cta-btn">Get Started — 50% Off</a>
+                </div>
+                <div class="faq-helpful">
+                    <span class="faq-helpful__text">Was this helpful?</span>
+                    <div class="faq-helpful__buttons">
+                        <button class="faq-helpful__btn" onclick="handleFaqHelpful(true, 'safety')">Yes</button>
+                        <button class="faq-helpful__btn" onclick="handleFaqHelpful(false, 'safety')">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-answer-card" id="faq-answer-quality">
+                <button class="faq-answer-card__back" onclick="backToFaqSearch()">← Back to search</button>
+                <h3 class="faq-answer-card__question">How do you ensure quality and consistency?</h3>
+                <div class="faq-answer-card__content">
+                    <p>Every batch goes through <strong>multiple quality checkpoints</strong>:</p>
+                    <ul>
+                        <li><strong>Incoming verification:</strong> Every ingredient is tested on arrival</li>
+                        <li><strong>Vetted suppliers:</strong> We work only with trusted partners</li>
+                        <li><strong>Strict protocols:</strong> Maintained at every stage of production</li>
+                        <li><strong>Pathogen testing:</strong> Before anything ships</li>
+                        <li><strong>Full traceability:</strong> Every ingredient traced back to its source</li>
+                    </ul>
+                    <p>If we wouldn't feed it to our own dogs, we won't send it to yours.</p>
+                </div>
+                <div class="faq-answer-card__cta">
+                    <a href="get-started-wireframe.html" class="faq-answer-card__cta-btn">Get Started — 50% Off</a>
+                </div>
+                <div class="faq-helpful">
+                    <span class="faq-helpful__text">Was this helpful?</span>
+                    <div class="faq-helpful__buttons">
+                        <button class="faq-helpful__btn" onclick="handleFaqHelpful(true, 'quality')">Yes</button>
+                        <button class="faq-helpful__btn" onclick="handleFaqHelpful(false, 'quality')">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-answer-card" id="faq-answer-ingredients">
+                <button class="faq-answer-card__back" onclick="backToFaqSearch()">← Back to search</button>
+                <h3 class="faq-answer-card__question">How do I know the ingredients are what you say they are?</h3>
+                <div class="faq-answer-card__content">
+                    <p>Our food is made in <strong>USDA-inspected human food facilities</strong>—the same standard as food you'd buy at the grocery store.</p>
+                    <ul>
+                        <li><strong>Every ingredient verified</strong> on arrival</li>
+                        <li><strong>Fully traceable</strong> back to the source</li>
+                        <li><strong>What you see on the label</strong> is exactly what's in the pack</li>
+                        <li><strong>No hidden ingredients</strong>, no fillers, no by-products</li>
+                    </ul>
+                    <p>You can actually see and recognize every ingredient in our food. That's the whole point.</p>
+                </div>
+                <div class="faq-answer-card__cta">
+                    <a href="get-started-wireframe.html" class="faq-answer-card__cta-btn">Get Started — 50% Off</a>
+                </div>
+                <div class="faq-helpful">
+                    <span class="faq-helpful__text">Was this helpful?</span>
+                    <div class="faq-helpful__buttons">
+                        <button class="faq-helpful__btn" onclick="handleFaqHelpful(true, 'ingredients')">Yes</button>
+                        <button class="faq-helpful__btn" onclick="handleFaqHelpful(false, 'ingredients')">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-answer-card" id="faq-answer-trust">
+                <button class="faq-answer-card__back" onclick="backToFaqSearch()">← Back to search</button>
+                <h3 class="faq-answer-card__question">Why should I trust a subscription company with my dog's food?</h3>
+                <div class="faq-answer-card__content">
+                    <p>Fair question. We're <strong>not just a subscription service</strong>—we're a food company that happens to deliver directly to you.</p>
+                    <p>That direct relationship means:</p>
+                    <ul>
+                        <li><strong>We control quality</strong> from kitchen to doorstep</li>
+                        <li><strong>We can respond immediately</strong> to any concerns</li>
+                        <li><strong>We're accountable</strong> for every meal your dog eats</li>
+                        <li><strong>No middlemen, no mystery</strong></li>
+                    </ul>
+                    <p>And if something ever goes wrong? Real humans are here 24/7—not scripts, not bots. We'll make it right.</p>
+                </div>
+                <div class="faq-answer-card__cta">
+                    <a href="get-started-wireframe.html" class="faq-answer-card__cta-btn">Get Started — 50% Off</a>
+                </div>
+                <div class="faq-helpful">
+                    <span class="faq-helpful__text">Was this helpful?</span>
+                    <div class="faq-helpful__buttons">
+                        <button class="faq-helpful__btn" onclick="handleFaqHelpful(true, 'trust')">Yes</button>
+                        <button class="faq-helpful__btn" onclick="handleFaqHelpful(false, 'trust')">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional searchable answer -->
+            <div class="faq-answer-card" id="faq-answer-issue">
+                <button class="faq-answer-card__back" onclick="backToFaqSearch()">← Back to search</button>
+                <h3 class="faq-answer-card__question">What happens if something goes wrong with my order?</h3>
+                <div class="faq-answer-card__content">
+                    <p><strong>Real humans are here 24/7</strong>—not scripts, not bots.</p>
+                    <p>If there's ever an issue with your delivery, your dog's reaction to the food, or anything else, we'll make it right:</p>
+                    <ul>
+                        <li><strong>Reship</strong> your order if needed</li>
+                        <li><strong>Adjust your plan</strong> based on your feedback</li>
+                        <li><strong>Credit your account</strong> if that's what's fair</li>
+                    </ul>
+                    <p>Your dog eating well is our priority. We're not here to win an argument—we're here to solve problems.</p>
+                </div>
+                <div class="faq-answer-card__cta">
+                    <a href="get-started-wireframe.html" class="faq-answer-card__cta-btn">Get Started — 50% Off</a>
+                </div>
+                <div class="faq-helpful">
+                    <span class="faq-helpful__text">Was this helpful?</span>
+                    <div class="faq-helpful__buttons">
+                        <button class="faq-helpful__btn" onclick="handleFaqHelpful(true, 'issue')">Yes</button>
+                        <button class="faq-helpful__btn" onclick="handleFaqHelpful(false, 'issue')">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Answer Card -->
+            <div class="faq-no-answer" id="faqNoAnswer">
+                <h3 class="faq-no-answer__title">We don't have that answer ready for you.</h3>
+                <p class="faq-no-answer__subtitle">Let me connect you with an advisor...</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ Chat Widget -->
+    <div class="faq-chat-overlay" id="faqChatOverlay" onclick="closeFaqChatWidget()"></div>
+    <div class="faq-chat-widget" id="faqChatWidget">
+        <div class="faq-chat-widget__header">
+            <div class="faq-chat-widget__header-info">
+                <div class="faq-chat-widget__avatar">💬</div>
+                <div>
+                    <div class="faq-chat-widget__title">The Farmer's Dog</div>
+                    <div class="faq-chat-widget__status">
+                        <span class="faq-chat-widget__status-dot"></span>
+                        Support is online
+                    </div>
+                </div>
+            </div>
+            <button class="faq-chat-widget__close" onclick="closeFaqChatWidget()">×</button>
+        </div>
+        <div class="faq-chat-widget__messages">
+            <div class="faq-chat-message faq-chat-message--user">
+                <span id="userQueryMessage">Your question here</span>
+            </div>
+            <div class="faq-chat-message faq-chat-message--system">
+                Your message has been sent. An agent will respond shortly.
+            </div>
+            <div class="faq-chat-message faq-chat-message--agent">
+                Hi there! Thanks for reaching out. I'm looking into your question now and will have an answer for you in just a moment.
+            </div>
+        </div>
+        <div class="faq-chat-widget__email">
+            <p class="faq-chat-widget__email-label">Leave your email in case we take a moment to respond:</p>
+            <form class="faq-chat-widget__email-form" onsubmit="return false;">
+                <input type="email" class="faq-chat-widget__email-input" placeholder="your@email.com">
+                <button type="submit" class="faq-chat-widget__email-btn">Save</button>
+            </form>
+        </div>
+        <div class="faq-chat-widget__input-area">
+            <form class="faq-chat-widget__input-form" onsubmit="return false;">
+                <input type="text" class="faq-chat-widget__input" placeholder="Type a message...">
+                <button type="submit" class="faq-chat-widget__send">➤</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-newsletter">
+                    <h3 class="footer-newsletter__title">Join the pack</h3>
+                    <p class="footer-newsletter__subtitle">Get nutrition tips, exclusive offers, and stories from real dog parents delivered to your inbox.</p>
+                    <form class="footer-newsletter__form">
+                        <input type="email" class="footer-newsletter__input" placeholder="Enter your email">
+                        <button type="submit" class="footer-newsletter__btn">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-links__group">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="#">DIY</a></li>
+                            <li><a href="#">Digest</a></li>
+                            <li><a href="#">Breeds</a></li>
+                            <li><a href="#">WSAVA</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Affiliates</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links__group">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="mailto:help@thefarmersdog.com">help@thefarmersdog.com</a></li>
+                            <li><a href="tel:6467807957">Call/Text: 646.780.7957</a></li>
+                            <li><a href="faq-wireframe.html">Help Center</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links__group">
+                        <h4>Business</h4>
+                        <ul>
+                            <li><a href="#">Media Inquiries</a></li>
+                            <li><a href="#">Partnership Inquiries</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-middle">
+                <div class="footer-social">
+                    <a href="#" class="footer-social__link" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" class="footer-social__link" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                    </a>
+                    <a href="#" class="footer-social__link" aria-label="TikTok">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                    </a>
+                </div>
+                <div class="footer-logo">The Farmer's Dog</div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2025 The Farmer's Dog, Inc. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Accessibility</a>
+                    <a href="#">Do Not Sell My Personal Information</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FAQ Answer Sheet -->
+    <div class="faq-sheet-overlay" id="faqSheetOverlay" onclick="closeFaqSheet()"></div>
+    <div class="faq-sheet" id="faqSheet">
+        <div class="faq-sheet-header">
+            <button class="faq-sheet-close" onclick="closeFaqSheet()">×</button>
+            <h3 class="faq-sheet-question" id="faqSheetQuestion"></h3>
+        </div>
+        <div class="faq-sheet-content" id="faqSheetContent">
+        </div>
+    </div>
+
+    <script>
+        // Quiz functionality
+        const quizData = [
+            {
+                statement: '"Kibble is cooked at temperatures over 400°F"',
+                answer: true,
+                explanation: 'Extrusion processing uses extreme heat that degrades nutrients and creates AGEs (Advanced Glycation End Products)—compounds linked to inflammation and aging.'
+            },
+            {
+                statement: '"Natural flavors" means real, whole ingredients',
+                answer: false,
+                explanation: '"Natural flavors" is a catch-all term that can hide processed additives. It doesn\'t mean recognizable, whole-food ingredients.'
+            },
+            {
+                statement: 'The same companies that make candy bars make most dog food',
+                answer: true,
+                explanation: 'Mars (Snickers, M&Ms) owns Pedigree, Royal Canin, and Nutro. Nestlé (Kit Kat, Butterfinger) owns Purina. Their expertise is shelf-stable processed food—not pet nutrition.'
+            },
+            {
+                statement: '"By-products" are just organ meats like liver and heart',
+                answer: false,
+                explanation: 'While by-products can include organs, the definition also allows beaks, feet, feathers, and undeveloped eggs. There\'s no way to know what\'s actually in there.'
+            },
+            {
+                statement: 'Dogs have thrived on kibble for thousands of years',
+                answer: false,
+                explanation: 'Commercial kibble has only existed since the 1950s. Dogs evolved eating whole, minimally processed foods for 15,000+ years before that.'
+            },
+            {
+                statement: 'A 40-lb bag of kibble contains about $2 worth of meat',
+                answer: true,
+                explanation: 'Most kibble is 60-70% carbohydrate fillers like corn, wheat, and soy. The "chicken" in "chicken flavored" food can be as little as 3% actual chicken.'
+            },
+            {
+                statement: '"Premium" and "gourmet" pet food must meet higher standards',
+                answer: false,
+                explanation: 'These terms are completely unregulated. Any brand can call itself premium or gourmet. There are no legal requirements or inspections to use these labels.'
+            },
+            {
+                statement: 'Pet food has been recalled for containing euthanasia drugs',
+                answer: true,
+                explanation: 'In 2017, pentobarbital (a euthanasia drug) was found in multiple dog food brands. The FDA confirmed rendered animals were the likely source.'
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswer = null;
+        let correctAnswers = 0;
+
+        function answerQuiz(answer) {
+            userAnswer = answer;
+            const isCorrect = answer === quizData[currentQuestion].answer;
+
+            if (isCorrect) {
+                correctAnswers++;
+            }
+
+            const badge = document.getElementById('answerBadge');
+            badge.textContent = isCorrect ? 'Correct!' : 'Not quite';
+            badge.className = 'quiz-answer-badge ' + (isCorrect ? 'correct' : 'incorrect');
+
+            document.getElementById('quizExplanation').textContent = quizData[currentQuestion].explanation;
+            document.getElementById('quizCard').classList.add('flipped');
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+
+            // Check if quiz is complete
+            if (currentQuestion >= quizData.length) {
+                showQuizComplete();
+                return;
+            }
+
+            document.getElementById('quizCard').classList.remove('flipped');
+
+            setTimeout(() => {
+                document.getElementById('quizStatement').textContent = quizData[currentQuestion].statement;
+                document.getElementById('quizProgress').textContent = (currentQuestion + 1) + ' of ' + quizData.length;
+                document.getElementById('progressFill').style.width = ((currentQuestion + 1) / quizData.length * 100) + '%';
+            }, 300);
+        }
+
+        function showQuizComplete() {
+            document.getElementById('quizCard').style.display = 'none';
+            document.getElementById('quizScore').textContent = correctAnswers + '/' + quizData.length;
+            document.getElementById('quizComplete').classList.add('visible');
+            document.querySelector('.quiz-progress').style.display = 'none';
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            correctAnswers = 0;
+            document.getElementById('quizCard').style.display = 'flex';
+            document.getElementById('quizCard').classList.remove('flipped');
+            document.getElementById('quizComplete').classList.remove('visible');
+            document.querySelector('.quiz-progress').style.display = 'block';
+            document.getElementById('quizStatement').textContent = quizData[0].statement;
+            document.getElementById('quizProgress').textContent = '1 of ' + quizData.length;
+            document.getElementById('progressFill').style.width = '12.5%';
+        }
+
+        function shareQuiz(platform) {
+            const score = correctAnswers + '/' + quizData.length;
+            const shareText = "I scored " + score + " on The Farmer's Dog Food or Fiction quiz! 🐕 Think you know what's really in your dog's food? Take the quiz: ";
+            const shareUrl = window.location.href;
+
+            let shareLink;
+            switch(platform) {
+                case 'facebook':
+                    shareLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl) + '&quote=' + encodeURIComponent(shareText);
+                    break;
+                case 'tiktok':
+                    // TikTok doesn't have a direct share URL, so we copy to clipboard
+                    navigator.clipboard.writeText(shareText + shareUrl);
+                    alert('Share text copied! Open TikTok to create your post.');
+                    return;
+                case 'instagram':
+                    // Instagram doesn't have a direct share URL, so we copy to clipboard
+                    navigator.clipboard.writeText(shareText + shareUrl);
+                    alert('Share text copied! Open Instagram to create your story or post.');
+                    return;
+            }
+
+            window.open(shareLink, '_blank', 'width=600,height=400');
+        }
+
+        // FAQ functionality
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('open');
+        }
+
+        // Results carousel functionality
+        function scrollResultsCarousel(direction) {
+            const carousel = document.getElementById('resultsCarousel');
+            const cardWidth = 300; // card width + gap
+            carousel.scrollBy({
+                left: direction * cardWidth * 2,
+                behavior: 'smooth'
+            });
+        }
+
+        // ===== FAQ Search Module (PRD-Aligned) =====
+        // Submit-only search, featured questions, inline answer cards, chat widget
+
+        // FAQ Database - keyword to answer mapping (Our Difference focused)
+        const faqDatabase = {
+            // Safety & Quality
+            'safe': 'safety',
+            'safety': 'safety',
+            'bacteria': 'safety',
+            'pathogen': 'safety',
+            'contamination': 'safety',
+            'usda': 'safety',
+
+            // Ingredients
+            'ingredients': 'ingredients',
+            'ingredient': 'ingredients',
+            'what\'s in': 'ingredients',
+            'contain': 'ingredients',
+            'recipe': 'ingredients',
+
+            // Quality & Standards
+            'quality': 'quality',
+            'standards': 'quality',
+            'tested': 'quality',
+            'testing': 'quality',
+            'inspection': 'quality',
+
+            // Trust & Transparency
+            'trust': 'trust',
+            'transparent': 'trust',
+            'transparency': 'trust',
+            'source': 'trust',
+            'sourcing': 'trust',
+
+            // Cooking Process
+            'cooked': 'cooking',
+            'cooking': 'cooking',
+            'gently cooked': 'cooking',
+            'temperature': 'cooking',
+            'process': 'cooking',
+
+            // Shipping
+            'shipping': 'clarification-shipping',
+            'ship': 'clarification-shipping',
+            'delivery': 'clarification-shipping',
+            'deliver': 'clarification-shipping',
+
+            // Sensitive Topics
+            'pancreatitis': 'clarification-pancreatitis',
+            'pancreas': 'clarification-pancreatitis',
+            'low fat': 'clarification-pancreatitis',
+        };
+
+        // Answer content database
+        const faqAnswers = {
+            'safety': {
+                question: 'Is fresh food safe? What about bacteria?',
+                answer: 'Our food is made in USDA-inspected human food facilities—the same standards as the food you buy at the grocery store. Every batch is gently cooked to eliminate pathogens and tested before shipping. We follow strict food safety protocols that exceed industry standards.',
+                category: 'Safety & Quality'
+            },
+            'ingredients': {
+                question: 'What ingredients do you use?',
+                answer: 'We use only human-grade ingredients: real meat (beef, chicken, turkey, or pork), vegetables, and carefully selected supplements. No fillers, by-products, or artificial preservatives. Every ingredient is sourced from trusted suppliers and traceable back to its origin.',
+                category: 'Ingredients'
+            },
+            'quality': {
+                question: 'How do you ensure quality?',
+                answer: 'Every batch undergoes rigorous testing for quality and safety. We test for pathogens, verify nutritional content, and inspect ingredients at every stage. Our facilities are regularly audited and exceed USDA standards for human food production.',
+                category: 'Quality'
+            },
+            'trust': {
+                question: 'How can I trust your food?',
+                answer: 'We believe in complete transparency. Every ingredient is human-grade and traceable. Our facilities are USDA-inspected, and we share our sourcing and testing processes openly. You can see exactly what goes into every recipe—no mystery ingredients.',
+                category: 'Transparency'
+            },
+            'cooking': {
+                question: 'How is the food cooked?',
+                answer: 'Our food is gently cooked at low temperatures to preserve nutrients while ensuring safety. This cooking method retains more of the natural vitamins and minerals compared to high-heat processing used in traditional kibble. The result is food that\'s both safe and nutritious.',
+                category: 'Process'
+            },
+            'clarification-shipping': {
+                type: 'clarification',
+                question: 'What would you like to know about shipping?',
+                options: [
+                    { label: 'How shipping stays fresh', answerId: 'shipping-fresh' },
+                    { label: 'Delivery timing & schedule', answerId: 'shipping-timing' },
+                    { label: 'Packaging & sustainability', answerId: 'shipping-packaging' }
+                ]
+            },
+            'shipping-fresh': {
+                question: 'How does shipping stay fresh?',
+                answer: 'We ship with dry ice and insulated packaging to keep food frozen during transit. Our packaging is designed to maintain safe temperatures for up to 48 hours, even in warm weather. Food arrives frozen or cold and ready to store in your freezer.',
+                category: 'Shipping'
+            },
+            'shipping-timing': {
+                question: 'When will my food arrive?',
+                answer: 'After your first order, deliveries are scheduled every 2-4 weeks based on your dog\'s eating schedule. You\'ll receive tracking information and can adjust delivery dates anytime through your account.',
+                category: 'Shipping'
+            },
+            'shipping-packaging': {
+                question: 'Is the packaging sustainable?',
+                answer: 'We use recyclable and biodegradable materials wherever possible. Our insulated liners are made from recycled materials and can be recycled curbside. The dry ice sublimates naturally and the boxes can be recycled.',
+                category: 'Shipping'
+            },
+            'clarification-pancreatitis': {
+                type: 'clarification',
+                question: 'We want to make sure we give you the right information.',
+                message: 'Pancreatitis requires careful dietary management. To give you accurate guidance:',
+                options: [
+                    { label: 'My dog has been diagnosed with pancreatitis', answerId: 'pancreatitis-diagnosed' },
+                    { label: 'I\'m concerned about preventing pancreatitis', answerId: 'pancreatitis-prevention' },
+                    { label: 'I want to speak with someone', action: 'chat' }
+                ]
+            },
+            'pancreatitis-diagnosed': {
+                question: 'Can dogs with pancreatitis eat your food?',
+                answer: 'For dogs with diagnosed pancreatitis, we recommend consulting with your veterinarian before making any dietary changes. Our turkey and beef recipes are lower in fat and may be suitable for some dogs with pancreatic conditions, but individual needs vary.',
+                category: 'Health',
+                showChat: true,
+                chatPrompt: 'Want to discuss your dog\'s specific needs with our team?'
+            },
+            'pancreatitis-prevention': {
+                question: 'Does fresh food help prevent pancreatitis?',
+                answer: 'A balanced, whole-food diet can support overall digestive health. Our recipes use lean proteins and healthy fats in appropriate proportions. While diet alone can\'t prevent all cases of pancreatitis, quality nutrition is an important factor in your dog\'s overall health.',
+                category: 'Health'
+            }
+        };
+
+        // Handle FAQ search form submission
+        function handleFaqSearch(event) {
+            event.preventDefault();
+            const input = document.getElementById('faqSearchInput');
+            const query = input.value.trim().toLowerCase();
+
+            if (!query) return;
+
+            // Find matching answer
+            let answerId = null;
+            for (const [keyword, id] of Object.entries(faqDatabase)) {
+                if (query.includes(keyword)) {
+                    answerId = id;
+                    break;
+                }
+            }
+
+            if (answerId && faqAnswers[answerId]) {
+                showFaqAnswer(answerId, query);
+            } else {
+                // No match - open chat widget with query
+                openFaqChatWidget(query);
+            }
+        }
+
+        // Show FAQ answer card
+        function showFaqAnswer(answerId, originalQuery) {
+            const answer = faqAnswers[answerId];
+            const answerCard = document.getElementById('faqAnswerCard');
+            const faqSection = document.querySelector('.faq-section');
+
+            if (answer.type === 'clarification') {
+                // Show clarification options
+                let optionsHtml = answer.options.map(opt => {
+                    if (opt.action === 'chat') {
+                        return `<button class="faq-clarification__option" onclick="openFaqChatWidget('${originalQuery}')">${opt.label}</button>`;
+                    }
+                    return `<button class="faq-clarification__option" onclick="showFaqAnswer('${opt.answerId}', '${originalQuery}')">${opt.label}</button>`;
+                }).join('');
+
+                answerCard.innerHTML = `
+                    <div class="faq-answer-card__header">
+                        <span class="faq-answer-card__category">Help us help you</span>
+                        <button class="faq-answer-card__close" onclick="backToFaqSearch()">×</button>
+                    </div>
+                    <h4 class="faq-answer-card__question">${answer.question}</h4>
+                    ${answer.message ? `<p class="faq-answer-card__message">${answer.message}</p>` : ''}
+                    <div class="faq-clarification__options">
+                        ${optionsHtml}
+                    </div>
+                `;
+            } else {
+                // Show regular answer
+                let chatSection = '';
+                if (answer.showChat) {
+                    chatSection = `
+                        <div class="faq-answer-card__chat-prompt">
+                            <p>${answer.chatPrompt}</p>
+                            <button class="faq-answer-card__chat-btn" onclick="openFaqChatWidget('${originalQuery}')">Chat with us</button>
+                        </div>
+                    `;
+                }
+
+                answerCard.innerHTML = `
+                    <div class="faq-answer-card__header">
+                        <span class="faq-answer-card__category">${answer.category}</span>
+                        <button class="faq-answer-card__close" onclick="backToFaqSearch()">×</button>
+                    </div>
+                    <h4 class="faq-answer-card__question">${answer.question}</h4>
+                    <p class="faq-answer-card__text">${answer.answer}</p>
+                    ${chatSection}
+                    <div class="faq-helpful">
+                        <span class="faq-helpful__label">Was this helpful?</span>
+                        <button class="faq-helpful__btn faq-helpful__btn--yes" onclick="handleFaqHelpful('yes', '${answerId}')">Yes</button>
+                        <button class="faq-helpful__btn faq-helpful__btn--no" onclick="handleFaqHelpful('no', '${answerId}')">No</button>
+                    </div>
+                `;
+            }
+
+            answerCard.style.display = 'block';
+            faqSection.classList.add('faq-section--has-answer');
+        }
+
+        // Back to FAQ search
+        function backToFaqSearch() {
+            const answerCard = document.getElementById('faqAnswerCard');
+            const faqSection = document.querySelector('.faq-section');
+
+            answerCard.style.display = 'none';
+            faqSection.classList.remove('faq-section--has-answer');
+            document.getElementById('faqSearchInput').value = '';
+            document.getElementById('faqSearchInput').focus();
+        }
+
+        // Handle helpful feedback
+        function handleFaqHelpful(response, answerId) {
+            const helpfulDiv = event.target.closest('.faq-helpful');
+
+            if (response === 'yes') {
+                helpfulDiv.innerHTML = '<span class="faq-helpful__thanks">Thanks for your feedback!</span>';
+            } else {
+                helpfulDiv.innerHTML = `
+                    <span class="faq-helpful__thanks">Sorry this wasn't helpful.</span>
+                    <button class="faq-helpful__chat-btn" onclick="openFaqChatWidget('')">Chat with us</button>
+                `;
+            }
+        }
+
+        // Handle featured question click
+        function handleFeaturedQuestion(answerId) {
+            const input = document.getElementById('faqSearchInput');
+            const answer = faqAnswers[answerId];
+            if (answer) {
+                input.value = answer.question;
+                showFaqAnswer(answerId, answer.question);
+            }
+        }
+
+        // Open chat widget
+        function openFaqChatWidget(query) {
+            const chatWidget = document.getElementById('faqChatWidget');
+            const userMessage = document.getElementById('userQueryMessage');
+
+            if (query) {
+                userMessage.textContent = query;
+                userMessage.parentElement.style.display = 'block';
+            } else {
+                userMessage.parentElement.style.display = 'none';
+            }
+
+            chatWidget.classList.add('faq-chat-widget--open');
+        }
+
+        // Close chat widget
+        function closeFaqChatWidget() {
+            const chatWidget = document.getElementById('faqChatWidget');
+            chatWidget.classList.remove('faq-chat-widget--open');
+        }
+
+        // Close chat widget on escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeFaqChatWidget();
+                backToFaqSearch();
+            }
+        });
+
+    </script>
+</body>
+</html>

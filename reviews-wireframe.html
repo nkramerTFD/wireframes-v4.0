@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews - The Farmer's Dog | Wireframe v2</title>
+    <!-- Adobe Fonts - Neue Haas Grotesk -->
+    <link rel="stylesheet" href="https://use.typekit.net/otc4rpl.css">
+    <style>
+        /* TFD Design Tokens - Embedded for standalone viewing */
+        :root {
+            /* TFD Typography */
+            --font-family-display: 'neue-haas-grotesk-display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-family-text: 'neue-haas-grotesk-text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* Kale (Primary Brand Green) */
+            --kale-0: #E5EFE7;
+            --kale-1: #b5d3ba;
+            --kale-2: #417c67;
+            --kale-3: #173b33;
+            /* Carrot (CTA Orange) */
+            --carrot-0: #fff4f1;
+            --carrot-1: #ffd9cc;
+            --carrot-2: #f2674b;
+            --carrot-3: #D2563D;
+            /* Blueberry */
+            --blueberry-0: #e6ecf5;
+            --blueberry-1: #b7c6e6;
+            --blueberry-2: #385a9d;
+            --blueberry-3: #03184e;
+            /* Charcoal (Text Grays) */
+            --charcoal-0: #39383c;
+            --charcoal-1: #717377;
+            --charcoal-2: #969799;
+            --charcoal-3: #c2c3c5;
+            /* Oyster (Light Grays/Backgrounds) */
+            --oyster-0: #c6bfb7;
+            --oyster-1: #dbd6d1;
+            --oyster-2: #efedea;
+            --oyster-3: #f6f5f3;
+            /* Chickpea (Warm Cream/Tan) */
+            --chickpea-0: #d3bfa2;
+            --chickpea-1: #f2e1c8;
+            --chickpea-2: #fff3e1;
+            --chickpea-3: #fffaf3;
+            /* Utility Colors */
+            --white: #ffffff;
+            --gold: #f5a623;
+            --success: #2ecc71;
+            /* Spacing */
+            --spacing-24: 24px;
+            --spacing-36: 36px;
+            --spacing-48: 48px;
+            --spacing-72: 72px;
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 6px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            /* Font Weights */
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            /* Z-index */
+            --z-fixed: 1000;
+            /* Animation */
+            --animation-standard: 300ms ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-text);
+            line-height: 1.6;
+            color: var(--charcoal-0);
+            background: var(--white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-display);
+        }
+
+        /* Navigation */
+        .nav-tfd {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 12px 24px;
+            z-index: var(--z-fixed);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-tfd__logo {
+            color: var(--kale-3);
+            font-weight: var(--font-weight-bold);
+            font-size: 1.25rem;
+            text-decoration: none;
+        }
+
+        .nav-tfd__logo-full { display: inline; }
+        .nav-tfd__logo-short { display: none; }
+
+        .nav-tfd__links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-tfd__links a {
+            color: var(--charcoal-1);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-medium);
+            transition: color 0.2s;
+        }
+
+        .nav-tfd__links a:hover {
+            color: var(--kale-3);
+        }
+
+        .nav-tfd__links a.active {
+            color: var(--kale-3);
+        }
+
+        .nav-tfd__actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .nav-tfd__login {
+            color: var(--kale-3);
+            text-decoration: none;
+            font-weight: var(--font-weight-medium);
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border: 1px solid var(--oyster-1);
+            border-radius: var(--radius-sm);
+            transition: all 0.2s;
+        }
+
+        .nav-tfd__login:hover {
+            border-color: var(--kale-2);
+            background: var(--kale-0);
+        }
+
+        .nav-tfd__cta {
+            background: var(--carrot-2);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .nav-tfd__cta:hover {
+            background: var(--carrot-3);
+        }
+
+        /* Mobile Menu */
+        .nav-tfd__mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--kale-3);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .nav-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 58px;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 1rem;
+            border-top: 1px solid var(--oyster-2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+
+        .nav-mobile-menu.open {
+            display: block;
+        }
+
+        .nav-mobile-menu a {
+            display: block;
+            color: var(--charcoal-1);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border-radius: var(--radius-sm);
+            transition: background 0.2s;
+        }
+
+        .nav-mobile-menu a:hover {
+            background: var(--oyster-3);
+        }
+
+        .nav-mobile-menu a.active {
+            color: var(--kale-3);
+            background: var(--kale-0);
+        }
+
+        .nav-mobile-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-top: 1px solid var(--oyster-2);
+            margin-top: 0.5rem;
+        }
+
+        .nav-mobile-actions .nav-tfd__login {
+            flex: 1;
+            text-align: center;
+        }
+
+        .nav-mobile-actions .nav-tfd__cta {
+            flex: 1;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .nav-tfd__links {
+                display: none;
+            }
+            .nav-tfd__login {
+                display: none;
+            }
+            .nav-tfd__mobile-toggle {
+                display: block;
+            }
+            .nav-tfd {
+                padding: 12px 16px;
+            }
+            .nav-tfd__logo-full {
+                display: none;
+            }
+            .nav-tfd__logo-short {
+                display: inline;
+            }
+        }
+
+        /* Footer */
+        /* Footer */
+        .footer {
+            background: var(--kale-3);
+            color: rgba(255,255,255,0.7);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 900px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .footer-newsletter {
+            max-width: 400px;
+        }
+
+        .footer-newsletter__title {
+            font-family: var(--font-family-display);
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-newsletter__subtitle {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .footer-newsletter__form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .footer-newsletter__input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--radius-sm);
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .footer-newsletter__input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-newsletter__input:focus {
+            outline: none;
+            border-color: var(--carrot-2);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .footer-newsletter__btn {
+            background: var(--carrot-2);
+            color: var(--white);
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .footer-newsletter__btn:hover {
+            background: var(--carrot-3);
+        }
+
+        @media (max-width: 480px) {
+            .footer-newsletter__form {
+                flex-direction: column;
+            }
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-links__group h4 {
+            font-family: var(--font-family-display);
+            font-size: 0.8rem;
+            font-weight: var(--font-weight-semibold);
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links__group ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links__group li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links__group a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links__group a:hover {
+            color: var(--white);
+        }
+
+        .footer-middle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .footer-social__link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .footer-social__link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-logo {
+            font-family: var(--font-family-display);
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-legal a:hover {
+            color: rgba(255,255,255,0.85);
+        }
+
+        @media (max-width: 600px) {
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-legal {
+                justify-content: center;
+            }
+        }
+        /* Page-specific styles that extend the design tokens */
+
+        /* ================================
+           LIVING WALL HERO
+           ================================ */
+        .living-wall-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            max-height: 900px;
+            margin-top: 58px;
+            overflow: hidden;
+            background: var(--kale-3);
+        }
+
+        /* The Photo Grid */
+        .living-wall-grid {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 3px;
+        }
+
+        .living-wall-photo {
+            position: relative;
+            overflow: hidden;
+            background: var(--oyster-2);
+        }
+
+        .living-wall-photo__image {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--oyster-1) 0%, var(--oyster-2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--charcoal-1);
+            animation: kenBurns 20s ease-in-out infinite;
+        }
+
+        /* Ken Burns animation variations */
+        @keyframes kenBurns {
+            0%, 100% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.08) translate(-1%, -1%); }
+        }
+
+        .living-wall-photo:nth-child(2n) .living-wall-photo__image {
+            animation-delay: -5s;
+            animation-direction: reverse;
+        }
+
+        .living-wall-photo:nth-child(3n) .living-wall-photo__image {
+            animation-delay: -10s;
+        }
+
+        .living-wall-photo:nth-child(5n) .living-wall-photo__image {
+            animation-delay: -15s;
+            animation-direction: reverse;
+        }
+
+        /* Large photos spanning multiple cells */
+        .living-wall-photo--wide {
+            grid-column: span 2;
+        }
+
+        .living-wall-photo--tall {
+            grid-row: span 2;
+        }
+
+        .living-wall-photo--featured {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        /* Quote overlay on active photo */
+        .living-wall-photo__quote {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(23, 59, 51, 0.95) 0%, rgba(23, 59, 51, 0.7) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.25rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        .living-wall-photo.active .living-wall-photo__quote {
+            opacity: 1;
+        }
+
+        .living-wall-photo__quote-text {
+            color: white;
+            font-size: 1rem;
+            font-weight: var(--font-weight-semibold);
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+
+        .living-wall-photo__attribution {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+        }
+
+        /* Active photo glow effect */
+        .living-wall-photo.active {
+            z-index: 2;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+        }
+
+        /* Center overlay content */
+        .living-wall-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, rgba(23, 59, 51, 0.85) 0%, rgba(23, 59, 51, 0.4) 60%, transparent 80%);
+        }
+
+        .living-wall-overlay__content {
+            pointer-events: auto;
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .living-wall-overlay h1 {
+            color: white;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .living-wall-overlay .subhead {
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-bottom: 2rem;
+        }
+
+        /* Stats in overlay */
+        .living-wall-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .living-wall-stat {
+            text-align: center;
+        }
+
+        .living-wall-stat__number {
+            font-size: 2rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .living-wall-stat__number .stars {
+            font-size: 1.25rem;
+        }
+
+        .living-wall-stat__label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 0.25rem;
+        }
+
+        /* CTA Button */
+        .living-wall-cta {
+            display: inline-block;
+            background: var(--carrot-2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: var(--font-weight-semibold);
+            font-size: 1.1rem;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .living-wall-cta:hover {
+            background: var(--carrot-3);
+            transform: translateY(-2px);
+        }
+
+        /* Scroll indicator */
+        .living-wall-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: bounce 2s infinite;
+            z-index: 10;
+        }
+
+        .living-wall-scroll__arrow {
+            font-size: 1.5rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* Bottom gradient fade */
+        .living-wall-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to bottom, transparent 0%, var(--oyster-3) 100%);
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .living-wall-grid {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(5, 1fr);
+            }
+
+            .living-wall-stats {
+                gap: 2rem;
+            }
+
+            .living-wall-stat__number {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .living-wall-hero {
+                height: 90vh;
+                min-height: 500px;
+            }
+
+            .living-wall-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(6, 1fr);
+            }
+
+            .living-wall-photo--wide,
+            .living-wall-photo--featured {
+                grid-column: span 1;
+            }
+
+            .living-wall-photo--tall,
+            .living-wall-photo--featured {
+                grid-row: span 1;
+            }
+
+            .living-wall-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .living-wall-photo__quote-text {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Reviews Layout */
+        .reviews-layout {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Horizontal Filter Bar */
+        .filters-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--oyster-1);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filters-bar__label {
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-semibold);
+            color: var(--charcoal-0);
+        }
+
+        .filters-bar__dropdowns {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        /* Filter Dropdown */
+        .filter-dropdown {
+            position: relative;
+        }
+
+        .filter-dropdown__trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: var(--white);
+            border: 1px solid var(--oyster-1);
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: var(--font-weight-medium);
+            color: var(--charcoal-0);
+            cursor: pointer;
+            transition: all var(--animation-standard);
+            white-space: nowrap;
+        }
+
+        .filter-dropdown__trigger:hover {
+            border-color: var(--kale-2);
+        }
+
+        .filter-dropdown__trigger.active {
+            background: var(--kale-0);
+            border-color: var(--kale-2);
+            color: var(--kale-3);
+        }
+
+        .filter-dropdown__trigger.has-selection {
+            background: var(--kale-2);
+            border-color: var(--kale-2);
+            color: white;
+        }
+
+        .filter-dropdown__icon {
+            font-size: 0.65rem;
+            transition: transform var(--animation-standard);
+        }
+
+        .filter-dropdown.open .filter-dropdown__icon {
+            transform: rotate(180deg);
+        }
+
+        .filter-dropdown__menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            min-width: 200px;
+            background: var(--white);
+            border: 1px solid var(--oyster-1);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+            display: none;
+        }
+
+        .filter-dropdown.open .filter-dropdown__menu {
+            display: block;
+        }
+
+        .filter-dropdown__option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            color: var(--charcoal-0);
+            cursor: pointer;
+            transition: background var(--animation-standard);
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .filter-dropdown__option:hover {
+            background: var(--oyster-3);
+        }
+
+        .filter-dropdown__option.active {
+            background: var(--kale-0);
+            color: var(--kale-3);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .filter-dropdown__option:first-child {
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+        }
+
+        .filter-dropdown__option:last-child {
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+        }
+
+        .filter-dropdown__count {
+            font-size: 0.75rem;
+            color: var(--charcoal-2);
+        }
+
+        .filter-dropdown__option.active .filter-dropdown__count {
+            color: var(--kale-2);
+        }
+
+        /* Clear and Results */
+        .filters-bar__actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: auto;
+        }
+
+        .filters-bar__clear {
+            font-size: 0.85rem;
+            color: var(--kale-2);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .filters-bar__clear:hover {
+            text-decoration: underline;
+        }
+
+        .filters-bar__results {
+            font-size: 0.85rem;
+            color: var(--charcoal-1);
+        }
+
+        /* Mobile: Stack dropdowns */
+        @media (max-width: 768px) {
+            .filters-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+            }
+
+            .filters-bar__label {
+                display: none;
+            }
+
+            .filters-bar__dropdowns {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+
+            .filters-bar__actions {
+                margin-left: 0;
+                justify-content: space-between;
+            }
+
+            .filter-dropdown__trigger {
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .filter-dropdown__menu {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .filters-bar__dropdowns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            background: var(--oyster-3);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .reviews-main {
+            flex: 1;
+        }
+
+        /* Standard Grid View */
+        .grid-view {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1000px) {
+            .grid-view {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid-view {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Review Card */
+        .review-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--animation-standard), box-shadow var(--animation-standard);
+        }
+
+        .review-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-photo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--oyster-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--charcoal-1);
+            flex-shrink: 0;
+        }
+
+        .review-meta {
+            flex: 1;
+        }
+
+        .review-dog-name {
+            font-weight: var(--font-weight-semibold);
+            font-size: 1rem;
+            margin-bottom: 0.15rem;
+            color: var(--kale-3);
+        }
+
+        .review-dog-info {
+            font-size: 0.8rem;
+            color: var(--charcoal-1);
+        }
+
+        .review-stars {
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .review-quote {
+            font-size: 1.05rem;
+            font-weight: var(--font-weight-semibold);
+            color: var(--charcoal-0);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .review-text {
+            font-size: 0.9rem;
+            color: var(--charcoal-1);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .review-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-tag {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--oyster-3);
+            border-radius: var(--radius-sm);
+            color: var(--charcoal-1);
+        }
+
+        .review-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--oyster-2);
+            font-size: 0.8rem;
+            color: var(--charcoal-1);
+        }
+
+        .verified-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--success);
+        }
+
+        .helpful-btn {
+            background: none;
+            border: 1px solid var(--oyster-1);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            cursor: pointer;
+            color: var(--charcoal-1);
+            transition: all var(--animation-standard);
+        }
+
+        .helpful-btn:hover {
+            border-color: var(--kale-2);
+            color: var(--kale-2);
+        }
+
+        /* Video Callout Card */
+        .review-card--video {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        @media (max-width: 600px) {
+            .review-card--video {
+                grid-column: span 1;
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .video-thumbnail {
+            background: var(--kale-3);
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .play-button {
+            width: 64px;
+            height: 64px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform var(--animation-standard);
+            color: var(--kale-3);
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+        }
+
+        .video-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .video-label {
+            font-size: 0.75rem;
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--carrot-2);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Expert Card */
+        .review-card--expert {
+            background: linear-gradient(135deg, var(--oyster-3) 0%, var(--blueberry-0) 100%);
+            border-left: 4px solid var(--blueberry-2);
+        }
+
+        .expert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: var(--blueberry-2);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: 1rem;
+        }
+
+        .expert-credentials {
+            font-size: 0.85rem;
+            color: var(--charcoal-1);
+            margin-top: 0.5rem;
+        }
+
+        /* Transformation Story Card */
+        .review-card--story {
+            grid-column: span 3;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        @media (max-width: 1000px) {
+            .review-card--story {
+                grid-column: span 2;
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .review-card--story {
+                grid-column: span 1;
+            }
+        }
+
+        .story-media {
+            background: var(--oyster-2);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .before-after {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            height: 100%;
+        }
+
+        .before-after-panel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--oyster-2);
+            color: var(--charcoal-1);
+            font-size: 0.75rem;
+        }
+
+        .before-after-panel::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: 0.5rem;
+            left: 0.5rem;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .story-content {
+            padding: 2rem;
+        }
+
+        .story-label {
+            font-size: 0.75rem;
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+
+        .story-headline {
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: var(--kale-3);
+        }
+
+        .story-text {
+            color: var(--charcoal-1);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-timeline {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-item {
+            text-align: center;
+        }
+
+        .timeline-period {
+            font-size: 0.75rem;
+            color: var(--charcoal-1);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-result {
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-semibold);
+            color: var(--success);
+        }
+
+        .read-more-link {
+            color: var(--kale-2);
+            font-weight: var(--font-weight-semibold);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .read-more-link:hover {
+            text-decoration: underline;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--kale-3) 0%, #1e4d40 100%);
+            padding: var(--spacing-72) var(--spacing-24);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .cta-subhead {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.15rem;
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-button-group {
+            margin-bottom: 2rem;
+        }
+
+        .cta-section .btn-primary {
+            background: var(--carrot-2);
+            color: white;
+            font-size: 1.1rem;
+            padding: 1.25rem 2.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: var(--font-weight-bold);
+            text-decoration: none;
+            display: inline-block;
+            transition: transform var(--animation-standard), background var(--animation-standard);
+        }
+
+        .cta-section .btn-primary:hover {
+            background: var(--carrot-3);
+        }
+
+        .cta-benefits {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .cta-benefit {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-benefit .checkmark {
+            color: var(--success);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav-tfd">
+        <a href="index.html" class="nav-tfd__logo"><span class="nav-tfd__logo-full">The Farmer's Dog</span><span class="nav-tfd__logo-short">TFD</span></a>
+        <div class="nav-tfd__links">
+            <a href="our-food-wireframe.html">Our Food</a>
+            <a href="our-difference-wireframe.html">Our Difference</a>
+            <a href="reviews-wireframe.html" class="active">Reviews</a>
+            <a href="faq-wireframe.html">FAQ</a>
+            <a href="about-us-wireframe.html">About Us</a>
+            <a href="#">Vet Professionals</a>
+        </div>
+        <div class="nav-tfd__actions">
+            <a href="#" class="nav-tfd__login">Log In</a>
+            <a href="get-started-wireframe.html" class="nav-tfd__cta">Get Started — 50% Off</a>
+        </div>
+        <button class="nav-tfd__mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="nav-mobile-menu" id="mobileMenu">
+        <a href="our-food-wireframe.html">Our Food</a>
+        <a href="our-difference-wireframe.html">Our Difference</a>
+        <a href="reviews-wireframe.html" class="active">Reviews</a>
+        <a href="faq-wireframe.html">FAQ</a>
+        <a href="about-us-wireframe.html">About Us</a>
+        <a href="#">Vet Professionals</a>
+        <div class="nav-mobile-actions">
+            <a href="#" class="nav-tfd__login">Log In</a>
+            <a href="get-started-wireframe.html" class="nav-tfd__cta">Get Started — 50% Off</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+    </script>
+
+    <!-- Living Wall Hero -->
+    <section class="living-wall-hero">
+        <!-- Photo Grid -->
+        <div class="living-wall-grid">
+            <!-- Row 1 -->
+            <div class="living-wall-photo" data-quote="Finally excited about mealtime!" data-dog="Buster, Golden Retriever">
+                <div class="living-wall-photo__image">[Happy Golden]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Finally excited about mealtime!"</div>
+                    <div class="living-wall-photo__attribution">— Buster, Golden Retriever</div>
+                </div>
+            </div>
+            <div class="living-wall-photo living-wall-photo--wide" data-quote="She acts like a puppy again at 10 years old" data-dog="Rosie, Labrador">
+                <div class="living-wall-photo__image">[Senior Lab playing]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"She acts like a puppy again at 10 years old"</div>
+                    <div class="living-wall-photo__attribution">— Rosie, Labrador</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="Allergies completely cleared up" data-dog="Mochi, Shiba Inu">
+                <div class="living-wall-photo__image">[Shiba close-up]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Allergies completely cleared up"</div>
+                    <div class="living-wall-photo__attribution">— Mochi, Shiba Inu</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="Best decision we ever made" data-dog="Penny, Corgi">
+                <div class="living-wall-photo__image">[Corgi smiling]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Best decision we ever made"</div>
+                    <div class="living-wall-photo__attribution">— Penny, Corgi</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="His coat has never looked better" data-dog="Scout, Border Collie">
+                <div class="living-wall-photo__image">[Border Collie]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"His coat has never looked better"</div>
+                    <div class="living-wall-photo__attribution">— Scout, Border Collie</div>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="living-wall-photo living-wall-photo--tall" data-quote="Lost 15 lbs and got his energy back" data-dog="Max, Mixed Breed">
+                <div class="living-wall-photo__image">[Healthy mixed breed]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Lost 15 lbs and got his energy back"</div>
+                    <div class="living-wall-photo__attribution">— Max, Mixed Breed</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="No more picky eating" data-dog="Bear, Husky">
+                <div class="living-wall-photo__image">[Husky eating]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"No more picky eating"</div>
+                    <div class="living-wall-photo__attribution">— Bear, Husky</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="Digestive issues gone in 2 weeks" data-dog="Cooper, French Bulldog">
+                <div class="living-wall-photo__image">[Frenchie portrait]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Digestive issues gone in 2 weeks"</div>
+                    <div class="living-wall-photo__attribution">— Cooper, French Bulldog</div>
+                </div>
+            </div>
+            <div class="living-wall-photo living-wall-photo--featured" data-quote="Worth every single penny" data-dog="Duke, German Shepherd">
+                <div class="living-wall-photo__image">[GSD with family]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Worth every single penny"</div>
+                    <div class="living-wall-photo__attribution">— Duke, German Shepherd</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="Our vet is amazed at his bloodwork" data-dog="Charlie, Beagle">
+                <div class="living-wall-photo__image">[Beagle at vet]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Our vet is amazed at his bloodwork"</div>
+                    <div class="living-wall-photo__attribution">— Charlie, Beagle</div>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="living-wall-photo" data-quote="She finishes every meal now" data-dog="Pepper, Chihuahua">
+                <div class="living-wall-photo__image">[Chihuahua eating]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"She finishes every meal now"</div>
+                    <div class="living-wall-photo__attribution">— Pepper, Chihuahua</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="Energy levels through the roof" data-dog="Luna, Australian Shepherd">
+                <div class="living-wall-photo__image">[Aussie running]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Energy levels through the roof"</div>
+                    <div class="living-wall-photo__attribution">— Luna, Australian Shepherd</div>
+                </div>
+            </div>
+            <div class="living-wall-photo living-wall-photo--wide" data-quote="The transformation has been incredible" data-dog="Bella, Boxer">
+                <div class="living-wall-photo__image">[Boxer before/after]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"The transformation has been incredible"</div>
+                    <div class="living-wall-photo__attribution">— Bella, Boxer</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="Wish we'd switched sooner" data-dog="Rocky, Pit Bull">
+                <div class="living-wall-photo__image">[Happy pittie]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Wish we'd switched sooner"</div>
+                    <div class="living-wall-photo__attribution">— Rocky, Pit Bull</div>
+                </div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="living-wall-photo living-wall-photo--wide" data-quote="Three rescue dogs, all thriving" data-dog="The Johnson Pack">
+                <div class="living-wall-photo__image">[Three dogs together]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Three rescue dogs, all thriving"</div>
+                    <div class="living-wall-photo__attribution">— The Johnson Pack</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="No more expensive vet visits" data-dog="Sadie, Dachshund">
+                <div class="living-wall-photo__image">[Dachshund]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"No more expensive vet visits"</div>
+                    <div class="living-wall-photo__attribution">— Sadie, Dachshund</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="He sprints to his bowl now" data-dog="Winston, Bulldog">
+                <div class="living-wall-photo__image">[Bulldog excited]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"He sprints to his bowl now"</div>
+                    <div class="living-wall-photo__attribution">— Winston, Bulldog</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="Real food, real results" data-dog="Oliver, Poodle">
+                <div class="living-wall-photo__image">[Poodle portrait]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Real food, real results"</div>
+                    <div class="living-wall-photo__attribution">— Oliver, Poodle</div>
+                </div>
+            </div>
+            <div class="living-wall-photo" data-quote="Game changer for our senior girl" data-dog="Maggie, Golden Retriever">
+                <div class="living-wall-photo__image">[Senior golden]</div>
+                <div class="living-wall-photo__quote">
+                    <div class="living-wall-photo__quote-text">"Game changer for our senior girl"</div>
+                    <div class="living-wall-photo__attribution">— Maggie, Golden Retriever</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Overlay -->
+        <div class="living-wall-overlay">
+            <div class="living-wall-overlay__content">
+                <h1>Real dogs.<br>Real stories.</h1>
+                <p class="subhead">Join millions of dogs thriving on fresh food.</p>
+
+                <div class="living-wall-stats">
+                    <div class="living-wall-stat">
+                        <div class="living-wall-stat__number">4.8 <span class="stars">★★★★★</span></div>
+                        <div class="living-wall-stat__label">Average Rating</div>
+                    </div>
+                    <div class="living-wall-stat">
+                        <div class="living-wall-stat__number">50,000+</div>
+                        <div class="living-wall-stat__label">Verified Reviews</div>
+                    </div>
+                    <div class="living-wall-stat">
+                        <div class="living-wall-stat__number">96%</div>
+                        <div class="living-wall-stat__label">Would Recommend</div>
+                    </div>
+                </div>
+
+                <a href="get-started-wireframe.html" class="living-wall-cta">Get 50% Off Your First Box</a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="living-wall-scroll">
+            <span>Explore reviews</span>
+            <span class="living-wall-scroll__arrow">↓</span>
+        </div>
+
+        <!-- Bottom Fade -->
+        <div class="living-wall-fade"></div>
+    </section>
+
+    <!-- Standard Page Content -->
+    <div class="standard-page">
+
+    <!-- Reviews Section with Filters -->
+    <section class="reviews-section">
+        <div class="reviews-layout">
+
+            <!-- Horizontal Filter Bar -->
+            <div class="filters-bar">
+                <span class="filters-bar__label">Filter by:</span>
+
+                <div class="filters-bar__dropdowns">
+                    <!-- Health Concern Dropdown -->
+                    <div class="filter-dropdown" data-filter="health">
+                        <button class="filter-dropdown__trigger">
+                            Health Concern
+                            <span class="filter-dropdown__icon">▼</span>
+                        </button>
+                        <div class="filter-dropdown__menu">
+                            <button class="filter-dropdown__option active" data-value="all">All <span class="filter-dropdown__count">847</span></button>
+                            <button class="filter-dropdown__option" data-value="picky">Picky Eater <span class="filter-dropdown__count">234</span></button>
+                            <button class="filter-dropdown__option" data-value="digestion">Digestion <span class="filter-dropdown__count">189</span></button>
+                            <button class="filter-dropdown__option" data-value="allergies">Allergies <span class="filter-dropdown__count">156</span></button>
+                            <button class="filter-dropdown__option" data-value="weight">Weight <span class="filter-dropdown__count">98</span></button>
+                            <button class="filter-dropdown__option" data-value="skin">Skin & Coat <span class="filter-dropdown__count">112</span></button>
+                        </div>
+                    </div>
+
+                    <!-- Life Stage Dropdown -->
+                    <div class="filter-dropdown" data-filter="stage">
+                        <button class="filter-dropdown__trigger">
+                            Life Stage
+                            <span class="filter-dropdown__icon">▼</span>
+                        </button>
+                        <div class="filter-dropdown__menu">
+                            <button class="filter-dropdown__option active" data-value="all">All <span class="filter-dropdown__count">847</span></button>
+                            <button class="filter-dropdown__option" data-value="puppy">Puppy <span class="filter-dropdown__count">156</span></button>
+                            <button class="filter-dropdown__option" data-value="adult">Adult <span class="filter-dropdown__count">498</span></button>
+                            <button class="filter-dropdown__option" data-value="senior">Senior <span class="filter-dropdown__count">193</span></button>
+                        </div>
+                    </div>
+
+                    <!-- Dog Size Dropdown -->
+                    <div class="filter-dropdown" data-filter="size">
+                        <button class="filter-dropdown__trigger">
+                            Dog Size
+                            <span class="filter-dropdown__icon">▼</span>
+                        </button>
+                        <div class="filter-dropdown__menu">
+                            <button class="filter-dropdown__option active" data-value="all">All <span class="filter-dropdown__count">847</span></button>
+                            <button class="filter-dropdown__option" data-value="small">Small (&lt;20 lbs) <span class="filter-dropdown__count">267</span></button>
+                            <button class="filter-dropdown__option" data-value="medium">Medium (20-50 lbs) <span class="filter-dropdown__count">312</span></button>
+                            <button class="filter-dropdown__option" data-value="large">Large (50+ lbs) <span class="filter-dropdown__count">268</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filters-bar__actions">
+                    <button class="filters-bar__clear">Clear all</button>
+                    <span class="filters-bar__results">847 reviews</span>
+                </div>
+            </div>
+
+            <!-- Main Review Content -->
+            <div class="reviews-main">
+
+            <!-- Grid View -->
+            <div class="grid-view" id="gridView">
+
+                <!-- Standard Review Card -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-photo">[Dog]</div>
+                        <div class="review-meta">
+                            <div class="review-dog-name">Buster</div>
+                            <div class="review-dog-info">7yr Golden Retriever &bull; California</div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    </div>
+                    <div class="review-quote">"Finally excited about mealtime again"</div>
+                    <div class="review-text">Buster was the pickiest eater. We tried everything. TFD is the only food he's ever finished without us having to coax him. Every single meal.</div>
+                    <div class="review-tags">
+                        <span class="review-tag">Picky Eater</span>
+                        <span class="review-tag">Senior</span>
+                        <span class="review-tag">Large Breed</span>
+                    </div>
+                    <div class="review-footer">
+                        <span class="verified-badge">&#10003; Verified Purchase</span>
+                        <button class="helpful-btn">&#128077; Helpful (24)</button>
+                    </div>
+                </div>
+
+                <!-- Video Callout Card -->
+                <div class="review-card review-card--video">
+                    <div class="video-thumbnail">
+                        <div class="play-button">&#9658;</div>
+                    </div>
+                    <div class="video-content">
+                        <div class="video-label">&#128249; Video Review</div>
+                        <div class="review-quote">"Watch Luna's reaction to her first bowl"</div>
+                        <div class="review-text">After 3 years of struggling with a picky eater, this was the moment everything changed. Luna literally did a happy dance.</div>
+                        <div class="review-dog-info" style="margin-top: auto;">Luna, 4yr Beagle Mix &bull; Texas</div>
+                    </div>
+                </div>
+
+                <!-- Standard Review Card -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-photo">[Dog]</div>
+                        <div class="review-meta">
+                            <div class="review-dog-name">Cooper</div>
+                            <div class="review-dog-info">2yr French Bulldog &bull; New York</div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    </div>
+                    <div class="review-quote">"Digestive issues completely resolved"</div>
+                    <div class="review-text">Cooper had constant stomach issues on kibble. Within two weeks on TFD, everything normalized. His coat is shinier too.</div>
+                    <div class="review-tags">
+                        <span class="review-tag">Digestion</span>
+                        <span class="review-tag">Skin &amp; Coat</span>
+                        <span class="review-tag">Adult</span>
+                    </div>
+                    <div class="review-footer">
+                        <span class="verified-badge">&#10003; Verified Purchase</span>
+                        <button class="helpful-btn">&#128077; Helpful (18)</button>
+                    </div>
+                </div>
+
+                <!-- Expert Card -->
+                <div class="review-card review-card--expert">
+                    <div class="expert-badge">&#129658; Veterinarian</div>
+                    <div class="review-quote">"I recommend TFD to my patients with digestive issues"</div>
+                    <div class="review-text">The quality and science behind this food is exactly what I'd want for any dog. My own dogs have been eating TFD for two years.</div>
+                    <div class="expert-credentials">
+                        <strong>Dr. Sarah Mitchell, DVM</strong><br>
+                        Greenfield Animal Hospital, Chicago
+                    </div>
+                </div>
+
+                <!-- Standard Review Card -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-photo">[Dog]</div>
+                        <div class="review-meta">
+                            <div class="review-dog-name">Rosie</div>
+                            <div class="review-dog-info">10yr Labrador &bull; Florida</div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    </div>
+                    <div class="review-quote">"She acts like a puppy again"</div>
+                    <div class="review-text">At 10, Rosie was slowing down. Three months on fresh food and she's running around the yard like she's 5. The change is remarkable.</div>
+                    <div class="review-tags">
+                        <span class="review-tag">Senior</span>
+                        <span class="review-tag">Energy</span>
+                        <span class="review-tag">Large Breed</span>
+                    </div>
+                    <div class="review-footer">
+                        <span class="verified-badge">&#10003; Verified Purchase</span>
+                        <button class="helpful-btn">&#128077; Helpful (42)</button>
+                    </div>
+                </div>
+
+                <!-- Transformation Story Card -->
+                <div class="review-card review-card--story">
+                    <div class="story-media">
+                        <div class="before-after">
+                            <div class="before-after-panel" data-label="Before">[Photo placeholder]</div>
+                            <div class="before-after-panel" data-label="After">[Photo placeholder]</div>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-label">&#11088; Transformation Story</div>
+                        <div class="story-headline">How Max lost 15 lbs and got his energy back</div>
+                        <div class="story-text">When we adopted Max, he was 20 lbs overweight and lethargic. Our vet was concerned about his joints. We switched to TFD with proper portions, and the transformation has been incredible...</div>
+                        <div class="story-timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-period">Month 1</div>
+                                <div class="timeline-result">-5 lbs, more energy</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-period">Month 3</div>
+                                <div class="timeline-result">-12 lbs, playing again</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-period">Month 6</div>
+                                <div class="timeline-result">Goal weight reached</div>
+                            </div>
+                        </div>
+                        <a href="#" class="read-more-link">Read Max's full story &#8594;</a>
+                    </div>
+                </div>
+
+            </div>
+
+            </div><!-- end reviews-main -->
+
+        </div><!-- end reviews-layout -->
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to see the difference?</h2>
+            <p class="cta-subhead">Join thousands of dog parents who've made the switch to real, fresh food. Your dog deserves to feel this good too.</p>
+
+            <div class="cta-button-group">
+                <a href="get-started-wireframe.html" class="btn-primary">Get 50% Off Your First Box</a>
+            </div>
+
+            <div class="cta-benefits">
+                <div class="cta-benefit">
+                    <span class="checkmark">&#10003;</span> Personalized for your dog
+                </div>
+                <div class="cta-benefit">
+                    <span class="checkmark">&#10003;</span> Free shipping, always
+                </div>
+                <div class="cta-benefit">
+                    <span class="checkmark">&#10003;</span> Cancel anytime
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-newsletter">
+                    <h3 class="footer-newsletter__title">Join the pack</h3>
+                    <p class="footer-newsletter__subtitle">Get nutrition tips, exclusive offers, and stories from real dog parents delivered to your inbox.</p>
+                    <form class="footer-newsletter__form">
+                        <input type="email" class="footer-newsletter__input" placeholder="Enter your email">
+                        <button type="submit" class="footer-newsletter__btn">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-links__group">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="#">DIY</a></li>
+                            <li><a href="#">Digest</a></li>
+                            <li><a href="#">Breeds</a></li>
+                            <li><a href="#">WSAVA</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Affiliates</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links__group">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="mailto:help@thefarmersdog.com">help@thefarmersdog.com</a></li>
+                            <li><a href="tel:6467807957">Call/Text: 646.780.7957</a></li>
+                            <li><a href="faq-wireframe.html">Help Center</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links__group">
+                        <h4>Business</h4>
+                        <ul>
+                            <li><a href="#">Media Inquiries</a></li>
+                            <li><a href="#">Partnership Inquiries</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-middle">
+                <div class="footer-social">
+                    <a href="#" class="footer-social__link" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" class="footer-social__link" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                    </a>
+                    <a href="#" class="footer-social__link" aria-label="TikTok">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                    </a>
+                </div>
+                <div class="footer-logo">The Farmer's Dog</div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2025 The Farmer's Dog, Inc. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Accessibility</a>
+                    <a href="#">Do Not Sell My Personal Information</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    </div><!-- end standard-page -->
+
+    <script>
+        // Filter Dropdown Functionality
+        const filterDropdowns = document.querySelectorAll('.filter-dropdown');
+
+        // Toggle dropdown on trigger click
+        filterDropdowns.forEach(dropdown => {
+            const trigger = dropdown.querySelector('.filter-dropdown__trigger');
+            const options = dropdown.querySelectorAll('.filter-dropdown__option');
+
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Close other dropdowns
+                filterDropdowns.forEach(d => {
+                    if (d !== dropdown) d.classList.remove('open');
+                });
+                // Toggle this dropdown
+                dropdown.classList.toggle('open');
+            });
+
+            // Handle option selection
+            options.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Update active state
+                    options.forEach(o => o.classList.remove('active'));
+                    option.classList.add('active');
+
+                    // Update trigger text and style
+                    const value = option.dataset.value;
+                    const label = option.textContent.split(/\d/)[0].trim(); // Get text before count
+
+                    if (value === 'all') {
+                        trigger.classList.remove('has-selection');
+                        trigger.innerHTML = `${dropdown.dataset.filter === 'health' ? 'Health Concern' : dropdown.dataset.filter === 'stage' ? 'Life Stage' : 'Dog Size'} <span class="filter-dropdown__icon">▼</span>`;
+                    } else {
+                        trigger.classList.add('has-selection');
+                        trigger.innerHTML = `${label} <span class="filter-dropdown__icon">▼</span>`;
+                    }
+
+                    // Close dropdown
+                    dropdown.classList.remove('open');
+                });
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', () => {
+            filterDropdowns.forEach(d => d.classList.remove('open'));
+        });
+
+        // Clear all filters
+        document.querySelector('.filters-bar__clear').addEventListener('click', () => {
+            filterDropdowns.forEach(dropdown => {
+                const trigger = dropdown.querySelector('.filter-dropdown__trigger');
+                const options = dropdown.querySelectorAll('.filter-dropdown__option');
+
+                // Reset to "All"
+                options.forEach(o => o.classList.remove('active'));
+                options[0].classList.add('active');
+
+                // Reset trigger
+                trigger.classList.remove('has-selection');
+                const filterType = dropdown.dataset.filter;
+                trigger.innerHTML = `${filterType === 'health' ? 'Health Concern' : filterType === 'stage' ? 'Life Stage' : 'Dog Size'} <span class="filter-dropdown__icon">▼</span>`;
+            });
+        });
+
+        // Living Wall - Quote Activation
+        const photos = document.querySelectorAll('.living-wall-photo');
+        let currentActiveIndex = 0;
+        let activationInterval;
+
+        function activatePhoto(index) {
+            // Remove active from all
+            photos.forEach(p => p.classList.remove('active'));
+            // Add active to current
+            if (photos[index]) {
+                photos[index].classList.add('active');
+            }
+        }
+
+        function startActivationCycle() {
+            // Activate first photo
+            activatePhoto(currentActiveIndex);
+
+            // Cycle through photos
+            activationInterval = setInterval(() => {
+                currentActiveIndex = (currentActiveIndex + 1) % photos.length;
+                activatePhoto(currentActiveIndex);
+            }, 4000); // Change every 4 seconds
+        }
+
+        // Start the cycle when page loads
+        startActivationCycle();
+
+        // Pause on hover over the wall
+        const livingWall = document.querySelector('.living-wall-hero');
+        if (livingWall) {
+            livingWall.addEventListener('mouseenter', () => {
+                clearInterval(activationInterval);
+            });
+
+            livingWall.addEventListener('mouseleave', () => {
+                startActivationCycle();
+            });
+        }
+    </script>
+
+</body>
+</html>

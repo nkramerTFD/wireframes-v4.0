@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is Fresh Dog Food Better Than Kibble? | The Farmer's Dog</title>
+    <!-- Adobe Fonts - Neue Haas Grotesk -->
+    <link rel="stylesheet" href="https://use.typekit.net/otc4rpl.css">
+    <style>
+        /* TFD Design Tokens - Embedded for standalone viewing */
+        :root {
+            /* TFD Typography */
+            --font-family-display: 'neue-haas-grotesk-display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-family-text: 'neue-haas-grotesk-text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* Kale (Primary Brand Green) */
+            --kale-0: #E5EFE7;
+            --kale-1: #b5d3ba;
+            --kale-2: #417c67;
+            --kale-3: #173b33;
+            /* Carrot (CTA Orange) */
+            --carrot-0: #fff4f1;
+            --carrot-1: #ffd9cc;
+            --carrot-2: #f2674b;
+            --carrot-3: #D2563D;
+            /* Blueberry */
+            --blueberry-0: #e6ecf5;
+            --blueberry-1: #b7c6e6;
+            --blueberry-2: #385a9d;
+            --blueberry-3: #03184e;
+            /* Charcoal (Text Grays) */
+            --charcoal-0: #39383c;
+            --charcoal-1: #717377;
+            --charcoal-2: #969799;
+            --charcoal-3: #c2c3c5;
+            /* Oyster (Light Grays/Backgrounds) */
+            --oyster-0: #c6bfb7;
+            --oyster-1: #dbd6d1;
+            --oyster-2: #efedea;
+            --oyster-3: #f6f5f3;
+            /* Chickpea (Warm Cream/Tan) */
+            --chickpea-0: #d3bfa2;
+            --chickpea-1: #f2e1c8;
+            --chickpea-2: #fff3e1;
+            --chickpea-3: #fffaf3;
+            /* Utility Colors */
+            --white: #ffffff;
+            --gold: #f5a623;
+            --success: #2ecc71;
+            /* Spacing */
+            --spacing-24: 24px;
+            --spacing-36: 36px;
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 6px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            /* Font Weights */
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            /* Z-index */
+            --z-dropdown: 100;
+            --z-fixed: 1000;
+            /* Animation */
+            --animation-standard: 300ms ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-text);
+            line-height: 1.6;
+            color: var(--charcoal-0);
+            background: var(--white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-display);
+        }
+
+        /* Navigation */
+        .nav-tfd {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 12px 24px;
+            z-index: var(--z-fixed);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-tfd__logo {
+            color: var(--kale-3);
+            font-weight: var(--font-weight-bold);
+            font-size: 1.25rem;
+            text-decoration: none;
+        }
+
+        .nav-tfd__logo-full { display: inline; }
+        .nav-tfd__logo-short { display: none; }
+
+        .nav-tfd__links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-tfd__links a {
+            color: var(--charcoal-1);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-medium);
+            transition: color 0.2s;
+        }
+
+        .nav-tfd__links a:hover {
+            color: var(--kale-3);
+        }
+
+        .nav-tfd__links a.active {
+            color: var(--kale-3);
+        }
+
+        .nav-tfd__actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .nav-tfd__login {
+            color: var(--kale-3);
+            text-decoration: none;
+            font-weight: var(--font-weight-medium);
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border: 1px solid var(--oyster-1);
+            border-radius: var(--radius-sm);
+            transition: all 0.2s;
+        }
+
+        .nav-tfd__login:hover {
+            border-color: var(--kale-2);
+            background: var(--kale-0);
+        }
+
+        .nav-tfd__cta {
+            background: var(--carrot-2);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .nav-tfd__cta:hover {
+            background: var(--carrot-3);
+        }
+
+        /* Mobile Menu */
+        .nav-tfd__mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--kale-3);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .nav-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 58px;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 1rem;
+            border-top: 1px solid var(--oyster-2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+
+        .nav-mobile-menu.open {
+            display: block;
+        }
+
+        .nav-mobile-menu a {
+            display: block;
+            color: var(--charcoal-1);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border-radius: var(--radius-sm);
+            transition: background 0.2s;
+        }
+
+        .nav-mobile-menu a:hover {
+            background: var(--oyster-3);
+        }
+
+        .nav-mobile-menu a.active {
+            color: var(--kale-3);
+            background: var(--kale-0);
+        }
+
+        .nav-mobile-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-top: 1px solid var(--oyster-2);
+            margin-top: 0.5rem;
+        }
+
+        .nav-mobile-actions .nav-tfd__login {
+            flex: 1;
+            text-align: center;
+        }
+
+        .nav-mobile-actions .nav-tfd__cta {
+            flex: 1;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .nav-tfd__links {
+                display: none;
+            }
+            .nav-tfd__login {
+                display: none;
+            }
+            .nav-tfd__mobile-toggle {
+                display: block;
+            }
+            .nav-tfd {
+                padding: 12px 16px;
+            }
+            .nav-tfd__logo-full {
+                display: none;
+            }
+            .nav-tfd__logo-short {
+                display: inline;
+            }
+        }
+
+        /* Footer */
+        /* Footer */
+        .footer {
+            background: var(--kale-3);
+            color: rgba(255,255,255,0.7);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 900px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .footer-newsletter {
+            max-width: 400px;
+        }
+
+        .footer-newsletter__title {
+            font-family: var(--font-family-display);
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-newsletter__subtitle {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .footer-newsletter__form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .footer-newsletter__input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--radius-sm);
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .footer-newsletter__input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-newsletter__input:focus {
+            outline: none;
+            border-color: var(--carrot-2);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .footer-newsletter__btn {
+            background: var(--carrot-2);
+            color: var(--white);
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .footer-newsletter__btn:hover {
+            background: var(--carrot-3);
+        }
+
+        @media (max-width: 480px) {
+            .footer-newsletter__form {
+                flex-direction: column;
+            }
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-links__group h4 {
+            font-family: var(--font-family-display);
+            font-size: 0.8rem;
+            font-weight: var(--font-weight-semibold);
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links__group ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links__group li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links__group a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links__group a:hover {
+            color: var(--white);
+        }
+
+        .footer-middle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .footer-social__link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .footer-social__link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-logo {
+            font-family: var(--font-family-display);
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-legal a:hover {
+            color: rgba(255,255,255,0.85);
+        }
+
+        @media (max-width: 600px) {
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-legal {
+                justify-content: center;
+            }
+        }
+        /* Page-specific styles that extend the design tokens */
+
+        /* Article Layout */
+        .article-header {
+            background: var(--oyster-3);
+            padding: 7rem 2rem 3rem;
+        }
+
+        .article-header-inner {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--charcoal-1);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--kale-2);
+        }
+
+        .breadcrumb span {
+            color: var(--charcoal-1);
+            margin: 0 0.5rem;
+        }
+
+        .article-header h1 {
+            font-size: 2.25rem;
+            font-weight: var(--font-weight-bold);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--kale-3);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            color: var(--charcoal-1);
+            font-size: 0.9rem;
+        }
+
+        .article-meta__item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Quick Answer Box */
+        .quick-answer {
+            background: var(--white);
+            border-left: 4px solid var(--kale-2);
+            padding: 1.5rem;
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .quick-answer__label {
+            font-size: 0.75rem;
+            font-weight: var(--font-weight-bold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--kale-2);
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-answer__text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--charcoal-0);
+        }
+
+        /* Article Content */
+        .article-content {
+            padding: 3rem 2rem 4rem;
+        }
+
+        .article-body {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .article-body h2 {
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+            margin: 2.5rem 0 1rem;
+            color: var(--kale-3);
+        }
+
+        .article-body h2:first-child {
+            margin-top: 0;
+        }
+
+        .article-body p {
+            color: var(--charcoal-1);
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .article-body ul, .article-body ol {
+            color: var(--charcoal-1);
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .article-body li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        .article-body strong {
+            color: var(--charcoal-0);
+        }
+
+        /* Content Blocks */
+        .content-block {
+            background: var(--oyster-3);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .content-block--expert {
+            border-left: 4px solid var(--blueberry-2);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .content-block--stat {
+            border-left: 4px solid var(--success);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .content-block--review {
+            border-left: 4px solid var(--gold);
+        }
+
+        .content-block--cta {
+            background: var(--kale-3);
+            color: white;
+            text-align: center;
+            border-left: none;
+        }
+
+        .expert-photo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--oyster-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--charcoal-1);
+            flex-shrink: 0;
+        }
+
+        .expert-content blockquote {
+            font-style: italic;
+            color: var(--charcoal-1);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .expert-name {
+            font-size: 0.85rem;
+            font-weight: var(--font-weight-semibold);
+            color: var(--charcoal-0);
+        }
+
+        .expert-title {
+            font-size: 0.8rem;
+            color: var(--charcoal-1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--success);
+            line-height: 1;
+        }
+
+        .stat-text {
+            font-size: 1rem;
+            color: var(--charcoal-1);
+            line-height: 1.5;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: var(--charcoal-1);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .review-author {
+            font-size: 0.9rem;
+            color: var(--charcoal-1);
+        }
+
+        .review-stars {
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-title {
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-text {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 1.25rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--carrot-2);
+            color: var(--white);
+            padding: 0.875rem 2rem;
+            border-radius: var(--radius-sm);
+            font-weight: var(--font-weight-bold);
+            text-decoration: none;
+            transition: transform var(--animation-standard), background var(--animation-standard);
+        }
+
+        .cta-button:hover {
+            background: var(--carrot-3);
+        }
+
+        .cta-subtext {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 0.75rem;
+        }
+
+        /* Image Placeholder */
+        .article-image {
+            background: var(--oyster-2);
+            border-radius: var(--radius-lg);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--charcoal-1);
+            font-size: 0.9rem;
+            margin: 2rem 0;
+        }
+
+        /* Key Takeaways */
+        .key-takeaways {
+            background: var(--chickpea-3);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .key-takeaways h3 {
+            font-size: 1rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--kale-3);
+        }
+
+        .key-takeaways ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .key-takeaways li {
+            margin-bottom: 0.5rem;
+            color: var(--charcoal-0);
+        }
+
+        .key-takeaways li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Sources Section */
+        .sources {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--oyster-1);
+        }
+
+        .sources h3 {
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1rem;
+            color: var(--charcoal-0);
+        }
+
+        .sources-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sources-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sources-list a {
+            font-size: 0.85rem;
+            color: var(--kale-2);
+            text-decoration: none;
+        }
+
+        .sources-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Related Questions */
+        .related-questions {
+            background: var(--oyster-3);
+            padding: 3rem 2rem;
+        }
+
+        .related-questions-inner {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .related-questions h2 {
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1.5rem;
+            color: var(--kale-3);
+        }
+
+        .related-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .related-link {
+            background: var(--white);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--charcoal-0);
+            font-weight: var(--font-weight-semibold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--animation-standard);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .related-link:hover {
+            background: var(--kale-2);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .related-link span {
+            font-size: 1.1rem;
+        }
+
+        /* Ask Another Question */
+        .ask-section {
+            background: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .ask-section-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .ask-section h2 {
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 0.5rem;
+            color: var(--kale-3);
+        }
+
+        .ask-section p {
+            color: var(--charcoal-1);
+            margin-bottom: 1.5rem;
+        }
+
+        .ask-search-wrapper {
+            position: relative;
+        }
+
+        .ask-search {
+            width: 100%;
+            padding: 1.25rem 1.25rem 1.25rem 3.5rem;
+            border: 2px solid var(--oyster-1);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            transition: border-color var(--animation-standard), box-shadow var(--animation-standard);
+        }
+
+        .ask-search:focus {
+            outline: none;
+            border-color: var(--kale-2);
+            box-shadow: 0 0 0 3px rgba(65, 124, 103, 0.1);
+        }
+
+        .ask-search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--charcoal-1);
+            font-size: 1.1rem;
+        }
+
+        /* Predictive Search Dropdown */
+        .search-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--oyster-1);
+            display: none;
+            z-index: var(--z-dropdown);
+            overflow: hidden;
+        }
+
+        .search-dropdown.active {
+            display: block;
+        }
+
+        .search-result {
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            border-bottom: 1px solid var(--oyster-2);
+            transition: background var(--animation-standard);
+        }
+
+        .search-result:last-child {
+            border-bottom: none;
+        }
+
+        .search-result:hover {
+            background: var(--oyster-3);
+        }
+
+        .search-result__icon {
+            color: var(--kale-2);
+            font-size: 1rem;
+            margin-top: 0.1rem;
+        }
+
+        .search-result__content {
+            flex: 1;
+        }
+
+        .search-result__question {
+            font-weight: var(--font-weight-semibold);
+            color: var(--charcoal-0);
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .search-result__category {
+            font-size: 0.8rem;
+            color: var(--charcoal-1);
+        }
+
+        .search-view-all {
+            padding: 0.875rem 1.25rem;
+            background: var(--oyster-3);
+            text-align: center;
+            color: var(--kale-2);
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .search-view-all:hover {
+            background: var(--oyster-2);
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .quick-link {
+            font-size: 0.85rem;
+            color: var(--charcoal-1);
+            text-decoration: none;
+            padding: 0.4rem 0.75rem;
+            background: var(--oyster-3);
+            border-radius: var(--radius-md);
+            transition: all var(--animation-standard);
+        }
+
+        .quick-link:hover {
+            background: var(--kale-2);
+            color: white;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .article-header {
+                padding: 6rem 1.5rem 2.5rem;
+            }
+
+            .article-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .article-content {
+                padding: 2rem 1.5rem 3rem;
+            }
+
+            .content-block--expert {
+                flex-direction: column;
+            }
+
+            .content-block--stat {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .related-questions,
+            .ask-section {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav-tfd">
+        <a href="index.html" class="nav-tfd__logo"><span class="nav-tfd__logo-full">The Farmer's Dog</span><span class="nav-tfd__logo-short">TFD</span></a>
+        <div class="nav-tfd__links">
+            <a href="our-food-wireframe.html">Our Food</a>
+            <a href="our-difference-wireframe.html">Our Difference</a>
+            <a href="reviews-wireframe.html">Reviews</a>
+            <a href="faq-wireframe.html" class="active">FAQ</a>
+            <a href="about-us-wireframe.html">About Us</a>
+            <a href="#">Vet Professionals</a>
+        </div>
+        <div class="nav-tfd__actions">
+            <a href="#" class="nav-tfd__login">Log In</a>
+            <a href="get-started-wireframe.html" class="nav-tfd__cta">Get Started — 50% Off</a>
+        </div>
+        <button class="nav-tfd__mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="nav-mobile-menu" id="mobileMenu">
+        <a href="our-food-wireframe.html">Our Food</a>
+        <a href="our-difference-wireframe.html">Our Difference</a>
+        <a href="reviews-wireframe.html">Reviews</a>
+        <a href="faq-wireframe.html" class="active">FAQ</a>
+        <a href="about-us-wireframe.html">About Us</a>
+        <a href="#">Vet Professionals</a>
+        <div class="nav-mobile-actions">
+            <a href="#" class="nav-tfd__login">Log In</a>
+            <a href="get-started-wireframe.html" class="nav-tfd__cta">Get Started — 50% Off</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+    </script>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-header-inner">
+            <div class="breadcrumb">
+                <a href="faq-wireframe.html">&larr; Back to Help Center</a>
+            </div>
+
+            <h1>Is Fresh Dog Food Better Than Kibble?</h1>
+
+            <div class="article-meta">
+                <div class="article-meta__item">
+                    <span>&#128214;</span>
+                    <span>5 min read</span>
+                </div>
+                <div class="article-meta__item">
+                    <span>&#9989;</span>
+                    <span>Vet-reviewed</span>
+                </div>
+                <div class="article-meta__item">
+                    <span>&#128260;</span>
+                    <span>Updated Jan 2025</span>
+                </div>
+            </div>
+
+            <!-- Quick Answer for Featured Snippets -->
+            <div class="quick-answer">
+                <div class="quick-answer__label">Quick Answer</div>
+                <div class="quick-answer__text">
+                    Yes. Fresh dog food is minimally processed, which means nutrients remain intact and more bioavailable for your dog. Studies show dogs on fresh food have better digestion, healthier coats, and improved markers of long-term health compared to kibble-fed dogs.
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="article-body">
+
+            <h2>The Science Behind Fresh vs. Processed Food</h2>
+
+            <p>The difference between fresh dog food and kibble comes down to one word: <strong>processing</strong>. And that processing has a significant impact on what your dog actually absorbs from their food.</p>
+
+            <p>Kibble is manufactured at extremely high temperatures&mdash;often over 400&deg;F&mdash;through a process called extrusion. This high heat destroys many of the natural nutrients in the ingredients, which is why synthetic vitamins have to be sprayed back on afterward.</p>
+
+            <p>Fresh food, on the other hand, is gently cooked at lower temperatures. This preserves more of the natural vitamins, minerals, and amino acids that dogs need. More importantly, it keeps nutrients in their natural, bioavailable form&mdash;meaning your dog's body can actually use them.</p>
+
+            <div class="content-block content-block--expert">
+                <div class="expert-photo">[Photo]</div>
+                <div class="expert-content">
+                    <blockquote>"The difference between processed and fresh food isn't just marketing. It's bioavailability. Fresh food delivers nutrients in a form your dog's body recognizes and can efficiently absorb."</blockquote>
+                    <p class="expert-name">Dr. Joseph Wakshlag</p>
+                    <p class="expert-title">DVM, Ph.D., Board-Certified Veterinary Nutritionist</p>
+                </div>
+            </div>
+
+            <h2>What the Research Shows</h2>
+
+            <p>A yearlong study conducted in partnership with Cornell University tracked dogs fed fresh food versus those on traditional kibble. The results were significant:</p>
+
+            <div class="content-block content-block--stat">
+                <div class="stat-number">30 days</div>
+                <div class="stat-text">That's all it took for dogs on fresh food to show measurably improved markers of long-term health, including better gut microbiome diversity and reduced inflammation.</div>
+            </div>
+
+            <p>The study found that dogs eating fresh food showed:</p>
+
+            <ul>
+                <li><strong>Improved digestibility</strong> &mdash; Dogs absorbed significantly more nutrients from fresh food</li>
+                <li><strong>Better stool quality</strong> &mdash; Smaller, firmer stools indicate more efficient digestion</li>
+                <li><strong>Healthier gut bacteria</strong> &mdash; More diverse and beneficial microbiome populations</li>
+                <li><strong>Reduced inflammation markers</strong> &mdash; Lower levels of inflammatory compounds in the blood</li>
+            </ul>
+
+            <div class="article-image">[Infographic: Fresh Food vs. Kibble Nutrient Comparison]</div>
+
+            <h2>Why Digestibility Matters</h2>
+
+            <p>When we talk about dog food, people often focus on the ingredient list. But what matters more is what your dog can actually <em>absorb</em> from those ingredients.</p>
+
+            <p>Fresh food is inherently more digestible because the proteins haven't been denatured by extreme heat. When proteins are cooked at very high temperatures, they change structure and become harder for the digestive system to break down.</p>
+
+            <p>This is why many dog owners notice immediate changes when switching to fresh food:</p>
+
+            <ul>
+                <li>Less gas and bloating</li>
+                <li>Smaller, less smelly stools</li>
+                <li>Better energy levels</li>
+                <li>Improved coat quality</li>
+                <li>More enthusiasm at mealtime</li>
+            </ul>
+
+            <div class="content-block content-block--review">
+                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="review-text">"I was skeptical at first&mdash;it's just dog food, right? But the change in Max was obvious within two weeks. His coat is shinier, he has more energy, and his digestion issues completely disappeared. I'm a believer now."</p>
+                <p class="review-author">&mdash; Sarah M., Max's mom</p>
+            </div>
+
+            <h2>What About Cost?</h2>
+
+            <p>Yes, fresh dog food costs more than kibble. But the comparison isn't quite apples to apples.</p>
+
+            <p>With kibble, you're paying for convenience and shelf stability. The heavy processing that destroys nutrients is what allows kibble to sit on a shelf for months (or years). You're essentially paying for food that's been engineered to last, not to nourish.</p>
+
+            <p>With fresh food, you're paying for actual nutrition. Many customers find that their dogs eat less food overall (because they're absorbing more nutrients) and have fewer vet bills related to digestive issues, allergies, and other diet-related problems.</p>
+
+            <div class="key-takeaways">
+                <h3>&#128203; Key Takeaways</h3>
+                <ul>
+                    <li>Fresh food preserves more natural nutrients than heavily processed kibble</li>
+                    <li>Dogs show health improvements within 30 days of switching to fresh food</li>
+                    <li>Better digestibility means your dog absorbs more from less food</li>
+                    <li>Improved digestion leads to smaller stools, less gas, and better energy</li>
+                    <li>Long-term, many pet parents see reduced vet costs from diet-related issues</li>
+                </ul>
+            </div>
+
+            <div class="content-block content-block--cta">
+                <p class="cta-title">Ready to see the difference?</p>
+                <p class="cta-text">Get a personalized meal plan for your dog and save 50% on your first box.</p>
+                <a href="#" class="cta-button">Build Your Plan</a>
+                <p class="cta-subtext">Takes 2 minutes. Cancel anytime.</p>
+            </div>
+
+            <!-- Sources -->
+            <div class="sources">
+                <h3>Sources &amp; Further Reading</h3>
+                <ul class="sources-list">
+                    <li><a href="#">Cornell University Study: Effects of Fresh Food on Canine Health Markers (2023)</a></li>
+                    <li><a href="#">Journal of Animal Science: Bioavailability of Nutrients in Processed vs. Fresh Pet Food</a></li>
+                    <li><a href="#">American College of Veterinary Nutrition: Understanding Pet Food Processing</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- Related Questions -->
+    <section class="related-questions">
+        <div class="related-questions-inner">
+            <h2>Related Questions</h2>
+            <div class="related-list">
+                <a href="#" class="related-link">
+                    Why is fresh food better for digestion?
+                    <span>&rarr;</span>
+                </a>
+                <a href="#" class="related-link">
+                    Is raw dog food better than cooked?
+                    <span>&rarr;</span>
+                </a>
+                <a href="#" class="related-link">
+                    How do I transition my dog from kibble to fresh food?
+                    <span>&rarr;</span>
+                </a>
+                <a href="#" class="related-link">
+                    What does "human-grade" dog food mean?
+                    <span>&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ask Another Question -->
+    <section class="ask-section">
+        <div class="ask-section-inner">
+            <h2>Have another question?</h2>
+            <p>Search our help center or explore popular topics below</p>
+
+            <div class="ask-search-wrapper">
+                <span class="ask-search-icon">&#128269;</span>
+                <input type="text" class="ask-search" id="askSearch" placeholder="Type your question..." autocomplete="off">
+
+                <!-- Predictive Search Dropdown -->
+                <div class="search-dropdown" id="searchDropdown">
+                    <div class="search-result">
+                        <span class="search-result__icon">&#10067;</span>
+                        <div class="search-result__content">
+                            <div class="search-result__question">How much does The Farmer's Dog cost?</div>
+                            <div class="search-result__category">Pricing &amp; Plans</div>
+                        </div>
+                    </div>
+                    <div class="search-result">
+                        <span class="search-result__icon">&#10067;</span>
+                        <div class="search-result__content">
+                            <div class="search-result__question">How do I feed my dog fresh food?</div>
+                            <div class="search-result__category">Feeding Your Dog</div>
+                        </div>
+                    </div>
+                    <div class="search-result">
+                        <span class="search-result__icon">&#10067;</span>
+                        <div class="search-result__content">
+                            <div class="search-result__question">Can I cancel my subscription anytime?</div>
+                            <div class="search-result__category">Subscription &amp; Delivery</div>
+                        </div>
+                    </div>
+                    <div class="search-view-all">View all results &rarr;</div>
+                </div>
+            </div>
+
+            <div class="quick-links">
+                <a href="#" class="quick-link">Pricing</a>
+                <a href="#" class="quick-link">Delivery</a>
+                <a href="#" class="quick-link">Recipes</a>
+                <a href="#" class="quick-link">Allergies</a>
+                <a href="#" class="quick-link">Puppies</a>
+                <a href="#" class="quick-link">Cancellation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-newsletter">
+                    <h3 class="footer-newsletter__title">Join the pack</h3>
+                    <p class="footer-newsletter__subtitle">Get nutrition tips, exclusive offers, and stories from real dog parents delivered to your inbox.</p>
+                    <form class="footer-newsletter__form">
+                        <input type="email" class="footer-newsletter__input" placeholder="Enter your email">
+                        <button type="submit" class="footer-newsletter__btn">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-links__group">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="#">DIY</a></li>
+                            <li><a href="#">Digest</a></li>
+                            <li><a href="#">Breeds</a></li>
+                            <li><a href="#">WSAVA</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Affiliates</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links__group">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="mailto:help@thefarmersdog.com">help@thefarmersdog.com</a></li>
+                            <li><a href="tel:6467807957">Call/Text: 646.780.7957</a></li>
+                            <li><a href="faq-wireframe.html">Help Center</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links__group">
+                        <h4>Business</h4>
+                        <ul>
+                            <li><a href="#">Media Inquiries</a></li>
+                            <li><a href="#">Partnership Inquiries</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-middle">
+                <div class="footer-social">
+                    <a href="#" class="footer-social__link" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" class="footer-social__link" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                    </a>
+                    <a href="#" class="footer-social__link" aria-label="TikTok">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                    </a>
+                </div>
+                <div class="footer-logo">The Farmer's Dog</div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2025 The Farmer's Dog, Inc. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Accessibility</a>
+                    <a href="#">Do Not Sell My Personal Information</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Predictive Search
+        const searchInput = document.getElementById('askSearch');
+        const searchDropdown = document.getElementById('searchDropdown');
+
+        searchInput.addEventListener('focus', function() {
+            if (this.value.length > 0) {
+                searchDropdown.classList.add('active');
+            }
+        });
+
+        searchInput.addEventListener('input', function() {
+            if (this.value.length > 0) {
+                searchDropdown.classList.add('active');
+            } else {
+                searchDropdown.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+                searchDropdown.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
