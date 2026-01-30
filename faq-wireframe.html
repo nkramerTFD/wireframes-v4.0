@@ -261,95 +261,543 @@
         }
 
         /* ============================================
-           HERO SECTION - Search First (per PRD 7.1)
+           FULL-PAGE CHAT LAYOUT
            ============================================ */
-        .hero {
-            padding: 8rem 2rem 3rem;
-            background: var(--chickpea-3);
-            text-align: center;
+        .faq-page {
+            display: flex;
+            height: calc(100vh - 58px);
+            margin-top: 58px;
+            overflow: hidden;
         }
 
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: var(--font-weight-bold);
-            margin-bottom: 0.5rem;
-            color: var(--kale-3);
+        /* Main chat area - full dark green */
+        .faq-main {
+            flex: 1;
+            background: var(--kale-3);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
         }
 
-        .hero-subhead {
-            font-size: 1.1rem;
-            color: var(--charcoal-1);
-            margin-bottom: 2rem;
+        /* Scrollable conversation area */
+        .faq-scroll-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 3rem 2rem 2rem;
+            min-height: 0; /* Important for flex overflow */
         }
 
-        /* ============================================
-           SEARCH COMPONENT - Submit Only (NO autocomplete per PRD 4.1)
-           ============================================ */
-        .faq-search {
-            position: relative;
+        /* Conversation container */
+        .faq-conversation {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        /* Message Thread */
+        .faq-thread {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Input area - fixed at bottom of main area */
+        .faq-input-wrapper {
+            background: var(--kale-3);
+            padding: 1.5rem 2rem 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0; /* Prevent input from shrinking */
+        }
+
+        .faq-input-container {
             max-width: 600px;
             margin: 0 auto;
         }
 
-        .faq-search__form {
+        /* Sidebar for common questions */
+        .faq-sidebar {
+            width: 320px;
+            background: var(--white);
+            border-left: 1px solid var(--oyster-1);
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .faq-sidebar__header {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-sidebar__title {
+            font-size: 0.75rem;
+            font-weight: var(--font-weight-bold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--charcoal-2);
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-sidebar__question {
+            display: block;
+            padding: 1rem;
+            background: var(--oyster-3);
+            border: 1px solid transparent;
+            border-radius: var(--radius-md);
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--charcoal-0);
+            line-height: 1.4;
+        }
+
+        .faq-sidebar__question:hover {
+            background: var(--kale-0);
+            border-color: var(--kale-1);
+        }
+
+        .faq-sidebar__contact {
+            display: none; /* Hidden on desktop */
+        }
+
+        /* Mobile question pills */
+        .faq-mobile-pills {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .faq-mobile-pills {
+                display: flex;
+                gap: 0.5rem;
+                overflow-x: auto;
+                padding: 0.75rem 0 0;
+                margin: 0 -2rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .faq-mobile-pills::-webkit-scrollbar {
+                display: none;
+            }
+
+            .faq-mobile-pill {
+                flex-shrink: 0;
+                background: rgba(255,255,255,0.1);
+                border: 1px solid rgba(255,255,255,0.2);
+                border-radius: var(--radius-full);
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+                color: rgba(255,255,255,0.8);
+                cursor: pointer;
+                transition: all 0.2s;
+                white-space: nowrap;
+            }
+
+            .faq-mobile-pill:hover,
+            .faq-mobile-pill:active {
+                background: rgba(255,255,255,0.2);
+                border-color: rgba(255,255,255,0.4);
+                color: var(--white);
+            }
+
+            /* Add padding after last pill for scroll bleed */
+            .faq-mobile-pill:last-child {
+                margin-right: 1rem;
+            }
+        }
+
+        /* Welcome state */
+        .faq-welcome {
+            text-align: center;
+            padding: 2rem 0 3rem;
+            margin-top: auto;
+        }
+
+        .faq-welcome__title {
+            font-family: var(--font-family-display);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: var(--font-weight-bold);
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-welcome__subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Mobile: hide sidebar, show toggle */
+        @media (max-width: 900px) {
+            .faq-sidebar {
+                display: none;
+            }
+            .faq-page {
+                flex-direction: column;
+            }
+            .faq-main {
+                height: calc(100vh - 58px);
+            }
+        }
+
+        /* User message bubble (right aligned) */
+        .faq-message--user {
+            align-self: flex-end;
+            background: rgba(255,255,255,0.15);
+            color: var(--white);
+            padding: 1rem 1.25rem;
+            border-radius: 20px 20px 4px 20px;
+            max-width: 85%;
+            font-size: 1rem;
+            line-height: 1.5;
+            display: none;
+        }
+
+        .faq-message--user.visible {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        /* Response message bubble (left aligned) */
+        .faq-message--response {
+            align-self: flex-start;
+            background: var(--kale-0);
+            color: var(--charcoal-0);
+            padding: 1.25rem 1.5rem;
+            border-radius: 20px 20px 20px 4px;
+            max-width: 85%;
+            font-size: 1rem;
+            line-height: 1.7;
+            text-align: left;
+            display: none;
+        }
+
+        .faq-message--response.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .faq-message--response p {
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-message--response p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-message__cta {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--kale-1);
+        }
+
+        .faq-message__cta-link {
+            color: var(--kale-2);
+            font-weight: var(--font-weight-semibold);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .faq-message__cta-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           INPUT AREA
+           ============================================ */
+        .faq-input-area {
+            width: 100%;
+        }
+
+        .faq-input {
+            width: 100%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--radius-lg);
+            font-family: var(--font-family-text);
+            font-size: 1rem;
+            color: var(--white);
+            padding: 1rem 1.25rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .faq-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .faq-input:focus {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .faq-input-hint {
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            transition: opacity 0.3s;
+        }
+
+        /* Agent handoff message */
+        .faq-message--handoff {
+            align-self: flex-start;
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.85);
+            padding: 0.875rem 1.25rem;
+            border-radius: 20px 20px 20px 4px;
+            max-width: 85%;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: none;
+            font-style: italic;
+        }
+
+        .faq-message--handoff.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Agent message with avatar */
+        .faq-message--agent {
+            align-self: flex-start;
+            display: none;
+            gap: 0.75rem;
+            max-width: 85%;
+        }
+
+        .faq-message--agent.visible {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .faq-agent-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--kale-1);
             display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--kale-3);
+            font-weight: var(--font-weight-bold);
+            flex-shrink: 0;
+        }
+
+        .faq-agent-bubble {
+            background: var(--kale-0);
+            color: var(--charcoal-0);
+            padding: 1rem 1.25rem;
+            border-radius: 20px 20px 20px 4px;
+            line-height: 1.6;
+        }
+
+        .faq-agent-name {
+            font-weight: var(--font-weight-semibold);
+            color: var(--kale-3);
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 0.5rem 0;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--kale-2);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-4px); opacity: 1; }
+        }
+
+        /* Clarification message with options */
+        .faq-message--clarify {
+            align-self: flex-start;
+            background: var(--kale-0);
+            color: var(--charcoal-0);
+            padding: 1.25rem 1.5rem;
+            border-radius: 20px 20px 20px 4px;
+            max-width: 85%;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: left;
+            display: none;
+        }
+
+        .faq-message--clarify.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .faq-clarify__question {
+            margin-bottom: 1rem;
+        }
+
+        .faq-clarify__options {
+            display: flex;
+            flex-direction: column;
             gap: 0.5rem;
         }
 
-        .faq-search__input-wrapper {
-            position: relative;
-            flex: 1;
-        }
-
-        .faq-search__icon {
-            position: absolute;
-            left: 1.25rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--charcoal-1);
-            font-size: 1.1rem;
-            pointer-events: none;
-        }
-
-        .faq-search__input {
-            width: 100%;
-            height: 56px;
-            padding: 0 1rem 0 3.25rem;
-            font-size: 1rem;
-            border: 2px solid var(--oyster-1);
-            border-radius: var(--radius-sm);
+        .faq-clarify__option {
             background: var(--white);
-            color: var(--charcoal-0);
-            transition: border-color var(--animation-standard), box-shadow var(--animation-standard);
-        }
-
-        .faq-search__input:focus {
-            outline: none;
-            border-color: var(--kale-2);
-            box-shadow: 0 0 0 4px rgba(65, 124, 103, 0.1);
-        }
-
-        .faq-search__input::placeholder {
-            color: var(--charcoal-2);
-        }
-
-        .faq-search__submit {
-            height: 56px;
-            padding: 0 1.5rem;
-            background: var(--carrot-2);
-            color: var(--white);
-            border: none;
-            border-radius: var(--radius-sm);
-            font-weight: var(--font-weight-bold);
-            font-size: 1rem;
+            border: 1px solid var(--kale-1);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            color: var(--kale-3);
             cursor: pointer;
-            transition: background var(--animation-standard);
-            white-space: nowrap;
+            text-align: left;
+            transition: all 0.2s;
         }
 
-        .faq-search__submit:hover {
-            background: var(--carrot-3);
+        .faq-clarify__option:hover {
+            background: var(--kale-1);
+            border-color: var(--kale-2);
+        }
+
+        /* ============================================
+           BROWSE SECTION - Now hidden, replaced by sidebar
+           ============================================ */
+        .faq-browse {
+            display: none;
+        }
+
+        .faq-browse__container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-browse__header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .faq-browse__title {
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--kale-3);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-browse__subtitle {
+            color: var(--charcoal-1);
+            font-size: 1rem;
+        }
+
+        /* Accordion Styles (kept for reference/mobile) */
+        .faq-accordion {
+            border: 1px solid var(--oyster-1);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .faq-accordion__header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background: var(--white);
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.2s;
+        }
+
+        .faq-accordion__header:hover {
+            background: var(--oyster-3);
+        }
+
+        .faq-accordion__question {
+            font-weight: var(--font-weight-semibold);
+            color: var(--charcoal-0);
+            font-size: 1rem;
+            flex: 1;
+            padding-right: 1rem;
+        }
+
+        .faq-accordion__icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--kale-2);
+            font-size: 1.25rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-accordion.open .faq-accordion__icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-accordion__body {
+            display: none;
+            padding: 0 1.5rem 1.5rem;
+            color: var(--charcoal-1);
+            line-height: 1.7;
+        }
+
+        .faq-accordion.open .faq-accordion__body {
+            display: block;
+        }
+
+        .faq-accordion__body p {
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-accordion__body p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Category Labels */
+        .faq-category {
+            font-size: 0.75rem;
+            font-weight: var(--font-weight-bold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--charcoal-2);
+            margin: 2rem 0 1rem;
+        }
+
+        .faq-category:first-child {
+            margin-top: 0;
         }
 
         /* ============================================
@@ -1460,69 +1908,81 @@
     </div>
 
     <!-- ============================================
-         HERO - Search First (per PRD 7.1)
+         FULL PAGE CHAT LAYOUT
          ============================================ -->
-    <section class="hero" id="heroSection">
-        <h1>How can we help?</h1>
-        <p class="hero-subhead">Type your question below and press Enter</p>
+    <div class="faq-page">
+        <!-- Main Chat Area -->
+        <div class="faq-main">
+            <!-- Scrollable conversation area -->
+            <div class="faq-scroll-area" id="scrollArea">
+                <div class="faq-conversation">
+                    <!-- Welcome message (shows before any conversation) -->
+                    <div class="faq-welcome" id="faqWelcome">
+                        <h1 class="faq-welcome__title">How can we help?</h1>
+                        <p class="faq-welcome__subtitle">Ask us anything about fresh food for dogs</p>
+                    </div>
 
-        <!-- Search Component - Submit Only (NO autocomplete per PRD 4.1) -->
-        <div class="faq-search">
-            <form class="faq-search__form" id="faqSearchForm" onsubmit="handleSearch(event)">
-                <div class="faq-search__input-wrapper">
-                    <span class="faq-search__icon">&#128269;</span>
-                    <input
-                        type="text"
-                        class="faq-search__input"
-                        id="faqSearchInput"
-                        placeholder="What can we help you with?"
-                        autocomplete="off"
-                    >
+                    <!-- Message Thread -->
+                    <div class="faq-thread" id="faqThread">
+                        <!-- Messages will be dynamically added here -->
+                    </div>
                 </div>
-                <button type="submit" class="faq-search__submit">Search</button>
-            </form>
+            </div>
+
+            <!-- Input Area - fixed at bottom -->
+            <div class="faq-input-wrapper">
+                <div class="faq-input-container">
+                    <form id="faqSearchForm" onsubmit="handleConversationalSearch(event)">
+                        <input
+                            type="text"
+                            class="faq-input"
+                            id="faqInput"
+                            placeholder="Type your question..."
+                            autocomplete="off"
+                        >
+                    </form>
+                    <p class="faq-input-hint" id="inputHint">Press Enter to ask</p>
+
+                    <!-- Mobile question pills (horizontally scrollable) -->
+                    <div class="faq-mobile-pills" id="mobilePills">
+                        <button class="faq-mobile-pill" onclick="askSidebarQuestion('Is kibble safe?')">Is kibble safe?</button>
+                        <button class="faq-mobile-pill" onclick="askSidebarQuestion('What does human-grade mean?')">Human-grade?</button>
+                        <button class="faq-mobile-pill" onclick="askSidebarQuestion('How do I know if my dog\'s food is healthy?')">Is my food healthy?</button>
+                        <button class="faq-mobile-pill" onclick="askSidebarQuestion('Why is fresh food more expensive?')">Why more expensive?</button>
+                        <button class="faq-mobile-pill" onclick="askSidebarQuestion('Can I make homemade dog food instead?')">Homemade instead?</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- OR BROWSE divider (per PRD 7.1) -->
-        <div class="browse-divider">
-            <div class="browse-divider__line"></div>
-            <span class="browse-divider__text">or browse</span>
-            <div class="browse-divider__line"></div>
-        </div>
+        <!-- Sidebar - Common Questions (Desktop only) -->
+        <aside class="faq-sidebar">
+            <div class="faq-sidebar__header">
+                <h2 class="faq-sidebar__title">Common questions</h2>
+            </div>
 
-        <!-- Featured Questions (per PRD 2.4) - Topics we WANT users asking about -->
-        <div class="featured-questions">
-            <button class="featured-question" onclick="showAnswer('fresh-food')">
-                <span class="featured-question__text">
-                    Why should I feed fresh?
-                    <span class="featured-question__arrow">→</span>
-                </span>
+            <button class="faq-sidebar__question" onclick="askSidebarQuestion('Is kibble safe for my dog?')">
+                Is kibble safe for my dog?
             </button>
-            <button class="featured-question" onclick="showAnswer('recipes')">
-                <span class="featured-question__text">
-                    What are the recipes and ingredients?
-                    <span class="featured-question__arrow">→</span>
-                </span>
+            <button class="faq-sidebar__question" onclick="askSidebarQuestion('What does human-grade actually mean?')">
+                What does "human-grade" actually mean?
             </button>
-            <button class="featured-question" onclick="showAnswer('shipping')">
-                <span class="featured-question__text">
-                    How do shipments work?
-                    <span class="featured-question__arrow">→</span>
-                </span>
+            <button class="faq-sidebar__question" onclick="askSidebarQuestion('How do I know if my dog\'s food is healthy?')">
+                How do I know if my dog's food is healthy?
             </button>
-            <button class="featured-question" onclick="showAnswer('life-stages')">
-                <span class="featured-question__text">
-                    Do you have food for puppies, adults, and seniors?
-                    <span class="featured-question__arrow">→</span>
-                </span>
+            <button class="faq-sidebar__question" onclick="askSidebarQuestion('Why is fresh food more expensive?')">
+                Why is fresh food more expensive?
             </button>
-        </div>
-    </section>
+            <button class="faq-sidebar__question" onclick="askSidebarQuestion('Can I make homemade dog food instead?')">
+                Can I make homemade dog food instead?
+            </button>
+        </aside>
+    </div>
 
     <!-- ============================================
          MAIN CONTENT - Answer Cards, Clarifications, Chat Panel
          ============================================ -->
-    <main class="faq-content">
+    <main class="faq-content" style="display: none;">
 
         <!-- ============================================
              INLINE ANSWER CARD - "Why should I feed fresh?" (per PRD 7.2)
@@ -2033,248 +2493,443 @@
             document.getElementById('mobileMenu').classList.toggle('open');
         }
 
-        // FAQ Database - Maps queries to answers (simulates backend matching)
-        const faqDatabase = {
-            // Featured questions (high confidence matches)
-            'fresh': 'fresh-food',
-            'why fresh': 'fresh-food',
-            'why should i feed fresh': 'fresh-food',
-            'fresh food': 'fresh-food',
-            'kibble': 'fresh-food',
-            'difference': 'fresh-food',
-
-            'recipe': 'recipes',
-            'recipes': 'recipes',
-            'ingredients': 'recipes',
-            'what ingredients': 'recipes',
-            'what are the recipes': 'recipes',
-
-            'ship': 'clarification-shipping', // Ambiguous - show clarification
-            'shipping': 'clarification-shipping',
-            'delivery': 'clarification-shipping',
-            'shipments': 'shipping',
-            'how do shipments work': 'shipping',
-
-            'puppy': 'life-stages',
-            'puppies': 'life-stages',
-            'senior': 'life-stages',
-            'seniors': 'life-stages',
-            'adult': 'life-stages',
-            'life stage': 'life-stages',
-            'age': 'life-stages',
-
-            // Searchable but not featured (per PRD 3.3)
-            'cost': 'clarification-cost', // Ambiguous
-            'price': 'clarification-cost',
-            'pricing': 'clarification-cost',
-            'how much': 'cost',
-            'what does it cost': 'cost',
-            'expensive': 'cost',
-
-            // Hidden answers (per PRD 3.4)
-            'grass fed': 'sourcing',
-            'grass-fed': 'sourcing',
-            'organic': 'sourcing',
-            'sourcing': 'sourcing',
-            'where do you source': 'sourcing',
-            'humanely raised': 'sourcing',
-            'free range': 'sourcing',
-            'pasture raised': 'sourcing',
-            'hormone free': 'sourcing',
-            'antibiotic free': 'sourcing',
-
-            // Sensitive topics - Gated responses (per PRD 3.6)
-            // These require clarification to confirm intent before responding
-            'pancreatitis': 'clarification-pancreatitis',
-            'panc': 'clarification-pancreatitis',
-            'pancreas': 'clarification-pancreatitis',
-            'pancreatic': 'clarification-pancreatitis',
-            'made my dog sick': 'clarification-pancreatitis',
-            'dog got sick': 'clarification-pancreatitis',
+        // Conversational Response Database
+        const conversationalResponses = {
+            'fresh': {
+                answer: `<p>Fresh food is minimally processed, which means more nutrients stay intact for your dog to absorb. Kibble is cooked at extreme temperatures (400°F+), destroying nutrients that then need to be added back synthetically.</p><p>A peer-reviewed study with Cornell University found dogs eating fresh food showed improved health markers within just one month.</p>`
+            },
+            'cost': {
+                answer: `<p>Plans typically range from $2–9/day depending on your dog's size and caloric needs. Most medium-sized dogs fall in the $3–6/day range.</p><p>Many customers find they spend less overall once vet bills for "mystery allergies" and digestive issues decrease.</p>`
+            },
+            'ingredients': {
+                answer: `<p>We use USDA human-grade meat (beef, chicken, turkey, or pork) combined with fresh vegetables like sweet potatoes, carrots, and leafy greens. Every recipe is formulated by board-certified veterinary nutritionists.</p><p>No fillers, no by-products, no artificial preservatives—just real food you can see and recognize.</p>`
+            },
+            'shipping_how': {
+                answer: `<p>We ship directly to your door on a schedule you control. Food arrives frozen with dry ice to keep it fresh. Just transfer to your freezer and thaw as needed.</p><p>Free shipping on all orders, and you can skip, pause, or reschedule anytime from your account.</p>`
+            },
+            'shipping_issue': {
+                answer: `<p>I'm sorry to hear you're having a shipping issue. Let me connect you with someone who can help right away.</p>`,
+                escalate: true
+            },
+            'puppy': {
+                answer: `<p>Yes! All our recipes are formulated to meet AAFCO standards for "all life stages"—meaning they're complete and balanced for puppies, adults, and seniors.</p><p>We'll calculate the right portions based on your puppy's age, breed, and expected adult weight.</p>`
+            },
+            'cancel': {
+                answer: `<p>Absolutely. No commitments, no contracts. You can pause, skip, or cancel anytime directly from your account—no phone calls required.</p>`
+            },
+            'panc_info': {
+                answer: `<p>Our recipes are formulated for healthy dogs and aren't specifically designed for dogs with pancreatitis. Dogs with this condition often need a carefully managed low-fat diet.</p><p>We'd recommend talking to your vet about whether our food is right for your dog's specific situation.</p>`
+            },
+            'panc_concern': {
+                answer: `<p>I'm really sorry to hear your dog isn't feeling well. Let me connect you with our team right away so we can help.</p>`,
+                escalate: true
+            },
+            'default': {
+                answer: `<p>I'm not quite sure what you're looking for. Let me connect you with someone who can help.</p>`,
+                escalate: true
+            }
         };
 
-        // Current state
+        // Clarification questions for ambiguous queries
+        const clarifications = {
+            'ship': {
+                question: "What would you like to know about shipping?",
+                options: [
+                    { label: "How does shipping work?", response: 'shipping_how' },
+                    { label: "I have an issue with my shipment", response: 'shipping_issue' }
+                ]
+            },
+            'panc': {
+                question: "I want to make sure I understand — are you asking about:",
+                options: [
+                    { label: "Is your food okay for dogs with pancreatitis?", response: 'panc_info' },
+                    { label: "I think your food made my dog sick", response: 'panc_concern' }
+                ]
+            },
+            'cost': {
+                question: "What would you like to know about pricing?",
+                options: [
+                    { label: "How much does it cost?", response: 'cost' },
+                    { label: "I have a billing issue", response: 'billing_issue' }
+                ]
+            }
+        };
+
+        // Add billing issue response
+        conversationalResponses['billing_issue'] = {
+            answer: `<p>I'm sorry you're experiencing a billing issue. Let me connect you with someone who can look into this for you.</p>`,
+            escalate: true
+        };
+
+        // Topics that trigger immediate escalation (no clarification needed)
+        const immediateEscalation = ['sick', 'ill', 'vomit', 'diarrhea', 'allergic', 'reaction', 'refund', 'complaint', 'problem', 'issue', 'wrong', 'damaged', 'vet said', 'doctor'];
+
+        // State tracking
         let currentQuery = '';
 
-        // Handle search form submission (per PRD 4.1 - submit only, no autocomplete)
-        function handleSearch(event) {
+        // Handle conversational search
+        function handleConversationalSearch(event) {
             event.preventDefault();
-            const input = document.getElementById('faqSearchInput');
-            const query = input.value.trim().toLowerCase();
-            currentQuery = input.value.trim();
+            const input = document.getElementById('faqInput');
+            const query = input.value.trim();
+            const queryLower = query.toLowerCase();
 
-            if (query.length < 3) {
-                alert('Please enter at least 3 characters');
+            if (query.length < 2) return;
+
+            currentQuery = query;
+            input.value = '';
+            hideWelcome();
+
+            // Create user message in thread
+            const thread = document.getElementById('faqThread');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'faq-message--user visible';
+            userMsg.textContent = query;
+            thread.appendChild(userMsg);
+            scrollToBottom();
+
+            // Check if immediate escalation is needed
+            const needsImmediateEscalation = immediateEscalation.some(topic => queryLower.includes(topic));
+
+            if (needsImmediateEscalation) {
+                showEscalation(query);
                 return;
             }
 
-            // Hide all cards first
-            hideAllCards();
-
-            // Find matching answer
-            let matchId = null;
-            for (const [keyword, answerId] of Object.entries(faqDatabase)) {
-                if (query.includes(keyword)) {
-                    matchId = answerId;
-                    break;
+            // Check if clarification is needed
+            for (const [trigger, clarification] of Object.entries(clarifications)) {
+                if (queryLower.includes(trigger) && queryLower.length < 15) {
+                    // Short/ambiguous query — ask for clarification
+                    showClarificationPersistent(clarification);
+                    return;
                 }
             }
 
-            if (matchId) {
-                // Check if it's a clarification or direct answer
-                if (matchId.startsWith('clarification-')) {
-                    showClarification(matchId);
+            // Find matching response
+            let responseKey = 'default';
+            let matched = false;
+
+            if (queryLower.includes('fresh') || queryLower.includes('kibble') || queryLower.includes('why fresh')) {
+                responseKey = 'fresh';
+                matched = true;
+            } else if (queryLower.includes('human-grade') || queryLower.includes('human grade')) {
+                responseKey = 'human_grade';
+                matched = true;
+            } else if (queryLower.includes('cost') || queryLower.includes('price') || queryLower.includes('how much') || queryLower.includes('expensive')) {
+                responseKey = 'cost';
+                matched = true;
+            } else if (queryLower.includes('ingredient') || queryLower.includes('recipe')) {
+                responseKey = 'ingredients';
+                matched = true;
+            } else if (queryLower.includes('shipping') || queryLower.includes('delivery') || queryLower.includes('how do shipments')) {
+                responseKey = 'shipping_how';
+                matched = true;
+            } else if (queryLower.includes('puppy') || queryLower.includes('puppies') || queryLower.includes('senior') || queryLower.includes('age')) {
+                responseKey = 'puppy';
+                matched = true;
+            } else if (queryLower.includes('cancel') || queryLower.includes('pause') || queryLower.includes('stop')) {
+                responseKey = 'cancel';
+                matched = true;
+            } else if (queryLower.includes('pancreatitis')) {
+                responseKey = 'panc_info';
+                matched = true;
+            } else if (queryLower.includes('homemade') || queryLower.includes('home made') || queryLower.includes('make my own')) {
+                responseKey = 'homemade';
+                matched = true;
+            } else if (queryLower.includes('healthy') || queryLower.includes('good food')) {
+                responseKey = 'healthy';
+                matched = true;
+            }
+
+            showResponsePersistent(responseKey, matched);
+        }
+
+        // Show clarification options (persistent version)
+        function showClarificationPersistent(clarification) {
+            const thread = document.getElementById('faqThread');
+
+            setTimeout(() => {
+                const clarifyMsg = document.createElement('div');
+                clarifyMsg.className = 'faq-message--clarify visible';
+
+                let optionsHtml = '';
+                clarification.options.forEach((opt, i) => {
+                    optionsHtml += `<button class="faq-clarify__option" onclick="handleClarificationChoicePersistent('${opt.response}', '${opt.label.replace(/'/g, "\\'")}', this.parentElement.parentElement)">${opt.label}</button>`;
+                });
+
+                clarifyMsg.innerHTML = `
+                    <p class="faq-clarify__question">${clarification.question}</p>
+                    <div class="faq-clarify__options">${optionsHtml}</div>
+                `;
+
+                thread.appendChild(clarifyMsg);
+                scrollToBottom();
+                document.getElementById('inputHint').textContent = 'Or type to clarify...';
+            }, 300);
+        }
+
+        // Handle clarification choice (persistent version)
+        function handleClarificationChoicePersistent(responseKey, choiceLabel, clarifyElement) {
+            // Fade out clarification options
+            clarifyElement.style.opacity = '0.5';
+            clarifyElement.style.pointerEvents = 'none';
+
+            // Add choice as user message
+            const thread = document.getElementById('faqThread');
+            const choiceMsg = document.createElement('div');
+            choiceMsg.className = 'faq-message--user visible';
+            choiceMsg.textContent = choiceLabel;
+            thread.appendChild(choiceMsg);
+            scrollToBottom();
+
+            // Show appropriate response
+            setTimeout(() => {
+                showResponsePersistent(responseKey, true);
+            }, 200);
+        }
+
+        // Show response (persistent version)
+        function showResponsePersistent(responseKey, matched) {
+            const response = conversationalResponses[responseKey] || conversationalResponses.default;
+            const thread = document.getElementById('faqThread');
+
+            setTimeout(() => {
+                const responseMsg = document.createElement('div');
+                responseMsg.className = 'faq-message--response visible';
+
+                let ctaHtml = '';
+                if (!response.escalate) {
+                    ctaHtml = `<div class="faq-message__cta"><a href="get-started-wireframe.html" class="faq-message__cta-link">Get started — 50% off your first box →</a></div>`;
+                }
+
+                responseMsg.innerHTML = response.answer + ctaHtml;
+                thread.appendChild(responseMsg);
+                scrollToBottom();
+
+                // If escalation needed, show handoff
+                if (response.escalate) {
+                    showEscalationPersistent();
                 } else {
-                    showAnswer(matchId);
+                    document.getElementById('inputHint').textContent = 'Ask another question';
                 }
-            } else {
-                // No match - escalate to chat (per PRD 2.3)
-                showChatWidget(currentQuery);
-            }
-
-            // Add visual state to hero
-            document.getElementById('heroSection').classList.add('hero--has-answer');
+            }, 300);
         }
 
-        // Show specific answer card
-        function showAnswer(answerId) {
-            hideAllCards();
-            const card = document.getElementById('answer-' + answerId);
-            if (card) {
-                card.classList.add('answer-card--visible');
-                document.getElementById('heroSection').classList.add('hero--has-answer');
-                // Scroll to answer
-                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
+        // Show escalation flow (persistent version)
+        function showEscalation(query) {
+            const thread = document.getElementById('faqThread');
 
-        // Show clarification card (per PRD 2.2)
-        function showClarification(clarificationId) {
-            hideAllCards();
-            const card = document.getElementById(clarificationId);
-            if (card) {
-                card.classList.add('clarification-card--visible');
-                document.getElementById('heroSection').classList.add('hero--has-answer');
-                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-
-        // Show chat widget for escalation (per PRD 2.3, 5.1)
-        // The search bar query becomes the chat message - already sent
-        function showChatWidget(query) {
-            // Show the "no answer" card inline
-            const noAnswerCard = document.getElementById('noAnswerCard');
-            noAnswerCard.classList.add('no-answer-card--visible');
-            document.getElementById('heroSection').classList.add('hero--has-answer');
-            noAnswerCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-            // Update the user message in the chat widget with their query
-            document.getElementById('userQueryMessage').textContent = query;
-
-            // Open the chat widget after a brief delay (simulating "Connecting you...")
             setTimeout(() => {
-                document.getElementById('chatWidgetOverlay').classList.add('chat-widget-overlay--open');
-                document.getElementById('chatWidget').classList.add('chat-widget--open');
-            }, 500);
-
-            // Log analytics
-            console.log('Analytics: faq_chat_opened', { query, reason: 'no_match' });
-        }
-
-        // Close chat widget
-        function closeChatWidget() {
-            document.getElementById('chatWidgetOverlay').classList.remove('chat-widget-overlay--open');
-            document.getElementById('chatWidget').classList.remove('chat-widget--open');
-        }
-
-        // Hide all answer/clarification/chat cards
-        function hideAllCards() {
-            document.querySelectorAll('.answer-card').forEach(card => {
-                card.classList.remove('answer-card--visible');
-            });
-            document.querySelectorAll('.clarification-card').forEach(card => {
-                card.classList.remove('clarification-card--visible');
-            });
-            document.getElementById('noAnswerCard').classList.remove('no-answer-card--visible');
-            document.getElementById('sensitiveChatPanel').classList.remove('chat-panel--visible');
-            closeChatWidget();
-        }
-
-        // Show sensitive chat panel for health concerns (per PRD 3.6)
-        function showSensitiveChatPanel(context) {
-            hideAllCards();
-
-            // Customize the user message based on context
-            let userMessage = currentQuery || 'I have a health-related question';
-            if (context === 'pancreatitis-concern') {
-                userMessage = 'I have a concern about my dog\'s health after eating your food';
-            } else if (context === 'panc-diet-help') {
-                userMessage = 'I\'d like to discuss whether your food is right for my dog with pancreatitis';
-            }
-
-            // Update the chat widget message
-            document.getElementById('userQueryMessage').textContent = userMessage;
-
-            // Show the sensitive chat panel inline
-            const panel = document.getElementById('sensitiveChatPanel');
-            const queryPreview = document.getElementById('sensitiveChatQueryPreview');
-            const subtitle = document.getElementById('sensitiveChatSubtitle');
-
-            queryPreview.textContent = '"' + userMessage + '"';
-
-            if (context === 'pancreatitis-concern') {
-                subtitle.textContent = 'We take health concerns very seriously. Our team is standing by to help you right away.';
-            } else if (context === 'panc-diet-help') {
-                subtitle.textContent = 'Our team can review your dog\'s specific situation and provide personalized guidance.';
-            }
-
-            panel.classList.add('chat-panel--visible');
-            document.getElementById('heroSection').classList.add('hero--has-answer');
-            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-            // Also open the chat widget
-            setTimeout(() => {
-                document.getElementById('chatWidgetOverlay').classList.add('chat-widget-overlay--open');
-                document.getElementById('chatWidget').classList.add('chat-widget--open');
+                const responseMsg = document.createElement('div');
+                responseMsg.className = 'faq-message--response visible';
+                responseMsg.innerHTML = `<p>Let me connect you with someone who can help with this.</p>`;
+                thread.appendChild(responseMsg);
+                scrollToBottom();
             }, 300);
 
-            // Log analytics event for sensitive topic escalation
-            console.log('Analytics: faq_sensitive_escalation', { context, query: currentQuery });
+            showEscalationPersistent();
         }
 
-        // Back to search (per PRD 5.4)
-        function backToSearch() {
-            hideAllCards();
-            document.getElementById('heroSection').classList.remove('hero--has-answer');
-            document.getElementById('faqSearchInput').value = '';
-            document.getElementById('faqSearchInput').focus();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Show handoff and agent message (persistent version)
+        function showEscalationPersistent() {
+            const thread = document.getElementById('faqThread');
+
+            // Show handoff message
+            setTimeout(() => {
+                const handoffMsg = document.createElement('div');
+                handoffMsg.className = 'faq-message--handoff visible';
+                handoffMsg.textContent = 'Got it — a customer experience agent is going to take over from here.';
+                thread.appendChild(handoffMsg);
+                scrollToBottom();
+            }, 600);
+
+            // Show agent message
+            setTimeout(() => {
+                const agentMsg = document.createElement('div');
+                agentMsg.className = 'faq-message--agent visible';
+                agentMsg.innerHTML = `
+                    <div class="faq-agent-avatar">P</div>
+                    <div class="faq-agent-bubble">
+                        <div class="faq-agent-name">Patty from The Farmer's Dog</div>
+                        <div>Hey there! 👋 I'm Patty from The Farmer's Dog. I'd love to help you with your question about "<strong>${currentQuery}</strong>". What's going on?</div>
+                    </div>
+                `;
+                thread.appendChild(agentMsg);
+                scrollToBottom();
+                document.getElementById('inputHint').textContent = 'Type your reply...';
+            }, 1500);
         }
 
-        // Handle "Was this helpful?" response (per PRD 5.3)
-        function handleHelpful(wasHelpful, answerId) {
-            if (wasHelpful) {
-                // Log helpful_yes event
-                console.log('Analytics: faq_helpful_yes', { answerId, query: currentQuery });
-                // Show success state or CTA
-                alert('Thanks for your feedback!');
-            } else {
-                // Log helpful_no event and escalate to chat (per PRD 5.3)
-                console.log('Analytics: faq_helpful_no', { answerId, query: currentQuery });
-                // Escalate to chat widget with original query
-                const query = currentQuery || 'I need help with: ' + answerId;
-                document.getElementById('userQueryMessage').textContent = query;
-                document.getElementById('chatWidgetOverlay').classList.add('chat-widget-overlay--open');
-                document.getElementById('chatWidget').classList.add('chat-widget--open');
+        // Legacy functions kept for backwards compatibility
+        function showClarification(clarification) { showClarificationPersistent(clarification); }
+        function handleClarificationChoice(responseKey, choiceLabel) { handleClarificationChoicePersistent(responseKey, choiceLabel, null); }
+        function showResponse(responseKey, matched) { showResponsePersistent(responseKey, matched); }
+        function showEscalationAfterResponse() { showEscalationPersistent(); }
+
+        // Scroll to bottom of conversation
+        function scrollToBottom() {
+            const scrollArea = document.getElementById('scrollArea');
+            setTimeout(() => {
+                scrollArea.scrollTo({
+                    top: scrollArea.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+
+        // Hide welcome message when conversation starts
+        function hideWelcome() {
+            const welcome = document.getElementById('faqWelcome');
+            if (welcome) {
+                welcome.style.display = 'none';
             }
         }
 
-        // Close chat widget with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeChatWidget();
+        // Add a new message pair to the conversation (persistent history)
+        function addMessagePair(userText, responseHtml, showCta = true, escalate = false) {
+            const thread = document.getElementById('faqThread');
+
+            // Create user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'faq-message--user visible';
+            userMsg.textContent = userText;
+            thread.appendChild(userMsg);
+
+            // Create response message
+            const responseMsg = document.createElement('div');
+            responseMsg.className = 'faq-message--response visible';
+            responseMsg.innerHTML = responseHtml;
+
+            if (showCta && !escalate) {
+                const ctaDiv = document.createElement('div');
+                ctaDiv.className = 'faq-message__cta';
+                ctaDiv.innerHTML = '<a href="get-started-wireframe.html" class="faq-message__cta-link">Get started — 50% off your first box →</a>';
+                responseMsg.appendChild(ctaDiv);
             }
-        });
+
+            thread.appendChild(responseMsg);
+            scrollToBottom();
+
+            return { userMsg, responseMsg };
+        }
+
+        // Handle sidebar question clicks
+        function askSidebarQuestion(question) {
+            currentQuery = question;
+            hideWelcome();
+
+            // Find matching response
+            let responseKey = 'default';
+            const queryLower = question.toLowerCase();
+
+            if (queryLower.includes('kibble')) {
+                responseKey = 'fresh';
+            } else if (queryLower.includes('human-grade')) {
+                responseKey = 'human_grade';
+            } else if (queryLower.includes('healthy')) {
+                responseKey = 'healthy';
+            } else if (queryLower.includes('expensive') || queryLower.includes('cost')) {
+                responseKey = 'cost';
+            } else if (queryLower.includes('homemade')) {
+                responseKey = 'homemade';
+            }
+
+            const response = conversationalResponses[responseKey] || conversationalResponses.default;
+            addMessagePair(question, response.answer, true, false);
+            document.getElementById('inputHint').textContent = 'Ask another question';
+        }
+
+        // Trigger agent handoff from sidebar
+        function triggerAgentHandoff() {
+            currentQuery = "Talk to your team";
+            hideWelcome();
+
+            // Add user message
+            const thread = document.getElementById('faqThread');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'faq-message--user visible';
+            userMsg.textContent = "I'd like to talk to someone";
+            thread.appendChild(userMsg);
+
+            scrollToBottom();
+
+            // Show handoff
+            setTimeout(() => {
+                const handoffMsg = document.createElement('div');
+                handoffMsg.className = 'faq-message--handoff visible';
+                handoffMsg.textContent = "Got it — a customer experience agent is going to take over from here.";
+                thread.appendChild(handoffMsg);
+                scrollToBottom();
+            }, 400);
+
+            // Show agent
+            setTimeout(() => {
+                const agentMsg = document.createElement('div');
+                agentMsg.className = 'faq-message--agent visible';
+                agentMsg.innerHTML = `
+                    <div class="faq-agent-avatar">P</div>
+                    <div class="faq-agent-bubble">
+                        <div class="faq-agent-name">Patty from The Farmer's Dog</div>
+                        <div>Hey there! 👋 I'm Patty. How can I help you today?</div>
+                    </div>
+                `;
+                thread.appendChild(agentMsg);
+                scrollToBottom();
+                document.getElementById('inputHint').textContent = 'Type your reply...';
+            }, 1200);
+        }
+
+        // Add additional sidebar responses
+        conversationalResponses['human_grade'] = {
+            answer: `<p>Human-grade means the food is made with ingredients that meet FDA and USDA standards for human consumption, produced in facilities that follow the same safety protocols as human food production.</p>
+<p>Most pet food is made with "feed-grade" ingredients not approved for people — things like meat by-products, rendered fats, and lower quality proteins that wouldn't pass inspection for your grocery store.</p>`
+        };
+
+        conversationalResponses['healthy'] = {
+            answer: `<p>Look for a few key things when evaluating any dog food:</p>
+<p><strong>Transparency:</strong> Can you recognize the ingredients? Are they listed clearly, or hidden behind vague terms?</p>
+<p><strong>Expertise:</strong> Is it formulated by board-certified veterinary nutritionists (not just "developed with vets")?</p>
+<p><strong>Evidence:</strong> Are there peer-reviewed studies backing the health claims, or just marketing?</p>`
+        };
+
+        conversationalResponses['homemade'] = {
+            answer: `<p>You can make homemade dog food, but it's harder than it looks.</p>
+<p>Studies show that most homemade dog food recipes — even vet-recommended ones from books and websites — are nutritionally incomplete. Getting the right balance of vitamins, minerals, and macros for your specific dog requires careful formulation that changes as your dog ages.</p>
+<p>If you want the benefits of fresh food without the nutritional guesswork, that's where we come in.</p>`
+        };
+
+        // Clear conversation (keeps input intact) - NOW DEPRECATED for persistent mode
+        function clearConversation() {
+            // In persistent mode, we don't clear - messages stay in history
+            // This function is kept for backwards compatibility but does nothing
+        }
+
+        // Reset conversation (full reset including input)
+        function resetConversation() {
+            // Clear all messages from thread
+            const thread = document.getElementById('faqThread');
+            thread.innerHTML = '';
+
+            // Show welcome again
+            const welcome = document.getElementById('faqWelcome');
+            if (welcome) {
+                welcome.style.display = 'block';
+            }
+
+            document.getElementById('faqInput').value = '';
+            document.getElementById('inputHint').textContent = 'Press Enter to ask';
+            currentQuery = '';
+            document.getElementById('faqInput').focus();
+        }
+
+        // Toggle accordion
+        function toggleAccordion(el) {
+            // Close other open accordions (optional - comment out for multi-open)
+            document.querySelectorAll('.faq-accordion.open').forEach(acc => {
+                if (acc !== el) acc.classList.remove('open');
+            });
+            el.classList.toggle('open');
+        }
     </script>
 </body>
 </html>
