@@ -404,17 +404,40 @@
             margin-top: 58px;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(45deg, var(--kale-3) 0%, #1a4a3f 50%, var(--kale-3) 100%);
         }
 
-        /* Hero content panels - only one visible at a time */
-        .hero-panel {
-            display: none;
-            width: 100%;
-            min-height: calc(100vh - 58px);
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
         }
 
-        .hero-panel.active {
-            display: block;
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1;
+            text-transform: lowercase;
+            letter-spacing: -2px;
+        }
+
+        .hero .hero-subhead {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: rgba(255,255,255,0.85);
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* ================================
