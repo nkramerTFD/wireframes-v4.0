@@ -270,9 +270,10 @@
             overflow: hidden;
         }
 
-        /* Main chat area - full dark green */
+        /* Main chat area - full width dark green */
         .faq-main {
             flex: 1;
+            width: 100%;
             background: var(--kale-3);
             display: flex;
             flex-direction: column;
@@ -291,7 +292,7 @@
         /* Conversation container */
         .faq-conversation {
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             min-height: 100%;
             display: flex;
@@ -316,104 +317,71 @@
         }
 
         .faq-input-container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            overflow: visible;
         }
 
-        /* Sidebar for common questions */
+        /* Sidebar - hidden, using pills instead */
         .faq-sidebar {
-            width: 320px;
-            background: var(--white);
-            border-left: 1px solid var(--oyster-1);
-            padding: 2rem 1.5rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-        }
-
-        .faq-sidebar__header {
-            margin-bottom: 1.5rem;
-        }
-
-        .faq-sidebar__title {
-            font-size: 0.75rem;
-            font-weight: var(--font-weight-bold);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--charcoal-2);
-            margin-bottom: 0.25rem;
-        }
-
-        .faq-sidebar__question {
-            display: block;
-            padding: 1rem;
-            background: var(--oyster-3);
-            border: 1px solid transparent;
-            border-radius: var(--radius-md);
-            margin-bottom: 0.75rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: left;
-            font-size: 0.9rem;
-            color: var(--charcoal-0);
-            line-height: 1.4;
-        }
-
-        .faq-sidebar__question:hover {
-            background: var(--kale-0);
-            border-color: var(--kale-1);
-        }
-
-        .faq-sidebar__contact {
-            display: none; /* Hidden on desktop */
-        }
-
-        /* Mobile question pills */
-        .faq-mobile-pills {
             display: none;
         }
 
-        @media (max-width: 900px) {
-            .faq-mobile-pills {
-                display: flex;
-                gap: 0.5rem;
+        /* Question pills - horizontal below input */
+        .faq-question-pills {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem 0 0;
+            flex-wrap: nowrap;
+            justify-content: center;
+            /* Break out of the 700px container to use full width */
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .faq-question-pills::-webkit-scrollbar {
+            display: none;
+        }
+
+        .faq-question-pill {
+            flex-shrink: 0;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--radius-full);
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .faq-question-pill:hover,
+        .faq-question-pill:active {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.4);
+            color: var(--white);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            .faq-question-pills {
+                justify-content: flex-start;
                 overflow-x: auto;
-                padding: 0.75rem 0 0;
-                margin: 0 -2rem;
-                padding-left: 2rem;
-                padding-right: 2rem;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
                 -ms-overflow-style: none;
+                padding-left: 2rem;
+                padding-right: 2rem;
             }
 
-            .faq-mobile-pills::-webkit-scrollbar {
+            .faq-question-pills::-webkit-scrollbar {
                 display: none;
             }
 
-            .faq-mobile-pill {
-                flex-shrink: 0;
-                background: rgba(255,255,255,0.1);
-                border: 1px solid rgba(255,255,255,0.2);
-                border-radius: var(--radius-full);
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-                color: rgba(255,255,255,0.8);
-                cursor: pointer;
-                transition: all 0.2s;
-                white-space: nowrap;
-            }
-
-            .faq-mobile-pill:hover,
-            .faq-mobile-pill:active {
-                background: rgba(255,255,255,0.2);
-                border-color: rgba(255,255,255,0.4);
-                color: var(--white);
-            }
-
-            /* Add padding after last pill for scroll bleed */
-            .faq-mobile-pill:last-child {
+            .faq-question-pill:last-child {
                 margin-right: 1rem;
             }
         }
@@ -438,14 +406,8 @@
             color: rgba(255,255,255,0.6);
         }
 
-        /* Mobile: hide sidebar, show toggle */
+        /* Mobile adjustments for main layout */
         @media (max-width: 900px) {
-            .faq-sidebar {
-                display: none;
-            }
-            .faq-page {
-                flex-direction: column;
-            }
             .faq-main {
                 height: calc(100vh - 58px);
             }
@@ -614,6 +576,128 @@
             color: var(--kale-3);
             font-size: 0.8rem;
             margin-bottom: 0.25rem;
+        }
+
+        /* Follow-up prompt */
+        .faq-followup {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--kale-1);
+        }
+
+        .faq-followup__question {
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            color: var(--charcoal-0);
+        }
+
+        .faq-followup__options {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .faq-followup__btn {
+            background: var(--white);
+            border: 1px solid var(--kale-1);
+            border-radius: var(--radius-full);
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            color: var(--kale-3);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-family-text);
+        }
+
+        .faq-followup__btn:hover {
+            background: var(--kale-1);
+            border-color: var(--kale-2);
+        }
+
+        .faq-followup__btn--primary {
+            background: var(--kale-2);
+            border-color: var(--kale-2);
+            color: var(--white);
+        }
+
+        .faq-followup__btn--primary:hover {
+            background: var(--kale-3);
+            border-color: var(--kale-3);
+        }
+
+        .faq-followup.answered {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Video embed */
+        .faq-video-embed {
+            margin-top: 0.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .faq-video-embed iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            display: block;
+            border: none;
+        }
+
+        /* Product card */
+        .faq-product-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .faq-product-card__image {
+            background: var(--oyster-2);
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--charcoal-1);
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .faq-product-card__content {
+            padding: 1rem;
+        }
+
+        .faq-product-card__title {
+            font-family: var(--font-family-display);
+            font-size: 1.1rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--charcoal-0);
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-product-card__description {
+            font-size: 0.9rem;
+            color: var(--charcoal-1);
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .faq-product-card__cta {
+            display: inline-block;
+            background: var(--carrot-2);
+            color: var(--white);
+            padding: 0.6rem 1.25rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .faq-product-card__cta:hover {
+            background: var(--carrot-3);
         }
 
         /* Typing indicator */
@@ -1943,40 +2027,18 @@
                     </form>
                     <p class="faq-input-hint" id="inputHint">Press Enter to ask</p>
 
-                    <!-- Mobile question pills (horizontally scrollable) -->
-                    <div class="faq-mobile-pills" id="mobilePills">
-                        <button class="faq-mobile-pill" onclick="askSidebarQuestion('Is kibble safe?')">Is kibble safe?</button>
-                        <button class="faq-mobile-pill" onclick="askSidebarQuestion('What does human-grade mean?')">Human-grade?</button>
-                        <button class="faq-mobile-pill" onclick="askSidebarQuestion('How do I know if my dog\'s food is healthy?')">Is my food healthy?</button>
-                        <button class="faq-mobile-pill" onclick="askSidebarQuestion('Why is fresh food more expensive?')">Why more expensive?</button>
-                        <button class="faq-mobile-pill" onclick="askSidebarQuestion('Can I make homemade dog food instead?')">Homemade instead?</button>
+                    <!-- Common question pills (horizontal layout) -->
+                    <div class="faq-question-pills" id="questionPills">
+                        <button class="faq-question-pill" onclick="askSidebarQuestion('Is kibble safe for my dog?')">Is kibble safe?</button>
+                        <button class="faq-question-pill" onclick="askSidebarQuestion('What does human-grade actually mean?')">Human-grade?</button>
+                        <button class="faq-question-pill" onclick="askSidebarQuestion('How do I know if my dog\'s food is healthy?')">Is my food healthy?</button>
+                        <button class="faq-question-pill" onclick="askSidebarQuestion('Why is fresh food more expensive?')">Why more expensive?</button>
+                        <button class="faq-question-pill" onclick="askSidebarQuestion('Can I make homemade dog food instead?')">Homemade instead?</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Sidebar - Common Questions (Desktop only) -->
-        <aside class="faq-sidebar">
-            <div class="faq-sidebar__header">
-                <h2 class="faq-sidebar__title">Common questions</h2>
-            </div>
-
-            <button class="faq-sidebar__question" onclick="askSidebarQuestion('Is kibble safe for my dog?')">
-                Is kibble safe for my dog?
-            </button>
-            <button class="faq-sidebar__question" onclick="askSidebarQuestion('What does human-grade actually mean?')">
-                What does "human-grade" actually mean?
-            </button>
-            <button class="faq-sidebar__question" onclick="askSidebarQuestion('How do I know if my dog\'s food is healthy?')">
-                How do I know if my dog's food is healthy?
-            </button>
-            <button class="faq-sidebar__question" onclick="askSidebarQuestion('Why is fresh food more expensive?')">
-                Why is fresh food more expensive?
-            </button>
-            <button class="faq-sidebar__question" onclick="askSidebarQuestion('Can I make homemade dog food instead?')">
-                Can I make homemade dog food instead?
-            </button>
-        </aside>
     </div>
 
     <!-- ============================================
@@ -2697,12 +2759,26 @@
                 const responseMsg = document.createElement('div');
                 responseMsg.className = 'faq-message--response visible';
 
+                let followUpHtml = '';
+                if (response.followUp) {
+                    const followUpId = 'followup-' + Date.now();
+                    followUpHtml = `
+                        <div class="faq-followup" id="${followUpId}">
+                            <p class="faq-followup__question">${response.followUp.question}</p>
+                            <div class="faq-followup__options">
+                                <button class="faq-followup__btn faq-followup__btn--primary" onclick="handleFollowUpYes('${followUpId}', '${response.followUp.videoUrl}')">Yes, show me</button>
+                                <button class="faq-followup__btn" onclick="handleFollowUpNo('${followUpId}')">No thanks</button>
+                            </div>
+                        </div>
+                    `;
+                }
+
                 let ctaHtml = '';
-                if (!response.escalate) {
+                if (!response.escalate && !response.followUp && !response.productCard) {
                     ctaHtml = `<div class="faq-message__cta"><a href="get-started-wireframe.html" class="faq-message__cta-link">Get started — 50% off your first box →</a></div>`;
                 }
 
-                responseMsg.innerHTML = response.answer + ctaHtml;
+                responseMsg.innerHTML = response.answer + followUpHtml + ctaHtml;
                 thread.appendChild(responseMsg);
                 scrollToBottom();
 
@@ -2712,6 +2788,96 @@
                 } else {
                     document.getElementById('inputHint').textContent = 'Ask another question';
                 }
+
+                // If product card, show it as a subsequent message
+                if (response.productCard) {
+                    setTimeout(() => {
+                        showProductCard(response.productCard);
+                    }, 600);
+                }
+            }, 300);
+        }
+
+        // Show product card as a subsequent message
+        function showProductCard(product) {
+            const thread = document.getElementById('faqThread');
+
+            const productMsg = document.createElement('div');
+            productMsg.className = 'faq-message--response visible';
+            productMsg.innerHTML = `
+                <p>You might be interested in this:</p>
+                <div class="faq-product-card">
+                    <div class="faq-product-card__image">DIY PRODUCT</div>
+                    <div class="faq-product-card__content">
+                        <h4 class="faq-product-card__title">${product.title}</h4>
+                        <p class="faq-product-card__description">${product.description}</p>
+                        <a href="${product.ctaUrl}" class="faq-product-card__cta">${product.ctaText}</a>
+                    </div>
+                </div>
+            `;
+            thread.appendChild(productMsg);
+            scrollToBottom();
+        }
+
+        // Handle follow-up "Yes" response
+        function handleFollowUpYes(followUpId, videoUrl) {
+            const followUpEl = document.getElementById(followUpId);
+            followUpEl.classList.add('answered');
+
+            const thread = document.getElementById('faqThread');
+
+            // Add user's "yes" as a message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'faq-message--user visible';
+            userMsg.textContent = 'Yes, show me';
+            thread.appendChild(userMsg);
+            scrollToBottom();
+
+            // Show video response after a brief delay
+            setTimeout(() => {
+                const videoMsg = document.createElement('div');
+                videoMsg.className = 'faq-message--response visible';
+                videoMsg.innerHTML = `
+                    <p>Here's a quick breakdown:</p>
+                    <div class="faq-video-embed">
+                        <iframe
+                            src="${videoUrl}"
+                            title="Video explanation"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="faq-message__cta"><a href="get-started-wireframe.html" class="faq-message__cta-link">Get started — 50% off your first box →</a></div>
+                `;
+                thread.appendChild(videoMsg);
+                scrollToBottom();
+            }, 300);
+        }
+
+        // Handle follow-up "No" response
+        function handleFollowUpNo(followUpId) {
+            const followUpEl = document.getElementById(followUpId);
+            followUpEl.classList.add('answered');
+
+            const thread = document.getElementById('faqThread');
+
+            // Add user's "no thanks" as a message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'faq-message--user visible';
+            userMsg.textContent = 'No thanks';
+            thread.appendChild(userMsg);
+            scrollToBottom();
+
+            // Show acknowledgment and CTA
+            setTimeout(() => {
+                const ackMsg = document.createElement('div');
+                ackMsg.className = 'faq-message--response visible';
+                ackMsg.innerHTML = `
+                    <p>No problem! Let me know if you have any other questions.</p>
+                    <div class="faq-message__cta"><a href="get-started-wireframe.html" class="faq-message__cta-link">Get started — 50% off your first box →</a></div>
+                `;
+                thread.appendChild(ackMsg);
+                scrollToBottom();
             }, 300);
         }
 
@@ -2834,9 +3000,16 @@
                 responseKey = 'homemade';
             }
 
-            const response = conversationalResponses[responseKey] || conversationalResponses.default;
-            addMessagePair(question, response.answer, true, false);
-            document.getElementById('inputHint').textContent = 'Ask another question';
+            // Add user message
+            const thread = document.getElementById('faqThread');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'faq-message--user visible';
+            userMsg.textContent = question;
+            thread.appendChild(userMsg);
+            scrollToBottom();
+
+            // Show response (this handles follow-ups properly)
+            showResponsePersistent(responseKey, true);
         }
 
         // Trigger agent handoff from sidebar
@@ -2882,7 +3055,12 @@
         // Add additional sidebar responses
         conversationalResponses['human_grade'] = {
             answer: `<p>Human-grade means the food is made with ingredients that meet FDA and USDA standards for human consumption, produced in facilities that follow the same safety protocols as human food production.</p>
-<p>Most pet food is made with "feed-grade" ingredients not approved for people — things like meat by-products, rendered fats, and lower quality proteins that wouldn't pass inspection for your grocery store.</p>`
+<p>Most pet food is made with "feed-grade" ingredients not approved for people — things like meat by-products, rendered fats, and lower quality proteins that wouldn't pass inspection for your grocery store.</p>`,
+            followUp: {
+                question: "Want to see a quick video that breaks this down?",
+                yesAction: "showVideo",
+                videoUrl: "https://www.youtube.com/embed/QkxvhG_n51Q"
+            }
         };
 
         conversationalResponses['healthy'] = {
@@ -2895,7 +3073,13 @@
         conversationalResponses['homemade'] = {
             answer: `<p>You can make homemade dog food, but it's harder than it looks.</p>
 <p>Studies show that most homemade dog food recipes — even vet-recommended ones from books and websites — are nutritionally incomplete. Getting the right balance of vitamins, minerals, and macros for your specific dog requires careful formulation that changes as your dog ages.</p>
-<p>If you want the benefits of fresh food without the nutritional guesswork, that's where we come in.</p>`
+<p>If you want the benefits of fresh food without the nutritional guesswork, that's where we come in.</p>`,
+            productCard: {
+                title: "DIY Nutrient Mix",
+                description: "Love cooking for your dog? Our vet-formulated nutrient mix makes it easy to create balanced, complete meals at home.",
+                ctaText: "Learn more",
+                ctaUrl: "#"
+            }
         };
 
         // Clear conversation (keeps input intact) - NOW DEPRECATED for persistent mode
