@@ -310,6 +310,51 @@
             font-size: 0.9rem;
             margin-top: 2rem;
         }
+
+        /* Utility/Reference links - visually distinct */
+        .utility-section {
+            margin-top: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed var(--oyster-1);
+        }
+
+        .utility-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--charcoal-1);
+            margin-bottom: 0.75rem;
+        }
+
+        .utility-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            background: transparent;
+            border: 1px dashed var(--oyster-1);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--charcoal-1);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .utility-link:hover {
+            background: var(--oyster-3);
+            border-color: var(--charcoal-1);
+            color: var(--charcoal-0);
+        }
+
+        .utility-link::after {
+            content: "\2192";
+            color: var(--oyster-1);
+            transition: color 0.2s;
+        }
+
+        .utility-link:hover::after {
+            color: var(--charcoal-1);
+        }
     </style>
 </head>
 <body>
@@ -374,6 +419,11 @@
                 <li><a href="reviews-wireframe.html" class="wireframe-link">Reviews</a></li>
             </ul>
         </div>
+
+            <div class="utility-section">
+                <h3 class="utility-title">Reference</h3>
+                <a href="design-system-wireframe.html" class="utility-link">Foundational Design System</a>
+            </div>
 
             <p class="footer-note">Click any wireframe to view</p>
         </main>
