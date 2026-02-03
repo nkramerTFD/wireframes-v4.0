@@ -476,7 +476,7 @@
             min-height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+            justify-content: center;
         }
 
         /* Message Thread */
@@ -569,7 +569,6 @@
         .faq-welcome {
             text-align: center;
             padding: 2rem 0 3rem;
-            margin-top: auto;
         }
 
         .faq-welcome__title {
@@ -593,6 +592,32 @@
 
         #rotatingTopic.fade-out {
             opacity: 0;
+        }
+
+        .faq-welcome__divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0 1.5rem;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+        }
+
+        .faq-welcome__divider::before,
+        .faq-welcome__divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+        }
+
+        .faq-welcome__pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* Mobile adjustments for main layout */
@@ -678,24 +703,25 @@
 
         .faq-input {
             width: 100%;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: var(--white);
+            border: none;
             border-radius: var(--radius-lg);
             font-family: var(--font-family-text);
             font-size: 1rem;
-            color: var(--white);
+            color: var(--kale-4);
             padding: 1rem 1.25rem;
             outline: none;
             transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .faq-input::placeholder {
-            color: rgba(255,255,255,0.5);
+            color: rgba(0,0,0,0.4);
         }
 
         .faq-input:focus {
-            background: rgba(255,255,255,0.12);
-            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            border-color: transparent;
         }
 
         .faq-input-hint {
@@ -2225,7 +2251,20 @@
                     <!-- Welcome message (shows before any conversation) -->
                     <div class="faq-welcome" id="faqWelcome">
                         <h1 class="faq-welcome__title">How can we help?</h1>
-                        <p class="faq-welcome__subtitle">No need for a perfect question — even keywords like "<span id="rotatingTopic">delivery</span>" work great</p>
+                        <p class="faq-welcome__subtitle">Just ask your question or topic below — even keywords like "<span id="rotatingTopic">delivery</span>" work great</p>
+
+                        <div class="faq-welcome__divider">
+                            <span>or select a question</span>
+                        </div>
+
+                        <!-- Question pills in welcome area -->
+                        <div class="faq-welcome__pills" id="welcomePills">
+                            <button class="faq-question-pill" onclick="askSidebarQuestion('I\'m new to fresh food — what should I know?')">I'm new to fresh food</button>
+                            <button class="faq-question-pill" onclick="askSidebarQuestion('Is fresh dog food worth the cost?')">Is this worth the cost?</button>
+                            <button class="faq-question-pill" onclick="askSidebarQuestion('What\'s actually in the food?')">What's actually in it?</button>
+                            <button class="faq-question-pill" onclick="askSidebarQuestion('How does delivery work?')">How does delivery work?</button>
+                            <button class="faq-question-pill" onclick="askSidebarQuestion('My dog has allergies — can you help?')">My dog has allergies</button>
+                        </div>
                     </div>
 
                     <!-- Message Thread -->
@@ -2248,15 +2287,6 @@
                         >
                     </form>
                     <p class="faq-input-hint" id="inputHint">Press Enter to ask</p>
-
-                    <!-- Common question pills (horizontal layout) -->
-                    <div class="faq-question-pills" id="questionPills">
-                        <button class="faq-question-pill" onclick="askSidebarQuestion('Is kibble safe for my dog?')">Is kibble safe?</button>
-                        <button class="faq-question-pill" onclick="askSidebarQuestion('What does human-grade actually mean?')">Human-grade?</button>
-                        <button class="faq-question-pill" onclick="askSidebarQuestion('How do I know if my dog\'s food is healthy?')">Is my food healthy?</button>
-                        <button class="faq-question-pill" onclick="askSidebarQuestion('Why is fresh food more expensive?')">Why more expensive?</button>
-                        <button class="faq-question-pill" onclick="askSidebarQuestion('Can I make homemade dog food instead?')">Homemade instead?</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -2819,50 +2849,50 @@
             // Account-based questions
             account: {
                 'default': [
-                    { label: 'Is kibble safe?', question: 'Is kibble safe for my dog?' },
-                    { label: 'Human-grade?', question: 'What does human-grade actually mean?' },
-                    { label: 'Is my food healthy?', question: 'How do I know if my dog\'s food is healthy?' },
-                    { label: 'Why more expensive?', question: 'Why is fresh food more expensive?' },
-                    { label: 'Homemade instead?', question: 'Can I make homemade dog food instead?' }
+                    { label: 'I\'m new to fresh food', question: 'I\'m new to fresh food — what should I know?' },
+                    { label: 'Is this worth the cost?', question: 'Is fresh dog food worth the cost?' },
+                    { label: 'What\'s actually in it?', question: 'What\'s actually in the food?' },
+                    { label: 'How does delivery work?', question: 'How does delivery work?' },
+                    { label: 'My dog has allergies', question: 'My dog has allergies — can you help?' }
                 ],
                 'payment-failed': [
-                    { label: 'Update payment', question: 'How do I update my payment method?' },
-                    { label: 'Why did it fail?', question: 'Why did my payment fail?' },
-                    { label: 'Retry payment', question: 'How can I retry my payment?' },
-                    { label: 'Contact support', question: 'I need help with my account' },
-                    { label: 'Pause instead?', question: 'Can I pause my subscription instead?' }
+                    { label: 'I need to update my card', question: 'I need to update my payment method' },
+                    { label: 'Why didn\'t it go through?', question: 'Why didn\'t my payment go through?' },
+                    { label: 'Will I miss a delivery?', question: 'Will I miss a delivery because of this?' },
+                    { label: 'I need some help', question: 'I need some help with my account' },
+                    { label: 'Can I pause instead?', question: 'Can I pause my subscription instead?' }
                 ],
                 'recent-pause': [
-                    { label: 'Resume delivery', question: 'How do I resume my subscription?' },
-                    { label: 'Change schedule', question: 'Can I change my delivery schedule?' },
-                    { label: 'Update portions', question: 'My dog\'s needs have changed' },
-                    { label: 'Skip vs pause?', question: 'What\'s the difference between skip and pause?' },
-                    { label: 'Any new recipes?', question: 'Have you added any new recipes?' }
+                    { label: 'I\'m ready to start again', question: 'I\'m ready to resume my deliveries' },
+                    { label: 'Can I change my schedule?', question: 'Can I change my delivery schedule?' },
+                    { label: 'My dog\'s needs changed', question: 'My dog\'s needs have changed — can I update my plan?' },
+                    { label: 'What\'s new?', question: 'Anything new since I paused?' },
+                    { label: 'Skip vs pause?', question: 'What\'s the difference between skipping and pausing?' }
                 ],
                 'new-customer': [
-                    { label: 'Transition tips', question: 'How do I transition my dog to fresh food?' },
-                    { label: 'How to store?', question: 'How do I store the food?' },
-                    { label: 'Portion size right?', question: 'How do I know if the portions are right?' },
-                    { label: 'First delivery', question: 'What should I expect in my first delivery?' },
-                    { label: 'Mix with kibble?', question: 'Can I mix fresh food with kibble?' }
+                    { label: 'How do I transition?', question: 'How should I transition my dog to fresh food?' },
+                    { label: 'How do I store it?', question: 'How do I store the food?' },
+                    { label: 'Are the portions right?', question: 'How do I know if the portions are right for my dog?' },
+                    { label: 'What\'s in my first box?', question: 'What should I expect in my first box?' },
+                    { label: 'Can I mix with kibble?', question: 'Can I mix this with kibble while transitioning?' }
                 ]
             },
             // Page-based questions
             page: {
                 'default': null, // Will use account questions
                 'plan': [
-                    { label: 'Change recipe', question: 'Can I change my dog\'s recipe?' },
-                    { label: 'Adjust portions', question: 'How do I adjust my dog\'s portions?' },
-                    { label: 'Add another dog', question: 'How do I add another dog to my plan?' },
-                    { label: 'Delivery frequency', question: 'Can I change how often I receive deliveries?' },
-                    { label: 'Pause or cancel', question: 'How do I pause or cancel my subscription?' }
+                    { label: 'Can I try a new recipe?', question: 'Can I switch to a different recipe?' },
+                    { label: 'Portions seem off', question: 'The portions don\'t seem quite right for my dog' },
+                    { label: 'I have another dog', question: 'I have another dog — can I add them?' },
+                    { label: 'Change delivery frequency?', question: 'Can I change how often I get deliveries?' },
+                    { label: 'Need to pause or cancel', question: 'I need to pause or cancel for a bit' }
                 ],
                 'get-started': [
-                    { label: 'How much?', question: 'How much does it cost?' },
-                    { label: 'Free shipping?', question: 'Is shipping free?' },
-                    { label: 'Commitment?', question: 'Is there a commitment or contract?' },
-                    { label: 'First box discount', question: 'What\'s included in the first box?' },
-                    { label: 'Money back?', question: 'What if my dog doesn\'t like it?' }
+                    { label: 'What will it cost?', question: 'What will this cost for my dog?' },
+                    { label: 'Is shipping included?', question: 'Is shipping included in the price?' },
+                    { label: 'Any commitment?', question: 'Is there any commitment or can I cancel anytime?' },
+                    { label: 'What\'s in the first box?', question: 'What comes in the first box?' },
+                    { label: 'What if my dog won\'t eat it?', question: 'What if my dog doesn\'t like it?' }
                 ]
             }
         };
@@ -2899,7 +2929,7 @@
 
         // Update the question pills based on current state
         function updateQuestionPills() {
-            const pillsContainer = document.getElementById('questionPills');
+            const pillsContainer = document.getElementById('welcomePills');
 
             // Determine which question set to use
             // Page-specific questions take priority if set, otherwise use account-based
@@ -3111,6 +3141,19 @@
                 matched = true;
             } else if (queryLower.includes('compare') || queryLower.includes('other brands') || queryLower.includes('vs')) {
                 responseKey = 'compare_brands';
+                matched = true;
+            // Default thought starter questions
+            } else if (queryLower.includes('new to fresh') || queryLower.includes('what should i know')) {
+                responseKey = 'new_to_fresh';
+                matched = true;
+            } else if (queryLower.includes('worth') && queryLower.includes('cost')) {
+                responseKey = 'worth_the_cost';
+                matched = true;
+            } else if (queryLower.includes('what\'s actually in') || queryLower.includes('whats actually in')) {
+                responseKey = 'whats_in_it';
+                matched = true;
+            } else if (queryLower.includes('allerg')) {
+                responseKey = 'allergies';
                 matched = true;
             }
 
@@ -3601,6 +3644,31 @@
 <li><strong>Personalized portions:</strong> Calculated for your specific dog, not just their weight</li>
 </ul>
 <p>We're happy to answer specific questions about how we compare to any brand you're considering.</p>`
+        };
+
+        // Default "thought starter" responses
+        conversationalResponses['new_to_fresh'] = {
+            answer: `<p>Welcome! Fresh dog food is exactly what it sounds like — real, whole ingredients gently cooked and delivered to your door.</p>
+<p>Unlike kibble (which is cooked at extreme temperatures and heavily processed), fresh food keeps more nutrients intact. Many pet parents notice shinier coats, better digestion, and more energy within the first few weeks.</p>
+<p>The transition is usually easy — most dogs take to it immediately. We include a simple transition guide with your first box.</p>`
+        };
+
+        conversationalResponses['worth_the_cost'] = {
+            answer: `<p>It's a fair question. Fresh food typically costs more than kibble — but many customers find the value goes beyond the bowl.</p>
+<p>Plans range from about $2–9/day depending on your dog's size. For context, that's often less than a daily coffee.</p>
+<p>What customers tell us: fewer vet visits for digestive issues and allergies, less waste (because dogs absorb more nutrients), and the peace of mind that comes from knowing exactly what's in the bowl.</p>`
+        };
+
+        conversationalResponses['whats_in_it'] = {
+            answer: `<p>Real, recognizable ingredients — the kind you'd find in your own kitchen.</p>
+<p>Our recipes use USDA human-grade meat (beef, chicken, turkey, or pork), fresh vegetables like sweet potatoes and leafy greens, and gentle cooking to preserve nutrients.</p>
+<p>No fillers, no by-products, no artificial preservatives. Every recipe is formulated by board-certified veterinary nutritionists to be complete and balanced.</p>`
+        };
+
+        conversationalResponses['allergies'] = {
+            answer: `<p>You're in the right place — allergies are one of the top reasons people switch to fresh food.</p>
+<p>Many "allergies" are actually reactions to the fillers, additives, or low-quality proteins in processed food. Our limited-ingredient recipes make it easier to identify and avoid triggers.</p>
+<p>When you build your plan, you can tell us about your dog's sensitivities and we'll recommend recipes that work. And if something isn't right, our team is here to help adjust.</p>`
         };
 
         // Clear conversation (keeps input intact) - NOW DEPRECATED for persistent mode
