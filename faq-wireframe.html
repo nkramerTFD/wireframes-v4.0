@@ -261,6 +261,185 @@
         }
 
         /* ============================================
+           PERSONALIZATION PANEL (Demo Only)
+           ============================================ */
+        .personalization-panel {
+            position: fixed;
+            top: 70px;
+            left: 12px;
+            width: 280px;
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 999;
+            font-size: 0.85rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--oyster-1);
+            cursor: pointer;
+        }
+
+        .panel-title {
+            font-weight: var(--font-weight-semibold);
+            color: var(--charcoal-0);
+            font-size: 0.9rem;
+        }
+
+        .panel-version-tag {
+            display: inline-block;
+            background: var(--blueberry-2);
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 6px;
+            vertical-align: middle;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .panel-toggle-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--oyster-2);
+            border: none;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.2s;
+        }
+
+        .panel-toggle-btn:hover {
+            background: var(--oyster-1);
+        }
+
+        .personalization-panel.collapsed .panel-toggle-btn {
+            transform: rotate(180deg);
+        }
+
+        .personalization-panel.collapsed .panel-content {
+            max-height: 0;
+            margin-top: 0;
+            overflow: hidden;
+        }
+
+        .personalization-panel.collapsed .panel-header {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .panel-content {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .panel-section {
+            margin-bottom: 1rem;
+        }
+
+        .panel-section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .panel-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--charcoal-0);
+            margin-bottom: 8px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .toggle-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .toggle-btn {
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--oyster-1);
+            background: white;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-family-text);
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--blueberry-2);
+        }
+
+        .toggle-btn.active {
+            background: var(--blueberry-2);
+            color: white;
+            border-color: var(--blueberry-2);
+        }
+
+        .panel-note {
+            font-size: 0.7rem;
+            color: var(--charcoal-1);
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--oyster-1);
+            line-height: 1.5;
+        }
+
+        /* Mobile: Bottom drawer behavior */
+        @media (max-width: 768px) {
+            .personalization-panel {
+                position: fixed;
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                border-radius: 16px 16px 0 0;
+                padding: 0.75rem 1rem 1rem;
+                box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+
+            .panel-header {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+
+            .panel-toggle-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 1rem;
+            }
+
+            .panel-content {
+                margin-top: 0.75rem;
+                padding-top: 0.75rem;
+                border-top: 1px solid var(--oyster-1);
+            }
+
+            .panel-note {
+                display: none;
+            }
+        }
+
+        /* ============================================
            FULL-PAGE CHAT LAYOUT
            ============================================ */
         .faq-page {
@@ -404,6 +583,16 @@
         .faq-welcome__subtitle {
             font-size: 1rem;
             color: rgba(255,255,255,0.6);
+        }
+
+        #rotatingTopic {
+            color: rgba(255,255,255,0.85);
+            font-weight: var(--font-weight-medium);
+            transition: opacity 0.3s ease;
+        }
+
+        #rotatingTopic.fade-out {
+            opacity: 0;
         }
 
         /* Mobile adjustments for main layout */
@@ -1991,6 +2180,39 @@
         </div>
     </div>
 
+    <!-- Personalization Panel (Wireframe Demo Only) -->
+    <div class="personalization-panel" id="personalizationPanel">
+        <div class="panel-header" onclick="togglePanel()">
+            <span class="panel-title">Personalization Demo <span class="panel-version-tag">v1</span></span>
+            <button class="panel-toggle-btn" aria-label="Toggle panel">&#9650;</button>
+        </div>
+
+        <div class="panel-content">
+            <div class="panel-section">
+                <span class="panel-label">Account Status</span>
+                <div class="toggle-group" id="accountToggle">
+                    <button class="toggle-btn active" data-account="default" onclick="setAccountStatus('default')">No account</button>
+                    <button class="toggle-btn" data-account="payment-failed" onclick="setAccountStatus('payment-failed')">Payment failed</button>
+                    <button class="toggle-btn" data-account="recent-pause" onclick="setAccountStatus('recent-pause')">Recent pause</button>
+                    <button class="toggle-btn" data-account="new-customer" onclick="setAccountStatus('new-customer')">New customer</button>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <span class="panel-label">Page Visited</span>
+                <div class="toggle-group" id="pageToggle">
+                    <button class="toggle-btn active" data-page="default" onclick="setPageVisited('default')">Homepage</button>
+                    <button class="toggle-btn" data-page="plan" onclick="setPageVisited('plan')">Plan page</button>
+                    <button class="toggle-btn" data-page="get-started" onclick="setPageVisited('get-started')">Get Started</button>
+                </div>
+            </div>
+
+            <p class="panel-note">
+                Simulates personalized FAQ experience based on user account status and browsing context.
+            </p>
+        </div>
+    </div>
+
     <!-- ============================================
          FULL PAGE CHAT LAYOUT
          ============================================ -->
@@ -2002,8 +2224,8 @@
                 <div class="faq-conversation">
                     <!-- Welcome message (shows before any conversation) -->
                     <div class="faq-welcome" id="faqWelcome">
-                        <h1 class="faq-welcome__title">How can we help?</h1>
-                        <p class="faq-welcome__subtitle">Ask us anything about fresh food for dogs</p>
+                        <h1 class="faq-welcome__title">Ask us anything</h1>
+                        <p class="faq-welcome__subtitle">No need for a perfect question — even keywords like "<span id="rotatingTopic">delivery</span>" work great</p>
                     </div>
 
                     <!-- Message Thread -->
@@ -2555,6 +2777,145 @@
             document.getElementById('mobileMenu').classList.toggle('open');
         }
 
+        // Rotating topic suggestions
+        const rotatingTopics = [
+            'delivery',
+            'human-grade',
+            'fresh food',
+            'portions',
+            'subscriptions'
+        ];
+        let currentTopicIndex = 0;
+
+        function rotateTopics() {
+            const topicEl = document.getElementById('rotatingTopic');
+            if (!topicEl) return;
+
+            // Fade out
+            topicEl.classList.add('fade-out');
+
+            setTimeout(() => {
+                // Change topic
+                currentTopicIndex = (currentTopicIndex + 1) % rotatingTopics.length;
+                topicEl.textContent = rotatingTopics[currentTopicIndex];
+                // Fade in
+                topicEl.classList.remove('fade-out');
+            }, 300);
+        }
+
+        // Start rotation every 3 seconds
+        setInterval(rotateTopics, 3000);
+
+        // ============================================
+        // PERSONALIZATION PANEL LOGIC
+        // ============================================
+
+        // Current personalization state
+        let currentAccountStatus = 'default';
+        let currentPageVisited = 'default';
+
+        // Question sets for different scenarios
+        const questionSets = {
+            // Account-based questions
+            account: {
+                'default': [
+                    { label: 'Is kibble safe?', question: 'Is kibble safe for my dog?' },
+                    { label: 'Human-grade?', question: 'What does human-grade actually mean?' },
+                    { label: 'Is my food healthy?', question: 'How do I know if my dog\'s food is healthy?' },
+                    { label: 'Why more expensive?', question: 'Why is fresh food more expensive?' },
+                    { label: 'Homemade instead?', question: 'Can I make homemade dog food instead?' }
+                ],
+                'payment-failed': [
+                    { label: 'Update payment', question: 'How do I update my payment method?' },
+                    { label: 'Why did it fail?', question: 'Why did my payment fail?' },
+                    { label: 'Retry payment', question: 'How can I retry my payment?' },
+                    { label: 'Contact support', question: 'I need help with my account' },
+                    { label: 'Pause instead?', question: 'Can I pause my subscription instead?' }
+                ],
+                'recent-pause': [
+                    { label: 'Resume delivery', question: 'How do I resume my subscription?' },
+                    { label: 'Change schedule', question: 'Can I change my delivery schedule?' },
+                    { label: 'Update portions', question: 'My dog\'s needs have changed' },
+                    { label: 'Skip vs pause?', question: 'What\'s the difference between skip and pause?' },
+                    { label: 'Any new recipes?', question: 'Have you added any new recipes?' }
+                ],
+                'new-customer': [
+                    { label: 'Transition tips', question: 'How do I transition my dog to fresh food?' },
+                    { label: 'How to store?', question: 'How do I store the food?' },
+                    { label: 'Portion size right?', question: 'How do I know if the portions are right?' },
+                    { label: 'First delivery', question: 'What should I expect in my first delivery?' },
+                    { label: 'Mix with kibble?', question: 'Can I mix fresh food with kibble?' }
+                ]
+            },
+            // Page-based questions
+            page: {
+                'default': null, // Will use account questions
+                'plan': [
+                    { label: 'Change recipe', question: 'Can I change my dog\'s recipe?' },
+                    { label: 'Adjust portions', question: 'How do I adjust my dog\'s portions?' },
+                    { label: 'Add another dog', question: 'How do I add another dog to my plan?' },
+                    { label: 'Delivery frequency', question: 'Can I change how often I receive deliveries?' },
+                    { label: 'Pause or cancel', question: 'How do I pause or cancel my subscription?' }
+                ],
+                'get-started': [
+                    { label: 'How much?', question: 'How much does it cost?' },
+                    { label: 'Free shipping?', question: 'Is shipping free?' },
+                    { label: 'Commitment?', question: 'Is there a commitment or contract?' },
+                    { label: 'First box discount', question: 'What\'s included in the first box?' },
+                    { label: 'Money back?', question: 'What if my dog doesn\'t like it?' }
+                ]
+            }
+        };
+
+        // Toggle panel collapse
+        function togglePanel() {
+            const panel = document.getElementById('personalizationPanel');
+            panel.classList.toggle('collapsed');
+        }
+
+        // Set account status
+        function setAccountStatus(status) {
+            currentAccountStatus = status;
+
+            // Update toggle buttons
+            document.querySelectorAll('#accountToggle .toggle-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.account === status);
+            });
+
+            updateQuestionPills();
+        }
+
+        // Set page visited
+        function setPageVisited(page) {
+            currentPageVisited = page;
+
+            // Update toggle buttons
+            document.querySelectorAll('#pageToggle .toggle-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.page === page);
+            });
+
+            updateQuestionPills();
+        }
+
+        // Update the question pills based on current state
+        function updateQuestionPills() {
+            const pillsContainer = document.getElementById('questionPills');
+
+            // Determine which question set to use
+            // Page-specific questions take priority if set, otherwise use account-based
+            let questions;
+            if (currentPageVisited !== 'default' && questionSets.page[currentPageVisited]) {
+                questions = questionSets.page[currentPageVisited];
+            } else {
+                questions = questionSets.account[currentAccountStatus];
+            }
+
+            // Clear and rebuild pills
+            pillsContainer.innerHTML = questions.map(q =>
+                `<button class="faq-question-pill" onclick="askSidebarQuestion('${q.question.replace(/'/g, "\\'")}')">${q.label}</button>`
+            ).join('');
+        }
+
         // Conversational Response Database
         const conversationalResponses = {
             'fresh': {
@@ -2700,6 +3061,56 @@
                 matched = true;
             } else if (queryLower.includes('healthy') || queryLower.includes('good food')) {
                 responseKey = 'healthy';
+                matched = true;
+            // Payment failed scenario questions
+            } else if (queryLower.includes('update') && queryLower.includes('payment')) {
+                responseKey = 'update_payment';
+                matched = true;
+            } else if (queryLower.includes('why') && (queryLower.includes('payment') && queryLower.includes('fail'))) {
+                responseKey = 'why_payment_failed';
+                matched = true;
+            } else if (queryLower.includes('delivery') && queryLower.includes('paused')) {
+                responseKey = 'delivery_paused';
+                matched = true;
+            // Recent pause scenario questions
+            } else if (queryLower.includes('resume') && (queryLower.includes('subscription') || queryLower.includes('delivery') || queryLower.includes('deliveries'))) {
+                responseKey = 'resume_subscription';
+                matched = true;
+            } else if (queryLower.includes('adjust') && queryLower.includes('schedule')) {
+                responseKey = 'adjust_schedule';
+                matched = true;
+            } else if (queryLower.includes('change') && (queryLower.includes('plan') || queryLower.includes('my plan'))) {
+                responseKey = 'change_plan';
+                matched = true;
+            // New customer scenario questions
+            } else if (queryLower.includes('transition') || (queryLower.includes('switch') && queryLower.includes('food'))) {
+                responseKey = 'transition_tips';
+                matched = true;
+            } else if (queryLower.includes('storage') || queryLower.includes('store') || queryLower.includes('freezer') || queryLower.includes('fridge')) {
+                responseKey = 'storage';
+                matched = true;
+            } else if (queryLower.includes('what to expect') || queryLower.includes('first box') || queryLower.includes('first order')) {
+                responseKey = 'what_to_expect';
+                matched = true;
+            // Plan page scenario questions
+            } else if (queryLower.includes('change') && queryLower.includes('recipe')) {
+                responseKey = 'change_recipe';
+                matched = true;
+            } else if (queryLower.includes('adjust') && queryLower.includes('portion')) {
+                responseKey = 'adjust_portions';
+                matched = true;
+            } else if (queryLower.includes('add') && (queryLower.includes('dog') || queryLower.includes('another dog'))) {
+                responseKey = 'add_dog';
+                matched = true;
+            // Get Started page scenario questions
+            } else if (queryLower.includes('how much') && (queryLower.includes('cost') || queryLower.includes('does it') || !queryLower.includes('food'))) {
+                responseKey = 'how_much';
+                matched = true;
+            } else if (queryLower.includes('quiz') && queryLower.includes('ask')) {
+                responseKey = 'quiz_questions';
+                matched = true;
+            } else if (queryLower.includes('compare') || queryLower.includes('other brands') || queryLower.includes('vs')) {
+                responseKey = 'compare_brands';
                 matched = true;
             }
 
@@ -3080,6 +3491,116 @@
                 ctaText: "Learn more",
                 ctaUrl: "#"
             }
+        };
+
+        // Payment failed scenario responses
+        conversationalResponses['update_payment'] = {
+            answer: `<p>Updating your payment method takes just a minute.</p>
+<p>Head to your account settings, click on "Payment Method," and you can add a new card or update your existing one. Your next delivery will process once your payment is updated.</p>
+<p>If you're having trouble, our support team can help — just reply here or give us a call.</p>`
+        };
+
+        conversationalResponses['why_payment_failed'] = {
+            answer: `<p>Payment failures usually happen for a few common reasons:</p>
+<ul style="margin: 1rem 0; padding-left: 1.5rem;">
+<li>Your card expired or the number changed</li>
+<li>Your bank flagged the charge (happens with new subscriptions)</li>
+<li>Insufficient funds at the time of processing</li>
+</ul>
+<p>The quickest fix is usually to update your payment method in your account settings. If everything looks correct on your end, your bank can usually clear things up with a quick call.</p>`
+        };
+
+        conversationalResponses['delivery_paused'] = {
+            answer: `<p>When a payment doesn't go through, we automatically pause your deliveries so you're not charged unexpectedly later.</p>
+<p>Once you update your payment method, your deliveries will resume on their normal schedule. If you need to adjust your next delivery date, you can do that from your account too.</p>`
+        };
+
+        // Recent pause scenario responses
+        conversationalResponses['resume_subscription'] = {
+            answer: `<p>Welcome back! Resuming is easy.</p>
+<p>Just head to your account and click "Resume Deliveries." You can pick your next delivery date, and we'll have fresh food on its way to you.</p>
+<p>Your dog's plan is saved exactly as you left it — same recipes, same portions.</p>`
+        };
+
+        conversationalResponses['adjust_schedule'] = {
+            answer: `<p>You can adjust your delivery schedule anytime from your account.</p>
+<p>Change your delivery frequency (weekly, every 2 weeks, etc.), skip individual deliveries, or pick specific delivery dates that work better for you. We're flexible because life is unpredictable.</p>`
+        };
+
+        conversationalResponses['change_plan'] = {
+            answer: `<p>Life changes, and your dog's food can too.</p>
+<p>From your account, you can update your dog's weight, activity level, or health goals — and we'll recalculate the perfect portions. You can also swap recipes if your pup is ready for something new.</p>
+<p>Changes take effect on your next delivery.</p>`
+        };
+
+        // New customer scenario responses
+        conversationalResponses['transition_tips'] = {
+            answer: `<p>Transitioning to fresh food is usually smooth, but a gradual switch helps.</p>
+<p>We recommend mixing a little of our food with their current food, then gradually increasing the ratio over 7-10 days. Most dogs take to it immediately — the bigger challenge is getting them to slow down!</p>
+<p>Your first box includes a transition guide with day-by-day instructions.</p>`
+        };
+
+        conversationalResponses['storage'] = {
+            answer: `<p>Our food stays fresh in your freezer for months, and in your fridge for up to 4 days once thawed.</p>
+<p>Each delivery is pre-portioned into daily packs, so you just move a few days' worth to the fridge at a time. No scooping, no mess, no guessing.</p>
+<p>The packs are designed to stack efficiently — most customers find they take up less freezer space than they expected.</p>`
+        };
+
+        conversationalResponses['what_to_expect'] = {
+            answer: `<p>Here's what happens after you order:</p>
+<ul style="margin: 1rem 0; padding-left: 1.5rem;">
+<li><strong>Your first box ships fast</strong> — usually within a few days, packed with dry ice to stay frozen</li>
+<li><strong>Inside:</strong> pre-portioned daily packs, a feeding guide, and transition instructions</li>
+<li><strong>Ongoing deliveries</strong> arrive on a schedule you control, always with fresh food ready to serve</li>
+</ul>
+<p>You'll get tracking info and reminders before each delivery. And you can adjust, pause, or cancel anytime from your account.</p>`
+        };
+
+        // Plan page scenario responses
+        conversationalResponses['change_recipe'] = {
+            answer: `<p>Absolutely — you can change recipes anytime from your account.</p>
+<p>We offer several recipes, and some dogs do great rotating between them for variety. If your dog has specific dietary needs, our team can help you choose the best fit.</p>
+<p>Recipe changes take effect on your next delivery.</p>`
+        };
+
+        conversationalResponses['adjust_portions'] = {
+            answer: `<p>Portions are calculated based on your dog's profile — weight, age, activity level, and body condition.</p>
+<p>If your dog is gaining or losing weight unexpectedly, you can adjust the daily calories in your account. Or update their profile info and we'll recalculate automatically.</p>
+<p>Not sure what's right? Our team is happy to help fine-tune portions.</p>`
+        };
+
+        conversationalResponses['add_dog'] = {
+            answer: `<p>Multi-dog household? We've got you covered.</p>
+<p>You can add another dog to your account anytime. Each dog gets their own customized plan based on their unique needs, and everything ships together in one delivery.</p>
+<p>Head to your account and click "Add a Dog" to get started.</p>`
+        };
+
+        // Get Started page scenario responses
+        conversationalResponses['how_much'] = {
+            answer: `<p>Pricing depends on your dog's size and caloric needs — smaller dogs cost less, larger dogs cost more.</p>
+<p>Most customers pay between $2-12 per day. The quiz will give you an exact price for your dog before you commit to anything.</p>
+<p>That includes free shipping, and you can adjust, pause, or cancel anytime.</p>`
+        };
+
+        conversationalResponses['quiz_questions'] = {
+            answer: `<p>The quiz takes about 2 minutes and asks about:</p>
+<ul style="margin: 1rem 0; padding-left: 1.5rem;">
+<li>Your dog's basics (name, age, breed, weight)</li>
+<li>Activity level and body condition</li>
+<li>Any health concerns or allergies</li>
+<li>Current diet and eating habits</li>
+</ul>
+<p>Based on your answers, we calculate the exact portions and recommend recipes that fit your dog's needs. No commitment until you see your plan and price.</p>`
+        };
+
+        conversationalResponses['compare_brands'] = {
+            answer: `<p>We're often compared to other fresh food brands, and here's what makes us different:</p>
+<ul style="margin: 1rem 0; padding-left: 1.5rem;">
+<li><strong>True human-grade:</strong> Made in USDA-inspected facilities (not just "human-grade ingredients")</li>
+<li><strong>Vet-developed recipes:</strong> Formulated by board-certified nutritionists</li>
+<li><strong>Personalized portions:</strong> Calculated for your specific dog, not just their weight</li>
+</ul>
+<p>We're happy to answer specific questions about how we compare to any brand you're considering.</p>`
         };
 
         // Clear conversation (keeps input intact) - NOW DEPRECATED for persistent mode
