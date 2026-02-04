@@ -1015,6 +1015,18 @@
             font-style: normal;
         }
 
+        /* Section Divider */
+        .section-divider {
+            padding: 3rem 0;
+            background: var(--bg-light);
+        }
+
+        .section-divider hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 0;
+        }
+
         /* Section 3: What Goes Into Our Food */
         .ingredients-light {
             background: var(--bg-light);
@@ -3428,7 +3440,97 @@
         </div>
     </section>
 
-    <!-- Section 4: How We Cook -->
+    <!-- Divider -->
+    <div class="section-divider">
+        <div class="container">
+            <hr>
+        </div>
+    </div>
+
+    <!-- Section 4: The Difference You'll See -->
+    <section class="difference">
+        <div class="container">
+            <div class="section-header">
+                <h2>What happens when dogs stop eating kibble</h2>
+                <p class="subhead-centered">The issues owners blamed on "breed," "age," or "sensitive stomachs" often disappear within weeks of switching to real food.</p>
+            </div>
+
+            <div class="results-carousel-wrapper">
+                <button class="carousel-btn prev" onclick="scrollResultsCarousel(-1)">&larr;</button>
+                <div class="results-carousel" id="resultsCarousel">
+                    <div class="result-card">
+                        <div class="result-image">[Photo: Golden Retriever puppy]</div>
+                        <div class="result-info">
+                            <div class="result-name">Biscuit</div>
+                            <div class="result-details">Golden Retriever, 8 months</div>
+                            <div class="result-outcome">"She used to walk away from her bowl. Now she sprints to the kitchen when she hears the fridge open."</div>
+                            <div class="result-attribution">— Sarah, Biscuit's mom</div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-image">[Photo: Senior Labrador]</div>
+                        <div class="result-info">
+                            <div class="result-name">Duke</div>
+                            <div class="result-details">Labrador, 11 years</div>
+                            <div class="result-outcome">"He's 11 but he just hiked 6 miles with us. Our vet couldn't believe his bloodwork."</div>
+                            <div class="result-attribution">— Mark, Duke's dad</div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-image">[Photo: French Bulldog]</div>
+                        <div class="result-info">
+                            <div class="result-name">Olive</div>
+                            <div class="result-details">French Bulldog, 4 years</div>
+                            <div class="result-outcome">"Three years of constant ear infections and scratching. Gone within 6 weeks of switching."</div>
+                            <div class="result-attribution">— Jamie, Olive's mom</div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-image">[Photo: Border Collie]</div>
+                        <div class="result-info">
+                            <div class="result-name">Scout</div>
+                            <div class="result-details">Border Collie, 2 years</div>
+                            <div class="result-outcome">"We tried 5 different kibbles. Loose stools every time. Two weeks on fresh and it was like a different dog."</div>
+                            <div class="result-attribution">— Alex, Scout's dad</div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-image">[Photo: Chihuahua senior]</div>
+                        <div class="result-info">
+                            <div class="result-name">Pepper</div>
+                            <div class="result-details">Chihuahua, 13 years</div>
+                            <div class="result-outcome">"She was down to eating a few bites a day. Now she finishes every meal and asks for more."</div>
+                            <div class="result-attribution">— Rosa, Pepper's mom</div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-image">[Photo: Mixed breed adult]</div>
+                        <div class="result-info">
+                            <div class="result-name">Luna</div>
+                            <div class="result-details">Mixed Breed, 5 years</div>
+                            <div class="result-outcome">"Lost 8 lbs in 4 months—but she's more playful than ever. The vet said 'keep doing what you're doing.'"</div>
+                            <div class="result-attribution">— Chen, Luna's dad</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" onclick="scrollResultsCarousel(1)">&rarr;</button>
+            </div>
+
+            <div class="difference-link">
+                <a href="#" class="cross-link">Read more reviews →</a>
+            </div>
+
+            <!-- Research callout - after testimonials for show-then-tell flow -->
+            <div class="research-callout-block">
+                <div class="research-callout-content">
+                    <strong>The science backs it up.</strong> A yearlong study with Cornell University found dogs eating fresh food showed markers of healthier aging—lower compounds linked to disease, higher protective antioxidants. Changes were visible in just one month.
+                </div>
+                <a href="our-food-wireframe.html#science" class="research-callout-link">See the full study →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: How We Cook -->
     <section class="how-we-cook">
         <div class="container">
             <div class="cook-content">
@@ -3608,90 +3710,7 @@
         </div>
     </section>
 
-    <!-- Section 8: The Difference You'll See -->
-    <section class="difference">
-        <div class="container">
-            <div class="section-header">
-                <h2>What happens when dogs stop eating kibble</h2>
-                <p class="subhead-centered">The issues owners blamed on "breed," "age," or "sensitive stomachs" often disappear within weeks of switching to real food.</p>
-            </div>
-
-            <div class="results-carousel-wrapper">
-                <button class="carousel-btn prev" onclick="scrollResultsCarousel(-1)">&larr;</button>
-                <div class="results-carousel" id="resultsCarousel">
-                    <div class="result-card">
-                        <div class="result-image">[Photo: Golden Retriever puppy]</div>
-                        <div class="result-info">
-                            <div class="result-name">Biscuit</div>
-                            <div class="result-details">Golden Retriever, 8 months</div>
-                            <div class="result-outcome">"She used to walk away from her bowl. Now she sprints to the kitchen when she hears the fridge open."</div>
-                            <div class="result-attribution">— Sarah, Biscuit's mom</div>
-                        </div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-image">[Photo: Senior Labrador]</div>
-                        <div class="result-info">
-                            <div class="result-name">Duke</div>
-                            <div class="result-details">Labrador, 11 years</div>
-                            <div class="result-outcome">"He's 11 but he just hiked 6 miles with us. Our vet couldn't believe his bloodwork."</div>
-                            <div class="result-attribution">— Mark, Duke's dad</div>
-                        </div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-image">[Photo: French Bulldog]</div>
-                        <div class="result-info">
-                            <div class="result-name">Olive</div>
-                            <div class="result-details">French Bulldog, 4 years</div>
-                            <div class="result-outcome">"Three years of constant ear infections and scratching. Gone within 6 weeks of switching."</div>
-                            <div class="result-attribution">— Jamie, Olive's mom</div>
-                        </div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-image">[Photo: Border Collie]</div>
-                        <div class="result-info">
-                            <div class="result-name">Scout</div>
-                            <div class="result-details">Border Collie, 2 years</div>
-                            <div class="result-outcome">"We tried 5 different kibbles. Loose stools every time. Two weeks on fresh and it was like a different dog."</div>
-                            <div class="result-attribution">— Alex, Scout's dad</div>
-                        </div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-image">[Photo: Chihuahua senior]</div>
-                        <div class="result-info">
-                            <div class="result-name">Pepper</div>
-                            <div class="result-details">Chihuahua, 13 years</div>
-                            <div class="result-outcome">"She was down to eating a few bites a day. Now she finishes every meal and asks for more."</div>
-                            <div class="result-attribution">— Rosa, Pepper's mom</div>
-                        </div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-image">[Photo: Mixed breed adult]</div>
-                        <div class="result-info">
-                            <div class="result-name">Luna</div>
-                            <div class="result-details">Mixed Breed, 5 years</div>
-                            <div class="result-outcome">"Lost 8 lbs in 4 months—but she's more playful than ever. The vet said 'keep doing what you're doing.'"</div>
-                            <div class="result-attribution">— Chen, Luna's dad</div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-btn next" onclick="scrollResultsCarousel(1)">&rarr;</button>
-            </div>
-
-            <div class="difference-link">
-                <a href="#" class="cross-link">Read more reviews →</a>
-            </div>
-
-            <!-- Research callout - after testimonials for show-then-tell flow -->
-            <div class="research-callout-block">
-                <div class="research-callout-content">
-                    <strong>The science backs it up.</strong> A yearlong study with Cornell University found dogs eating fresh food showed markers of healthier aging—lower compounds linked to disease, higher protective antioxidants. Changes were visible in just one month.
-                </div>
-                <a href="our-food-wireframe.html#science" class="research-callout-link">See the full study →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 9: Ready to Try It -->
+    <!-- Section 8: Ready to Try It -->
     <section class="cta-section">
         <div class="container">
             <h2>Ready to see the difference?</h2>
