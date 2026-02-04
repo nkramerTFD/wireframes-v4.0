@@ -1054,6 +1054,18 @@
             gap: 1rem;
         }
 
+        /* Section Divider */
+        .section-divider {
+            padding: 3rem 0;
+            background: var(--white);
+        }
+
+        .section-divider hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 0;
+        }
+
         /* Section 7: Feeding Made Simple */
         .simple {
             background: var(--bg-light);
@@ -2906,7 +2918,45 @@
         </div>
     </section>
 
-    <!-- Section 5: Personalization -->
+    <!-- Section 5: Specific Needs -->
+    <section class="specific-needs">
+        <div class="container">
+            <h2>Right for your dog, whatever their needs</h2>
+            <p class="subhead">Not every dog is the same. Here's how we help dogs with allergies, sensitivities, and picky palates.</p>
+
+            <div class="needs-grid">
+                <div class="need-card">
+                    <h4>Allergies & sensitivities</h4>
+                    <p>Single-protein recipes available. Our Turkey and Pork recipes work well for dogs with common chicken or beef sensitivities.</p>
+                </div>
+                <div class="need-card">
+                    <h4>Digestive issues</h4>
+                    <p>If your dog has had trouble with other foods, we can recommend a slower transition schedule and the gentlest recipe to start.</p>
+                </div>
+                <div class="need-card">
+                    <h4>Picky eaters</h4>
+                    <p>Fresh food wins over most picky dogs—the smell and texture of real food is hard to resist. And if not, we'll help you figure it out.</p>
+                </div>
+            </div>
+
+            <div class="support-cta">
+                <div>
+                    <h4>Not sure what's right for your dog?</h4>
+                    <p>Our team can help you find the best recipe and transition plan.</p>
+                </div>
+                <button class="btn-primary" onclick="openFaqChatWidget('Help me find the right recipe')">Talk to our team</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider between "why" and "how" sections -->
+    <div class="section-divider">
+        <div class="container">
+            <hr>
+        </div>
+    </div>
+
+    <!-- Section 6: Personalization -->
     <section class="personalization">
         <div class="container">
             <div class="personalization-grid">
@@ -2955,7 +3005,7 @@
         </div>
     </section>
 
-    <!-- Section 6: Timeline -->
+    <!-- Section 7: Timeline -->
     <section class="timeline-section" id="transition">
         <div class="timeline-header">
             <h2>Your first two weeks</h2>
@@ -3011,38 +3061,7 @@
         </div>
     </section>
 
-    <!-- Sub-section: Specific Needs -->
-    <section class="specific-needs">
-        <div class="container">
-            <h3>If your dog has specific needs</h3>
-            <p class="subhead">Not every dog is the same. Here's how we help dogs with allergies, sensitivities, and picky palates.</p>
-
-            <div class="needs-grid">
-                <div class="need-card">
-                    <h4>Allergies & sensitivities</h4>
-                    <p>Single-protein recipes available. Our Turkey and Pork recipes work well for dogs with common chicken or beef sensitivities.</p>
-                </div>
-                <div class="need-card">
-                    <h4>Digestive issues</h4>
-                    <p>If your dog has had trouble with other foods, we can recommend a slower transition schedule and the gentlest recipe to start.</p>
-                </div>
-                <div class="need-card">
-                    <h4>Picky eaters</h4>
-                    <p>Fresh food wins over most picky dogs—the smell and texture of real food is hard to resist. And if not, we'll help you figure it out.</p>
-                </div>
-            </div>
-
-            <div class="support-cta">
-                <div>
-                    <h4>Not sure what's right for your dog?</h4>
-                    <p>Our team can help you find the best recipe and transition plan.</p>
-                </div>
-                <button class="btn-primary" onclick="openFaqChatWidget('Help me find the right recipe')">Talk to our team</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 7: Feeding Made Simple -->
+    <!-- Section 8: Feeding Made Simple -->
     <section class="simple">
         <div class="container">
             <h2>Feeding fresh is easier than you think</h2>
@@ -3076,7 +3095,7 @@
         </div>
     </section>
 
-    <!-- Section 8: CTA -->
+    <!-- Section 9: CTA -->
     <section class="cta-section">
         <div class="container">
             <h2>Ready to see the difference?</h2>
@@ -3098,7 +3117,7 @@
         </div>
     </section>
 
-    <!-- Section 9: FAQ - PRD-Aligned Module -->
+    <!-- Section 10: FAQ - PRD-Aligned Module -->
     <section class="faq" id="faq">
         <div class="container">
             <h2>Still have questions?</h2>
